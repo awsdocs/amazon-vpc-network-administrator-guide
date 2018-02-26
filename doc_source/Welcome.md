@@ -18,6 +18,10 @@ For more information, see the following topics:
 
 + [Example: Cisco IOS Device without Border Gateway Protocol](Cisco_NoBGP.md)
 
++ [Example: Cisco ASA Device with a Virtual Tunnel Interface and Border Gateway Protocol](cisco-asa-vti-bgp.md)
+
++ [Example: Cisco ASA Device with a Virtual Tunnel Interface \(without Border Gateway Protocol\)](cisco-asa-vti-no-bgp.md)
+
 + [Example: Dell SonicWALL SonicOS Device Without Border Gateway Protocol](sonicwall-static.md)
 
 + [Example: Dell SonicWALL Device](sonicwall-bgp.md)

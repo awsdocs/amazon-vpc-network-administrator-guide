@@ -99,7 +99,7 @@ The following diagram shows the configuration of multiple VPNs\.
 
 Your customer gateway can be a physical or software appliance\.
 
-For information about the specific routers that we've tested, see [What customer gateway devices are known to work with Amazon VPC?](https://aws.amazon.com/vpc/faqs/#C9) in the Amazon VPC FAQ\. 
+For information about the specific routers that we've tested, see **What customer gateway devices are known to work with Amazon VPC?** in the [Connectivity](https://aws.amazon.com/vpc/faqs/#Connectivity) section of the Amazon VPC FAQ\.
 
 This guide presents information about how to configure the following devices:
 
@@ -130,6 +130,8 @@ This guide presents information about how to configure the following devices:
 + Microsoft Windows Server 2008 R2 \(or later\) software
 
 + Microsoft Windows Server 2012 R2 \(or later\) software 
+
++ Zyxel Zywall Series 4\.20 \(or later\) software for statically routed VPN connections, or 4\.30 \(or later\) software for dynamically routed VPN connections
 
 If you have one of these devices, but configure it for IPsec in a different way than presented in this guide, feel free to alter our suggested configuration to match your particular needs\.
 

@@ -289,8 +289,7 @@ If you are repeating this procedure for Tunnel 2, be sure to select the endpoint
 1. Under **Which computers are in Endpoint 2**, click **Add**\. Enter the CIDR block of your VPC, and then click **OK**\.
 **Important**  
 You must scroll in the dialog box until you locate **Which computers are in Endpoint 2**\. Do not click **Next** until you have completed this step, or you won't be able to connect to your server\.  
-![\[New Connection Security Rule Wizard: Tunnel
-										Endpoints\]](http://docs.aws.amazon.com/AmazonVPC/latest/NetworkAdminGuide/images/tunnelendpoints_complete.png)
+![\[New Connection Security Rule Wizard: Tunnel Endpoints\]](http://docs.aws.amazon.com/AmazonVPC/latest/NetworkAdminGuide/images/tunnelendpoints_complete.png)
 
 1. Confirm that all the settings you've specified are correct, and then click **Next**\.
 

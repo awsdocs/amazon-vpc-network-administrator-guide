@@ -5,8 +5,7 @@ The following diagram and table provide general instructions for troubleshooting
 **Tip**  
 When troubleshooting problems, you might find it useful to enable the debug features of your gateway device\. Consult your gateway device vendor for details\.
 
-![\[Flow chart for troubleshooting generic customer
-						gateway\]](http://docs.aws.amazon.com/AmazonVPC/latest/NetworkAdminGuide/images/troubleshooting-cgw-flow-diagram.png)
+![\[Flow chart for troubleshooting generic customer gateway\]](http://docs.aws.amazon.com/AmazonVPC/latest/NetworkAdminGuide/images/troubleshooting-cgw-flow-diagram.png)
 
 
 |  |  | 

@@ -19,6 +19,8 @@ Amazon's trademarks and trade dress may not be used in
 + [Example: Check Point Device with Border Gateway Protocol](check-point-bgp.md)
 + [Example: Check Point Device without Border Gateway Protocol](check-point-NoBGP.md)
 + [Example: Cisco ASA Device](Cisco_ASA.md)
++ [Example: Cisco ASA Device with a Virtual Tunnel Interface and Border Gateway Protocol](cisco-asa-vti-bgp.md)
++ [Example: Cisco ASA Device with a Virtual Tunnel Interface (without Border Gateway Protocol)](cisco-asa-vti-no-bgp.md)
 + [Example: Cisco IOS Device](Cisco.md)
 + [Example: Cisco IOS Device without Border Gateway Protocol](Cisco_NoBGP.md)
 + [Example: Dell SonicWALL Device](sonicwall-bgp.md)
