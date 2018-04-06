@@ -1,6 +1,6 @@
 # Example: Generic Customer Gateway without Border Gateway Protocol<a name="GenericConfigNoBGP"></a>
 
-
+**Topics**
 + [A High\-Level View of the Customer Gateway](#HighLevelCustomerGateway6)
 + [A Detailed View of the Customer Gateway and an Example Configuration](#DetailedViewCustomerGateway6)
 + [How to Test the Customer Gateway Configuration](#TestingConfig6)
@@ -22,7 +22,6 @@ The diagram in this section illustrates an example generic customer gateway \(wi
 The diagram in this section illustrates a generic customer gateway that uses static routing for its VPN connection \(meaning that it does not support dynamic routing, or Border Gateway Protocol \(BGP\)\. Following the diagram, there is a corresponding example of the configuration information your integration team should give you\. The example configuration contains a set of information for each of the two tunnels you must configure\.
 
 In addition, the example configuration refers to one item that you must provide:
-
 + *YOUR\_UPLINK\_ADDRESS*—The IP address for the Internet\-routable external interface on the customer gateway\. The address must be static, and may be behind a device performing network address translation \(NAT\)\. To ensure that NAT traversal \(NAT\-T\) can function, you must adjust your firewall rules to unblock UDP port 4500\.
 
 The example configuration includes several example values to help you understand how configuration works\. For example, we provide example values for the VPN connection ID \(vpn\-44a8938f\), virtual private gateway ID \(vgw\-8db04f81\), and the VGW IP addresses \(72\.21\.209\.\*, 169\.254\.255\.\*\)\. You'll replace these example values with the actual values from the configuration information that you receive\.
@@ -239,15 +238,11 @@ the tunnels.
 You must first test the gateway configuration for each tunnel\.
 
 **To test the customer gateway configuration for each tunnel**
-
 + On your customer gateway, verify that you have added a static route to the VPC CIDR IP space to use the tunnel interface\.
 
 Next you must test the connectivity for each tunnel by launching an instance into your VPC, and pinging the instance from your home network\. Before you begin, make sure of the following:
-
 + Use an AMI that responds to ping requests\. We recommend that you use one of the Amazon Linux AMIs\.
-
 + Configure your instance's security group and network ACL to enable inbound ICMP traffic\.
-
 + Ensure that you have configured routing for your VPN connection \- your subnet's route table must contain a route to the virtual private gateway\. For more information, see [Enable Route Propagation in Your Route Table](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html#vpn-configure-routing) in the *Amazon VPC User Guide*\.
 
 **To test the end\-to\-end connectivity of each tunnel**

@@ -2,7 +2,7 @@
 
 You can configure Windows Server 2008 R2 as a customer gateway for your VPC\. Use the following process whether you are running Windows Server 2008 R2 on an EC2 instance in a VPC, or on your own server\.
 
-
+**Topics**
 + [Configuring Your Windows Server](#prereq-windows-server)
 + [Step 1: Create a VPN Connection and Configure Your VPC](#CreateVPNConnection)
 + [Step 2: Download the Configuration File for the VPN Connection](#DownloadConfigFile)
@@ -14,13 +14,11 @@ You can configure Windows Server 2008 R2 as a customer gateway for your VPC\. Us
 ## Configuring Your Windows Server<a name="prereq-windows-server"></a>
 
 To configure Windows Server as a customer gateway, ensure that you have Windows Server 2008 R2 on your own network, or on an EC2 instance in a VPC\. If you use an EC2 instance that you launched from a Windows AMI, do the following:
-
 + Disable source/destination checking for the instance:
 
   1. Open the Amazon EC2 console at [https://console\.aws\.amazon\.com/ec2/](https://console.aws.amazon.com/ec2/)\.
 
   1. Select your Windows Server instance, and choose **Actions**, **Networking**, **Change Source/Dest\. Check**\. Choose **Yes, Disable**\.
-
 + Update your adapter settings so that you can route traffic from other instances:
 
   1. Connect to your Windows instance\. For more information, see [Connecting to Your Windows Instance](http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/connecting_to_windows_instance.html)\.
@@ -32,7 +30,6 @@ To configure Windows Server as a customer gateway, ensure that you have Windows 
   1. Right\-click the Citrix or AWS PV network adapter, and then click **Properties**\.
 
   1. On the **Advanced** tab, disable the **IPv4 Checksum Offload**, **TCP Checksum Offload \(IPv4\)**, and **UDP Checksum Offload \(IPv4\)** properties, and then choose **OK**\.
-
 + Associate an Elastic IP address with the instance:
 
   1. Open the Amazon EC2 console at [https://console\.aws\.amazon\.com/ec2/](https://console.aws.amazon.com/ec2/)\.
@@ -44,7 +41,6 @@ To configure Windows Server as a customer gateway, ensure that you have Windows 
   1. For **Instance**, select your Windows Server instance\. Choose **Associate**\.
 
   Take note of this address — you will need it when you create the customer gateway in your VPC\. 
-
 + Ensure the instance's security group rules allow outbound IPsec traffic\. By default, a security group allows all outbound traffic; however, if the security group's outbound rules have been modified from their original state, you must create the following outbound custom protocol rules for IPsec traffic: IP protocol 50, IP protocol 51, and UDP 500\. 
 
 Take note of the CIDR range for your network in which the Windows server is located, for example, `172.31.0.0/16`\.
@@ -80,21 +76,14 @@ The IP address must be static and may be behind a device performing network addr
 1. Select the **Static** routing option, enter the **Static IP Prefixes** values for your network in CIDR notation, and then choose **Yes, Create**\.
 
 **To configure your VPC**
-
 + Create a private subnet in your VPC \(if you don't have one already\) for launching instances that will communicate with the Windows server\. For more information, see [Adding a Subnet to Your VPC](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Subnets.html#AddaSubnet)\. 
 **Note**  
 A private subnet is a subnet that does not have a route to an Internet gateway\. The routing for this subnet is described in the next item\.
-
 + Update your route tables for the VPN connection:
-
   + Add a route to your private subnet's route table with the virtual private gateway as the target, and the Windows server's network \(CIDR range\) as the destination\.
-
   + Enable route propagation for the virtual private gateway\. For more information, see [Route Tables](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Route_Tables.html) in the *Amazon VPC User Guide*\.
-
 + Create a security group configuration for your instances that allows communication between your VPC and network:
-
   + Add rules that allow inbound RDP or SSH access from your network\. This enables you to connect to instances in your VPC from your network\. For example, to allow computers in your network to access Linux instances in your VPC, create an inbound rule with a type of SSH, and the source set to the CIDR range of your network; for example, `172.31.0.0/16`\. For more information, see [Security Groups for Your VPC](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html) in the *Amazon VPC User Guide*\.
-
   + Add a rule that allows inbound ICMP access from your network\. This enables you to test your VPN connection by pinging an instance in your VPC from your Windows server\. 
 
 ## Step 2: Download the Configuration File for the VPN Connection<a name="DownloadConfigFile"></a>
@@ -254,11 +243,8 @@ You can also use the Windows server user interface to set up the VPN tunnel\. Th
 
 **Important**  
 You can't enable master key perfect forward secrecy \(PFS\) using the Windows Server 2008 R2 user interface\. Therefore, if you decide to use PFS, you must use the netsh scripts described in option 1 instead of the user interface described in this option\.
-
 + [2\.1: Configure a Security Rule for a VPN Tunnel](#ConfigureSecurityRule)
-
 + [2\.3: Confirm the Tunnel Configuration](#ConfirmTunnel)
-
 + [2\.4: Configure the Windows Firewall](#ConfigureFirewall)
 
 #### 2\.1: Configure a Security Rule for a VPN Tunnel<a name="ConfigureSecurityRule"></a>
@@ -322,25 +308,17 @@ After you've finished, you’ll have two tunnels configured for your VPN connect
 1. In the Server Manager navigation pane, expand the **Configuration** node, expand **Windows Firewall with Advanced Security**, and then click **Connection Security Rules**\.
 
 1. Verify the following for both tunnels:
-
    + **Enabled** is `Yes`
-
    + **Authentication mode** is `Require inbound and clear outbound`
-
    + **Authentication method** is `Custom`
-
    + **Endpoint 1 port** is `Any`
-
    + **Endpoint 2 port** is `Any`
-
    + **Protocol** is `Any`
 
 1. Double\-click the security rule for your first tunnel\.
 
 1. On the **Computers** tab, verify the following:
-
    + Under **Endpoint 1**, the CIDR block range shown matches the CIDR block range of your network\.
-
    + Under **Endpoint 2**, the CIDR block range shown matches the CIDR block range of your VPC\.
 
 1. On the **Authentication** tab, under **Method**, click **Customize**, and verify that **First authentication methods** contains the correct pre\-shared key from your configuration file for the tunnel, and then click **OK**\.
@@ -348,11 +326,8 @@ After you've finished, you’ll have two tunnels configured for your VPN connect
 1. On the **Advanced** tab, verify that **Domain**, **Private**, and **Public** are all selected\.
 
 1. Under **IPsec tunneling**, click **Customize**\. Verify the following IPsec tunneling settings\.
-
    + **Use IPsec tunneling** is selected\.
-
    + **Local tunnel endpoint \(closest to Endpoint 1\)** contains the IP address of your server\. If your customer gateway is a Windows server instance, this is the instance's private IP address\. 
-
    + **Remote tunnel endpoint \(closest to Endpoint 2\)** contains the IP address of the virtual private gateway for this tunnel\.
 
 1. Double\-click the security rule for your second tunnel\. Repeat steps 4 to 7 for this tunnel\.
@@ -374,13 +349,9 @@ After setting up your security rules on your server, configure some basic IPsec 
 1. In the **Customize IPsec Settings** dialog box, under **Key exchange \(Main Mode\)**, select **Advanced** and then click **Customize**\.
 
 1. In **Customize Advanced Key Exchange Settings**, under **Security methods**, verify that these default values are used for the first entry\.
-
    + Integrity: SHA\-1
-
    + Encryption: AES\-CBC 128
-
    + Key exchange algorithm: Diffie\-Hellman Group 2
-
    + Under **Key lifetimes**, verify that **Minutes** is `480` and **Sessions** is `0`\.
 
    These settings correspond to these entries in the configuration file:
@@ -398,13 +369,9 @@ After setting up your security rules on your server, configure some basic IPsec 
 1. Click **Require encryption for all connection security rules that use these settings**\.
 
 1. Under **Data integrity and encryption algorithms**, leave the default values:
-
    + Protocol: ESP
-
    + Integrity: SHA\-1
-
    + Encryption: AES\-CBC 128
-
    + Lifetime: 60 minutes
 
    These value correspond to the following entries from the configuration file\.
@@ -478,15 +445,10 @@ Approximate round trip times in milli-seconds:
 ```
 
 If the `ping` command fails, check the following information:
-
 + Ensure that you have configured your security group rules to allow ICMP to the instance in your VPC\. If your Windows server is an EC2 instance, ensure that its security group's outbound rules allow IPsec traffic\. For more information, see [Configuring Your Windows Server](#prereq-windows-server)\.
-
 + Ensure that the operating system on the instance you are pinging is configured to respond to ICMP\. We recommend that you use one of the Amazon Linux AMIs\.
-
 + If the instance you are pinging is a Windows instance, log in to the instance and enable inbound ICMPv4 on the Windows firewall\.
-
 + Ensure that you have configured the route tables for your VPC or your subnet correctly\. For more information, see [ Step 1: Create a VPN Connection and Configure Your VPC](#CreateVPNConnection)\.
-
 + If your customer gateway is a Windows server instance, ensure that you've disabled source/destination checking for the instance\. For more information, see [Configuring Your Windows Server](#prereq-windows-server)\.
 
 In the Amazon VPC console, on the **VPN Connections** page, select your VPN connection\. The first tunnel is in the UP state\. The second tunnel should be configured, but it won't be used unless the first tunnel goes down\. It may take a few moments to establish the encrypted tunnels\.

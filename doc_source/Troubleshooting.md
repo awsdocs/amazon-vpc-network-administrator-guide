@@ -2,7 +2,7 @@
 
 The following topics contain troubleshooting information that you can use if your tunnels aren't in the correct state when you test your customer gateway\.
 
-
+**Topics**
 + [Troubleshooting Cisco ASA Customer Gateway Connectivity](Cisco_ASA_Troubleshooting.md)
 + [Troubleshooting Cisco IOS Customer Gateway Connectivity](Cisco_Troubleshooting.md)
 + [Troubleshooting Cisco IOS Customer Gateway without Border Gateway Protocol Connectivity](Cisco_Troubleshooting_NoBGP.md)

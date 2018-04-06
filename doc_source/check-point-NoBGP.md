@@ -2,7 +2,7 @@
 
 This section has example configuration information provided by your integration team if your customer gateway is a Check Point Security Gateway device running R77\.10 or above, and using the Gaia operating system\. 
 
-
+**Topics**
 + [High\-Level View of the Customer Gateway](#check-point-NoBGP-overview)
 + [Configuration File](#check-point-NoBGP-example-config)
 + [Configuring the Check Point Device](#check-point-ui-configuration)
@@ -61,7 +61,7 @@ The following procedures demonstrate how to configure the VPN tunnels, network o
 **Note**  
 For more information, go to the [Check Point Security Gateway IPsec VPN to Amazon Web Services VPC](https://supportcenter.checkpoint.com/supportcenter/portal?eventSubmit_doGoviewsolutiondetails=&solutionid=sk100726) article on the Check Point Support Center\.
 
-
+**Topics**
 + [Step 1: Configure Tunnel Interface](#check-point-configure-tunnel)
 + [Step 2: Configure the Static Route](#check-point-static-routes)
 + [Step 3: Create Network Objects](#check-point-define-network-objects)
@@ -80,13 +80,9 @@ The first step is to create the VPN tunnels and provide the private \(inside\) I
 1. Choose **Network Interfaces**, **Add**, **VPN tunnel**\.
 
 1. In the dialog box, configure the settings as follows, and choose **OK** when you are done:
-
    + For **VPN Tunnel ID**, enter any unique value, such as 1\.
-
    + For **Peer**, enter a unique name for your tunnel, such as `AWS_VPC_Tunnel_1` or `AWS_VPC_Tunnel_2`\.
-
    + Ensure that **Numbered** is selected, and for **Local Address**, enter the IP address specified for `CGW Tunnel IP` in the configuration file, for example, `169.254.44.234`\. 
-
    + For **Remote Address**, enter the IP address specified for `VGW Tunnel IP` in the configuration file, for example, `169.254.44.233`\.  
 ![\[Check Point Add VPN Tunnel dialog box\]](http://docs.aws.amazon.com/AmazonVPC/latest/NetworkAdminGuide/images/check-point-create-tunnel.png)
 
@@ -178,17 +174,11 @@ In this step, you create a VPN community on your Check Point gateway, to which y
 1. In the category pane, choose **Encryption**\. In the **Encryption Method** section, choose **IKEv1 only**\. In the **Encryption Suite** section, choose **Custom**, **Custom Encryption**\.
 
 1. In the dialog box, configure the encryption properties as follows, and choose **OK** when you're done:
-
    + IKE Security Association \(Phase 1\) Properties:
-
      + **Perform key exchange encryption with**: AES\-128
-
      + **Perform data integrity with**: SHA1
-
    + IPsec Security Association \(Phase 2\) Properties:
-
      + **Perform IPsec data encryption with**: AES\-128
-
      + **Perform data integrity with**: SHA\-1
 
 1. In the category pane, choose **Tunnel Management**\. Choose **Set Permanent Tunnels**, **On all tunnels in the community**\. In the **VPN Tunnel Sharing** section, choose **One VPN tunnel per Gateway pair**\.
@@ -201,19 +191,12 @@ In this step, you create a VPN community on your Check Point gateway, to which y
 ![\[Check Point Interoperable Shared Secret dialog box\]](http://docs.aws.amazon.com/AmazonVPC/latest/NetworkAdminGuide/images/check-point-shared-secret.png)
 
 1. Still in the **Advanced Settings** category, choose **Advanced VPN Properties**, configure the properties as follows, and choose **OK** when you're done:
-
    + IKE \(Phase 1\):
-
      + **Use Diffie\-Hellman group**: `Group 2`
-
      + **Renegotiate IKE security associations every** `480` **minutes**
-
    + IPsec \(Phase 2\):
-
      + Choose **Use Perfect Forward Secrecy**
-
      + **Use Diffie\-Hellman group**: `Group 2`
-
      + **Renegotiate IPsec security associations every** `3600` **seconds**
 
 ### Step 5: Configure the Firewall<a name="check-point-firewall"></a>
@@ -227,19 +210,14 @@ In this step, you configure a policy with firewall rules and directional match r
 1. Choose **Enable VPN Directional Match in VPN Column**, and save your changes\.
 
 1. In the SmartDashboard, choose **Firewall**, and create a policy with the following rules: 
-
    + Allow the VPC subnet to communicate with the local network over the required protocols\. 
-
    + Allow the local network to communicate with the VPC subnet over the required protocols\.
 
 1. Open the context menu for the cell in the VPN column, and choose **Edit Cell**\. 
 
 1. In the **VPN Match Conditions** dialog box, choose **Match traffic in this direction only**\. Create the following directional match rules by choosing **Add** for each, and choose **OK** when you're done:
-
    + `internal_clear` > VPN community \(The VPN star community you created earlier, for example, `AWS_VPN_Star`\)
-
    + VPN community > VPN community
-
    + VPN community > `internal_clear`
 
 1. In the SmartDashboard, choose **Policy**, **Install**\. 
@@ -311,11 +289,8 @@ You can test the gateway configuration for each tunnel\.
 1. Ensure that a static route has been added to the VPN connection so that traffic can get back to your customer gateway\. For example, if your local subnet prefix is `198.10.0.0/16`, you need to add a static route with that CIDR range to your VPN connection\. Make sure that both tunnels have a static route to your VPC\.
 
 Next you must test the connectivity for each tunnel by launching an instance into your VPC, and pinging the instance from your home network\. Before you begin, make sure of the following:
-
 + Use an AMI that responds to ping requests\. We recommend that you use one of the Amazon Linux AMIs\.
-
 + Configure your instance's security group and network ACL to enable inbound ICMP traffic\.
-
 + Ensure that you have configured routing for your VPN connection \- your subnet's route table must contain a route to the virtual private gateway\. For more information, see [Enable Route Propagation in Your Route Table](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html#vpn-configure-routing) in the *Amazon VPC User Guide*\.
 
 **To test the end\-to\-end connectivity of each tunnel**

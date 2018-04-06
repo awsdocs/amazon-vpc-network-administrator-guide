@@ -4,7 +4,7 @@ This topic provides an example of how to configure your router if your customer 
 
 This section assumes that a VPN connection with static routing has been configured in the Amazon VPC console\. For more information, see [Adding a Virtual Private Gateway to Your VPC](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html) in the *Amazon VPC User Guide*\.
 
-
+**Topics**
 + [A High\-Level View of the Customer Gateway](#sonicwall-bgp-overview)
 + [Example Configuration File](#sonicwall-bgp-config-file)
 + [Configuring the SonicWALL Device Using the Management Interface](#sonicwall-bgp-configure-device)
@@ -241,11 +241,8 @@ You can test the gateway configuration for each tunnel\.
 When properly established, your BGP peering should be receiving one route from the virtual private gateway corresponding to the prefix that your VPC integration team specified for the VPC \(for example, `10.0.0.0/24`\)\. If the BGP peering is established, you are receiving a prefix, and you are advertising a prefix, your tunnel is configured correctly\. Make sure that both tunnels are in this state\.
 
 Next you must test the connectivity for each tunnel by launching an instance into your VPC, and pinging the instance from your home network\. Before you begin, make sure of the following:
-
 + Use an AMI that responds to ping requests\. We recommend that you use one of the Amazon Linux AMIs\.
-
 + Configure your instance's security group and network ACL to enable inbound ICMP traffic\.
-
 + Ensure that you have configured routing for your VPN connection: your subnet's route table must contain a route to the virtual private gateway\. For more information, see [Enable Route Propagation in Your Route Table](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html#vpn-configure-routing) in the *Amazon VPC User Guide*\.
 
 **To test the end\-to\-end connectivity of each tunnel**

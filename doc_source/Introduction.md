@@ -1,6 +1,6 @@
 # Your Customer Gateway<a name="Introduction"></a>
 
-
+**Topics**
 + [What Is a Customer Gateway?](#CustomerGateway)
 + [Overview of Setting Up a VPN Connection](#Summary)
 + [AWS VPN CloudHub and Redundant Customer Gateways](#VPNCloudHub)
@@ -68,7 +68,7 @@ If you have redundant customer gateways, each customer gateway advertises the sa
 
 If you use the AWS VPN CloudHub configuration, multiple sites can access your VPC or securely access each other using a simple hub\-and\-spoke model\. You configure each customer gateway to advertise a site\-specific prefix \(such as 10\.0\.0\.0/24, 10\.0\.1\.0/24\) to the virtual private gateway\. The virtual private gateway routes traffic to the appropriate site and advertises the reachability of one site to all other sites\.
 
-To configure the AWS VPN CloudHub, use the Amazon VPC console to create multiple customer gateways, each with the public IP address of the gateway\. You must use the same Border Gateway Protocol \(BGP\) Autonomous System Number \(ASN\) for each\. Then create a VPN connection from each customer gateway to a common virtual private gateway\. Use the instructions that follow to configure each customer gateway to connect to the virtual private gateway\.
+To configure the AWS VPN CloudHub, use the Amazon VPC console to create multiple customer gateways, each with the public IP address of the gateway\. You must use a unique Border Gateway Protocol \(BGP\) Autonomous System Number \(ASN\) for each\. Then create a VPN connection from each customer gateway to a common virtual private gateway\. Use the instructions that follow to configure each customer gateway to connect to the virtual private gateway\.
 
 To enable instances in your VPC to reach the virtual private gateway \(and then your customer gateways\), you must configure routes in your VPC routing tables\. For complete instructions, see [VPN Connections](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpn-connections.html) in the *Amazon VPC User Guide*\. For AWS VPN CloudHub, you can configure an aggregate route in your VPC routing table \(for example, 10\.0\.0\.0/16\), and use more specific prefixes between customer gateways and the virtual private gateway\.
 
@@ -102,35 +102,20 @@ Your customer gateway can be a physical or software appliance\.
 For information about the specific routers that we've tested, see **What customer gateway devices are known to work with Amazon VPC?** in the [Connectivity](https://aws.amazon.com/vpc/faqs/#Connectivity) section of the Amazon VPC FAQ\.
 
 This guide presents information about how to configure the following devices:
-
 + Check Point Security Gateway running R77\.10 \(or later\) software
-
 + Cisco ASA running Cisco ASA 8\.2 \(or later\) software
-
 + Cisco IOS running Cisco IOS 12\.4 \(or later\) software
-
 + Dell SonicWALL running SonicOS 5\.9 \(or later\) software
-
 + Fortinet Fortigate 40\+ Series running FortiOS 4\.0 \(or later\) software 
-
 + Juniper J\-Series running JunOS 9\.5 \(or later\) software
-
 + Juniper SRX running JunOS 11\.0 \(or later\) software
-
 + Juniper SSG running ScreenOS 6\.1, or 6\.2 \(or later\) software
-
 + Juniper ISG running ScreenOS 6\.1, or 6\.2 \(or later\) software
-
 + Netgate pfSense running OS 2\.2\.5 \(or later\) software\.
-
 + Palo Alto Networks PANOS 4\.1\.2 \(or later\) software
-
 + Yamaha RT107e, RTX1200, RTX1210, RTX1500, RTX3000 and SRT100 routers
-
 + Microsoft Windows Server 2008 R2 \(or later\) software
-
 + Microsoft Windows Server 2012 R2 \(or later\) software 
-
 + Zyxel Zywall Series 4\.20 \(or later\) software for statically routed VPN connections, or 4\.30 \(or later\) software for dynamically routed VPN connections
 
 If you have one of these devices, but configure it for IPsec in a different way than presented in this guide, feel free to alter our suggested configuration to match your particular needs\.

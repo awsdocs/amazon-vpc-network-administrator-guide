@@ -2,7 +2,7 @@
 
 This section has example configuration information provided by your integration team if your customer gateway is a Check Point Security Gateway device running R77\.10 or above, and using the Gaia operating system\. 
 
-
+**Topics**
 + [High\-Level View of the Customer Gateway](#check-point-bgp-overview)
 + [Configuration File](#check-point-bgp-example-config)
 + [Configuring the Check Point Device](#check-point-bgp-configuration)
@@ -61,7 +61,7 @@ The following procedures demonstrate how to configure the VPN tunnels, network o
 **Note**  
 For more information, go to the [Amazon Web Services \(AWS\) VPN BGP ](https://supportcenter.checkpoint.com/supportcenter/portal?eventSubmit_doGoviewsolutiondetails=&solutionid=sk108958) article on the Check Point Support Center\.
 
-
+**Topics**
 + [Step 1: Configure the Tunnel Interfaces](#check-point-bgp-configure-tunnel)
 + [Step 2: Configure BGP](#check-point-bgp-configure-bgp)
 + [Step 3: Create Network Objects](#check-point-bgp-define-network-objects)
@@ -202,17 +202,11 @@ In this step, you create a VPN community on your Check Point gateway, to which y
 You must select the **IKEv1 for IPv4 and IKEv2 for IPv6** option for IKEv1 functionality; however, IKEv2 and IPv6 are currently not supported\. 
 
 1. In the dialog box, configure the encryption properties as follows, and choose **OK** when you're done:
-
    + IKE Security Association \(Phase 1\) Properties:
-
      + **Perform key exchange encryption with**: AES\-128
-
      + **Perform data integrity with**: SHA1
-
    + IPsec Security Association \(Phase 2\) Properties:
-
      + **Perform IPsec data encryption with**: AES\-128
-
      + **Perform data integrity with**: SHA\-1
 
 1. In the category pane, choose **Tunnel Management**\. Choose **Set Permanent Tunnels**, **On all tunnels in the community**\. In the **VPN Tunnel Sharing** section, choose **One VPN tunnel per Gateway pair**\.
@@ -225,19 +219,12 @@ You must select the **IKEv1 for IPv4 and IKEv2 for IPv6** option for IKEv1 funct
 ![\[Check Point Interoperable Shared Secret dialog box\]](http://docs.aws.amazon.com/AmazonVPC/latest/NetworkAdminGuide/images/check-point-shared-secret.png)
 
 1. Still in the **Advanced Settings** category, choose **Advanced VPN Properties**, configure the properties as follows, and choose **OK** when you're done:
-
    + IKE \(Phase 1\):
-
      + **Use Diffie\-Hellman group**: `Group 2 (1024 bit)`
-
      + **Renegotiate IKE security associations every** `480` **minutes**
-
    + IPsec \(Phase 2\):
-
      + Choose **Use Perfect Forward Secrecy**
-
      + **Use Diffie\-Hellman group**: `Group 2 (1024 bit)`
-
      + **Renegotiate IPsec security associations every** `3600` **seconds**
 
 ### Step 5: Configure the Firewall<a name="check-point-bgp-firewall"></a>
@@ -251,19 +238,14 @@ In this step, you configure a policy with firewall rules and directional match r
 1. Choose **Enable VPN Directional Match in VPN Column**, and choose **OK**\.
 
 1. In the SmartDashboard, choose **Firewall**, and create a policy with the following rules: 
-
    + Allow the VPC subnet to communicate with the local network over the required protocols\. 
-
    + Allow the local network to communicate with the VPC subnet over the required protocols\.
 
 1. Open the context menu for the cell in the VPN column, and choose **Edit Cell**\. 
 
 1. In the **VPN Match Conditions** dialog box, choose **Match traffic in this direction only**\. Create the following directional match rules by choosing **Add** for each, and choose **OK** when you're done:
-
    + `internal_clear` > VPN community \(The VPN star community you created earlier, for example, `AWS_VPN_Star`\)
-
    + VPN community > VPN community
-
    + VPN community > `internal_clear`
 
 1. In the SmartDashboard, choose **Policy**, **Install**\. 
@@ -339,11 +321,8 @@ You can test the gateway configuration for each tunnel\.
 When properly established, your BGP peering should be receiving one route from the virtual private gateway corresponding to the prefix that your VPC integration team specified for the VPC \(for example, `10.0.0.0/24`\)\. If the BGP peering is established, you are receiving a prefix, and you are advertising a prefix, your tunnel is configured correctly\. Make sure that both tunnels are in this state\.
 
 Next you must test the connectivity for each tunnel by launching an instance into your VPC, and pinging the instance from your home network\. Before you begin, make sure of the following:
-
 + Use an AMI that responds to ping requests\. We recommend that you use one of the Amazon Linux AMIs\.
-
 + Configure your instance's security group and network ACL to enable inbound ICMP traffic\.
-
 + Ensure that you have configured routing for your VPN connection: your subnet's route table must contain a route to the virtual private gateway\. For more information, see [Enable Route Propagation in Your Route Table](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html#vpn-configure-routing) in the *Amazon VPC User Guide*\.
 
 **To test the end\-to\-end connectivity of each tunnel**

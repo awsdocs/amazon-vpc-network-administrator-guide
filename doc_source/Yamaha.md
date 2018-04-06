@@ -1,6 +1,6 @@
 # Example: Yamaha Device<a name="Yamaha"></a>
 
-
+**Topics**
 + [A High\-Level View of the Customer Gateway](#CustomerGateway4)
 + [A Detailed View of the Customer Gateway and an Example Configuration](#CustomerGatewayDetailedView4)
 + [How to Test the Customer Gateway Configuration](#TestingConfig4)
@@ -20,21 +20,15 @@ The following diagram shows the general details of your customer gateway\. Note 
 The diagram in this section illustrates an example Yamaha customer gateway\. Following the diagram, there is a corresponding example of the configuration information your integration team should provide\. The example configuration contains a set of information for each of the tunnels that you must configure\.
 
 In addition, the example configuration refers to these items that you must provide:
-
 + *YOUR\_UPLINK\_ADDRESS*—The IP address for the Internet\-routable external interface on the customer gateway\. The address must be static, and may be behind a device performing network address translation \(NAT\)\. To ensure that NAT traversal \(NAT\-T\) can function, you must adjust your firewall rules to unblock UDP port 4500\.
-
 + *YOUR\_LOCAL\_NETWORK\_ADDRESS*—The IP address that is assigned to the LAN interface connected to your local network \(most likely a private address such as 192\.168\.0\.1\)
-
 + *YOUR\_BGP\_ASN*—The customer gateway's BGP ASN \(we use 65000 by default\)
 
 The example configuration includes several example values to help you understand how configuration works\. For example, we provide example values for the VPN connection ID \(vpn\-44a8938f\), virtual private gateway ID \(vgw\-8db04f81\), the IP addresses \(72\.21\.209\.\*, 169\.254\.255\.\*\), and the remote ASN \(7224\)\. You'll replace these example values with the actual values from the configuration information that you receive\.
 
 In addition, you must also:
-
 + Configure the outside interface \(referred to as *LAN3* in the example configuration\)\.
-
 + Configure the tunnel interface IDs \(referred to as *Tunnel \#1* and *Tunnel \#2* in the example configuration\)\.
-
 + Configure all internal routing that moves traffic between the customer gateway and your local network\.
 
 In the following diagram and example configuration, you must replace the items in red italics with values that apply to your particular configuration\.
@@ -335,11 +329,8 @@ You can test the gateway configuration for each tunnel\.
 When properly established, your BGP peering should be receiving one route from the virtual private gateway corresponding to the prefix that your VPC integration team specified for the VPC \(for example, `10.0.0.0/24`\)\. If the BGP peering is established, you are receiving a prefix, and you are advertising a prefix, your tunnel is configured correctly\. Make sure that both tunnels are in this state\.
 
 Next you must test the connectivity for each tunnel by launching an instance into your VPC, and pinging the instance from your home network\. Before you begin, make sure of the following:
-
 + Use an AMI that responds to ping requests\. We recommend that you use one of the Amazon Linux AMIs\.
-
 + Configure your instance's security group and network ACL to enable inbound ICMP traffic\.
-
 + Ensure that you have configured routing for your VPN connection: your subnet's route table must contain a route to the virtual private gateway\. For more information, see [Enable Route Propagation in Your Route Table](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html#vpn-configure-routing) in the *Amazon VPC User Guide*\.
 
 **To test the end\-to\-end connectivity of each tunnel**

@@ -1,6 +1,6 @@
 # Example: Cisco ASA Device<a name="Cisco_ASA"></a>
 
-
+**Topics**
 + [A High\-Level View of the Customer Gateway](#Cisco_ASA_overview)
 + [An Example Configuration](#Cisco_ASA_details)
 + [How to Test the Customer Gateway Configuration](#TestCustomerGateway_ASA)
@@ -24,17 +24,11 @@ Please note that some Cisco ASAs only support Active/Standby mode\. When you use
 The example configuration includes example values to help you understand how configuration works\. For example, we provide example values for the VPN connection ID \(vpn\-12345678\) and virtual private gateway ID \(vgw\-12345678\), and placeholders for the AWS endpoints \(*AWS\_ENDPOINT\_1* and *AWS\_ENDPOINT\_2*\)\. You'll replace these example values with the actual values from the configuration information that you receive\.
 
 In addition, you must:
-
 + Configure the outside interface\.
-
 + Ensure that the Crypto ISAKMP Policy Sequence number is unique\.
-
 + Ensure that the Crypto List Policy Sequence number is unique\.
-
 + Ensure that the Crypto IPsec Transform Set and the Crypto ISAKMP Policy Sequence are harmonious with any other IPsec tunnels configured on the device\.
-
 + Ensure that the SLA monitoring number is unique\.
-
 + Configure all internal routing that moves traffic between the customer gateway and your local network\.
 
 **Important**  
@@ -249,15 +243,11 @@ When using Cisco ASA as a customer gateway, only one tunnel will be in the UP st
 You can test the gateway configuration for each tunnel\.
 
 **To test the customer gateway configuration for each tunnel**
-
 + Ensure that a static route has been added to the VPN connection so that traffic can get back to your customer gateway\. For example, if your local subnet prefix is `198.10.0.0/16`, you need to add a static route with that CIDR range to your VPN connection\. Make sure that both tunnels have a static route to your VPC\.
 
 Next you must test the connectivity for each tunnel by launching an instance into your VPC, and pinging the instance from your home network\. Before you begin, make sure of the following:
-
 + Use an AMI that responds to ping requests\. We recommend that you use one of the Amazon Linux AMIs\.
-
 + Configure your instance's security group and network ACL to enable inbound ICMP traffic\.
-
 + Ensure that you have configured routing for your VPN connection \- your subnet's route table must contain a route to the virtual private gateway\. For more information, see [Enable Route Propagation in Your Route Table](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html#vpn-configure-routing) in the *Amazon VPC User Guide*\.
 
 **To test the end\-to\-end connectivity of each tunnel**

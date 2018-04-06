@@ -4,7 +4,7 @@ This topic provides an example of how to configure your router if your customer 
 
 This section assumes that a VPN connection with static routing has been configured in the Amazon VPC console\. For more information, see [Adding a Virtual Private Gateway to Your VPC](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html) in the *Amazon VPC User Guide*\.
 
-
+**Topics**
 + [A High\-Level View of the Customer Gateway](#sonicwall-static-overview)
 + [Example Configuration File](#sonicwall-static-config-file)
 + [Configuring the SonicWALL Device Using the Management Interface](#sonicwall-static-configure-device)
@@ -198,67 +198,40 @@ The following procedure demonstrates how to configure the VPN tunnels on the Son
 1. In the left pane, choose **VPN**, **Settings**\. Under **VPN Policies**, choose **Add\.\.\.**\.
 
 1. In the VPN policy window on the **General ** tab, complete the following information:
-
    + **Policy Type**: Choose **Site to Site**\.
-
    + **Authentication Method**: Choose **IKE using Preshared Secret**\.
-
    + **Name**: Enter a name for the VPN policy\. We recommend that you use the name of the VPN ID, as provided in the configuration file\.
-
    + **IPsec Primary Gateway Name or Address**: Enter the IP address of the virtual private gateway \(AWS endpoint\) as provided in the configuration file; for example, `72.21.209.193`\.
-
    + **IPsec Secondary Gateway Name or Address**: Leave the default value\.
-
    + **Shared Secret**: Enter the pre\-shared key as provided in the configuration file, and enter it again in **Confirm Shared Secret**\.
-
    + **Local IKE ID**: Enter the IPv4 address of the customer gateway \(the SonicWALL device\)\. 
-
    + **Peer IKE ID**: Enter the IPv4 address of the virtual private gateway \(AWS endpoint\)\.
 
 1. On the **Network** tab, complete the following information:
-
    + Under **Local Networks**, choose **Any address**\. We recommend this option to prevent connectivity issues from your local network\. 
-
    + Under **Remote Networks**, choose **Choose a destination network from list**\. Create an address object with the CIDR of your VPC in AWS\.
 
 1. On the **Proposals** tab, complete the following information\. 
-
    + Under **IKE \(Phase 1\) Proposal**, do the following:
-
      + **Exchange**: Choose **Main Mode**\.
-
      + **DH Group**: Enter a value for the Diffie\-Hellman group; for example, `2`\. 
-
      + **Encryption**: Choose **AES\-128** or **AES\-256**\.
-
      + **Authentication**: Choose **SHA1** or **SHA256**\.
-
      + **Life Time**: Enter `28800`\.
-
    + Under **IKE \(Phase 2\) Proposal**, do the following:
-
      + **Protocol**: Choose **ESP**\.
-
      + **Encryption**: Choose **AES\-128** or **AES\-256**\.
-
      + **Authentication**: Choose **SHA1** or **SHA256**\.
-
      + Select the **Enable Perfect Forward Secrecy** check box, and choose the Diffie\-Hellman group\.
-
      + **Life Time**: Enter `3600`\.
 **Important**  
 If you created your virtual private gateway before October 2015, you must specify Diffie\-Hellman group 2, AES\-128, and SHA1 for both phases\.
 
 1. On the **Advanced** tab, complete the following information:
-
    + Select **Enable Keep Alive**\.
-
    + Select **Enable Phase2 Dead Peer Detection** and enter the following:
-
      + For **Dead Peer Detection Interval**, enter `60` \(this is the minimum that the SonicWALL device accepts\)\.
-
      + For **Failure Trigger Level**, enter `3`\.
-
    + For **VPN Policy bound to**, select **Interface X1**\. This is the interface that's typically designated for public IP addresses\.
 
 1. Choose **OK**\. On the **Settings** page, the **Enable** check box for the tunnel should be selected by default\. A green dot indicates that the tunnel is up\.
@@ -268,15 +241,11 @@ If you created your virtual private gateway before October 2015, you must specif
 You must first test the gateway configuration for each tunnel\.
 
 **To test the customer gateway configuration for each tunnel**
-
 + On your customer gateway, verify that you have added a static route to the VPC CIDR IP space to use the tunnel interface\.
 
 Next, you must test the connectivity for each tunnel by launching an instance into your VPC and pinging the instance from your home network\. Before you begin, make sure of the following:
-
 + Use an AMI that responds to ping requests\. We recommend that you use one of the Amazon Linux AMIs\.
-
 + Configure your instance's security group and network ACL to enable inbound ICMP traffic\.
-
 + Ensure that you have configured routing for your VPN connection; your subnet's route table must contain a route to the virtual private gateway\. For more information, see [Enable Route Propagation in Your Route Table](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html#vpn-configure-routing) in the *Amazon VPC User Guide*\.
 
 **To test the end\-to\-end connectivity of each tunnel**

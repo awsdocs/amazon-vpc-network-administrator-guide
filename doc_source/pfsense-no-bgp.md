@@ -1,6 +1,6 @@
 # Example: Netgate PfSense Device without Border Gateway Protocol<a name="pfsense-no-bgp"></a>
 
-
+**Topics**
 + [A High\-Level View of the Customer Gateway](#pfsense-high-level)
 + [Example Configuration](#pfsense-example)
 + [How to Test the Customer Gateway Configuration](#pfsense-test)
@@ -203,15 +203,11 @@ Automatically ping host : ! Provide the IP address of an EC2 instance in VPC tha
 You must first test the gateway configuration for each tunnel\.
 
 **To test the customer gateway configuration for each tunnel**
-
 + In the Amazon VPC console, ensure that a static route has been added to the VPN connection so that traffic can get back to your customer gateway\. For example, if your local subnet prefix is 198\.10\.0\.0/16, you must add a static route with that CIDR range to your VPN connection\. Make sure that both tunnels have a static route to your VPC\. 
 
 Next you must test the connectivity for each tunnel by launching an instance into your VPC, and pinging the instance from your home network\. Before you begin, make sure of the following:
-
 + Use an AMI that responds to ping requests\. We recommend that you use one of the Amazon Linux AMIs\.
-
 + Configure your instance's security group and network ACL to enable inbound ICMP traffic\.
-
 + Ensure that you have configured routing for your VPN connection \- your subnet's route table must contain a route to the virtual private gateway\. For more information, see [Enable Route Propagation in Your Route Table](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html#vpn-configure-routing) in the *Amazon VPC User Guide*\.
 
 **To test the end\-to\-end connectivity of each tunnel**
