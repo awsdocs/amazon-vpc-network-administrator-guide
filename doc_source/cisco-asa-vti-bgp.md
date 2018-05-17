@@ -192,10 +192,10 @@ exit
 !
 router bgp 65343
   address-family ipv4 unicast
-    neighbor 169.254.34.149 remote-as 7224
-    neighbor 169.254.34.149 timers 10 30 30
-    neighbor 169.254.34.149 default-originate
-    neighbor 169.254.34.149 activate
+    neighbor 169.254.33.197 remote-as 7224
+    neighbor 169.254.33.197 timers 10 30 30
+    neighbor 169.254.33.197 default-originate
+    neighbor 169.254.33.197 activate
     
 ! To advertise additional prefixes to Amazon VPC, copy the 'network' statement
 ! and identify the prefix you wish to advertise. Make sure the prefix is present
@@ -351,10 +351,10 @@ exit
 !
 router bgp 65343
   address-family ipv4 unicast
-    neighbor 169.254.34.185 remote-as 7224
-    neighbor 169.254.34.185 timers 10 30 30
-    neighbor 169.254.34.185 default-originate
-    neighbor 169.254.34.185 activate
+    neighbor 169.254.33.193 remote-as 7224
+    neighbor 169.254.33.193 timers 10 30 30
+    neighbor 169.254.33.193 default-originate
+    neighbor 169.254.33.193 activate
     
 ! To advertise additional prefixes to Amazon VPC, copy the 'network' statement
 ! and identify the prefix you wish to advertise. Make sure the prefix is present

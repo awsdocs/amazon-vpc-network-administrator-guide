@@ -55,10 +55,12 @@ To create a VPN connection in AWS, you need the following information\.
 | Item | Comments | 
 | --- | --- | 
 | Customer gateway vendor \(for example, Cisco\), platform \(for example, ISR Series Routers\), and software version \(for example, IOS 12\.4\) | This information is used to generate a configuration file for the customer gateway\. | 
-| The internet\-routable IP address for the customer gateway device's external interface\. | The value must be static\. Your customer gateway may reside behind a device performing network address translation \(NAT\)\.  | 
+| The internet\-routable IP address for the customer gateway device's external interface\. | The value must be static\. Your customer gateway may reside behind a device performing network address translation \(NAT\)\.  For a NAT configuration, traffic sent across a VPN tunnel must not be translated to the customer gateway IP address\.  | 
 | \(Optional\) Border Gateway Protocol \(BGP\) Autonomous System Number \(ASN\) of the customer gateway\. | You can use an existing ASN assigned to your network\. If you don't have one, you can use a private ASN in the 64512–65534 range\. Otherwise, we assume that the BGP ASN for the customer gateway is 65000\. | 
 |  \(Optional\) The ASN for the Amazon side of the BGP session\.  |  Specified when creating a virtual private gateway\. If you do not specify a value, the default ASN applies\. For more information, see [Virtual Private Gateway](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html#VPNGateway)\.  | 
 |  \(Optional\) Tunnel information for each VPN tunnel  |  You can specify the following tunnel information for the VPN connection: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonVPC/latest/NetworkAdminGuide/Introduction.html) For more information, see [Configuring the VPN Tunnels for Your VPN Connection](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html#VPNTunnels)\.  | 
+
+The configuration file for your customer gateway includes the values that you specify for the above items\. It also contains any additional values required for setting up the VPN tunnels, including the outside IP address for the virtual private gateway\. This value is static unless you recreate the VPN connection in AWS\.
 
 ## AWS VPN CloudHub and Redundant Customer Gateways<a name="VPNCloudHub"></a>
 
