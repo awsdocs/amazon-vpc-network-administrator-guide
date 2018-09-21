@@ -7,7 +7,7 @@
 
 This topic provides an example of how to configure your router if your customer gateway is a Netgate pfSense firewall running OS 2\.2\.5 or later\.
 
-This topic assumes that you've configured a VPN connection with static routing in the Amazon VPC console\. For more information, see [Adding a Hardware Virtual Private Gateway to Your VPC](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html) in the *Amazon VPC User Guide*\.
+This topic assumes that you've configured a VPN connection with static routing in the Amazon VPC console\. For more information, see [Adding a Hardware Virtual Private Gateway to Your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_VPN.html) in the *Amazon VPC User Guide*\.
 
 ## A High\-Level View of the Customer Gateway<a name="pfsense-high-level"></a>
 
@@ -15,7 +15,7 @@ The following diagram shows the general details of your customer gateway\. Note 
 
 You should use the real configuration information that you receive from your integration team and apply it to your customer gateway\. 
 
-![\[Generic high-level diagram\]](http://docs.aws.amazon.com/AmazonVPC/latest/NetworkAdminGuide/images/highlevel-generic-nobgp-diagram.png)
+![\[Generic high-level diagram\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/highlevel-generic-nobgp-diagram.png)
 
 ## Example Configuration<a name="pfsense-example"></a>
 
@@ -208,11 +208,11 @@ You must first test the gateway configuration for each tunnel\.
 Next you must test the connectivity for each tunnel by launching an instance into your VPC, and pinging the instance from your home network\. Before you begin, make sure of the following:
 + Use an AMI that responds to ping requests\. We recommend that you use one of the Amazon Linux AMIs\.
 + Configure your instance's security group and network ACL to enable inbound ICMP traffic\.
-+ Ensure that you have configured routing for your VPN connection \- your subnet's route table must contain a route to the virtual private gateway\. For more information, see [Enable Route Propagation in Your Route Table](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html#vpn-configure-routing) in the *Amazon VPC User Guide*\.
++ Ensure that you have configured routing for your VPN connection \- your subnet's route table must contain a route to the virtual private gateway\. For more information, see [Enable Route Propagation in Your Route Table](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_VPN.html#vpn-configure-routing) in the *Amazon VPC User Guide*\.
 
 **To test the end\-to\-end connectivity of each tunnel**
 
-1. Launch an instance from one of the Amazon Linux AMIs into your VPC\. The Amazon Linux AMIs are available in the Quick Start menu when you use the Launch Instances Wizard in the Amazon EC2 console\. For more information, see [Launching an Instance](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/launching-instance.html)in the *Amazon EC2 User Guide for Linux Instances*\.
+1. Launch an instance from one of the Amazon Linux AMIs into your VPC\. The Amazon Linux AMIs are available in the Quick Start menu when you use the Launch Instances Wizard in the Amazon EC2 console\. For more information, see [Launching an Instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/launching-instance.html)in the *Amazon EC2 User Guide for Linux Instances*\.
 
 1. After the instance is running, get its private IP address \(for example, 10\.0\.0\.4\)\. The console displays the address as part of the instance's details\.
 

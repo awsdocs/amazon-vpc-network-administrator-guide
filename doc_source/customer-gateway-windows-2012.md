@@ -21,7 +21,7 @@ To configure Windows Server as a customer gateway, ensure that you have Windows 
   1. Select your Windows Server instance, and choose **Actions**, **Networking**, **Change Source/Dest\. Check**\. Choose **Yes, Disable**\.
 + Update your adapter settings so that you can route traffic from other instances:
 
-  1. Connect to your Windows instance\. For more information, see [Connecting to Your Windows Instance](http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/connecting_to_windows_instance.html)\.
+  1. Connect to your Windows instance\. For more information, see [Connecting to Your Windows Instance](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/connecting_to_windows_instance.html)\.
 
   1. Open the Control Panel, and start the Device Manager\.
 
@@ -76,14 +76,14 @@ The IP address must be static and may be behind a device performing network addr
 1. Select the **Static** routing option, enter the **Static IP Prefixes** values for your network in CIDR notation, and then choose **Yes, Create**\.
 
 **To configure your VPC**
-+ Create a private subnet in your VPC \(if you don't have one already\) for launching instances that will communicate with the Windows server\. For more information, see [Adding a Subnet to Your VPC](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Subnets.html#AddaSubnet)\. 
++ Create a private subnet in your VPC \(if you don't have one already\) for launching instances that will communicate with the Windows server\. For more information, see [Adding a Subnet to Your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html#AddaSubnet)\. 
 **Note**  
 A private subnet is a subnet that does not have a route to an Internet gateway\. The routing for this subnet is described in the next item\.
 + Update your route tables for the VPN connection:
   + Add a route to your private subnet's route table with the virtual private gateway as the target, and the Windows server's network \(CIDR range\) as the destination\.
-  + Enable route propagation for the virtual private gateway\. For more information, see [Route Tables](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Route_Tables.html) in the *Amazon VPC User Guide*\.
+  + Enable route propagation for the virtual private gateway\. For more information, see [Route Tables](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html) in the *Amazon VPC User Guide*\.
 + Create a security group configuration for your instances that allows communication between your VPC and network:
-  + Add rules that allow inbound RDP or SSH access from your network\. This enables you to connect to instances in your VPC from your network\. For example, to allow computers in your network to access Linux instances in your VPC, create an inbound rule with a type of SSH, and the source set to the CIDR range of your network; for example, `172.31.0.0/16`\. For more information, see [Security Groups for Your VPC](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html) in the *Amazon VPC User Guide*\.
+  + Add rules that allow inbound RDP or SSH access from your network\. This enables you to connect to instances in your VPC from your network\. For example, to allow computers in your network to access Linux instances in your VPC, create an inbound rule with a type of SSH, and the source set to the CIDR range of your network; for example, `172.31.0.0/16`\. For more information, see [Security Groups for Your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) in the *Amazon VPC User Guide*\.
   + Add a rule that allows inbound ICMP access from your network\. This enables you to test your VPN connection by pinging an instance in your VPC from your Windows server\. 
 
 ## Step 2: Download the Configuration File for the VPN Connection<a name="cgw-win2012-download-config"></a>
@@ -280,7 +280,7 @@ If you are repeating this procedure for Tunnel 2, be sure to select the endpoint
 1. Under **Which computers are in Endpoint 2**, choose **Add**\. In the **This IP address or subnet field**, enter the CIDR block of your VPC, and then choose **OK**\.
 **Important**  
 You must scroll in the dialog box until you locate **Which computers are in Endpoint 2**\. Do not choose **Next** until you have completed this step, or you won't be able to connect to your server\.  
-![\[New Connection Security Rule Wizard: Tunnel Endpoints\]](http://docs.aws.amazon.com/AmazonVPC/latest/NetworkAdminGuide/images/tunnelendpoints_complete_win2012.png)
+![\[New Connection Security Rule Wizard: Tunnel Endpoints\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/tunnelendpoints_complete_win2012.png)
 
 1. Confirm that all the settings you've specified are correct, and then choose **Next**\.
 

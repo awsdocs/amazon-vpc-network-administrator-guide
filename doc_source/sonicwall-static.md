@@ -2,7 +2,7 @@
 
 This topic provides an example of how to configure your router if your customer gateway is a Dell SonicWALL router running SonicOS 5\.9 or 6\.2\. 
 
-This section assumes that a VPN connection with static routing has been configured in the Amazon VPC console\. For more information, see [Adding a Virtual Private Gateway to Your VPC](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html) in the *Amazon VPC User Guide*\.
+This section assumes that a VPN connection with static routing has been configured in the Amazon VPC console\. For more information, see [Adding a Virtual Private Gateway to Your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_VPN.html) in the *Amazon VPC User Guide*\.
 
 **Topics**
 + [A High\-Level View of the Customer Gateway](#sonicwall-static-overview)
@@ -14,7 +14,7 @@ This section assumes that a VPN connection with static routing has been configur
 
 The following diagram shows the general details of your customer gateway\. Note that the VPN connection consists of two separate tunnels: *Tunnel 1* and *Tunnel 2*\. Using redundant tunnels ensures continuous availability in the case that a device fails\.
 
-![\[Customer gateway high-level diagram\]](http://docs.aws.amazon.com/AmazonVPC/latest/NetworkAdminGuide/images/highlevel-generic-nobgp-diagram.png)
+![\[Customer gateway high-level diagram\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/highlevel-generic-nobgp-diagram.png)
 
 ## Example Configuration File<a name="sonicwall-static-config-file"></a>
 
@@ -46,7 +46,7 @@ The following configuration information uses example values — you must use the
 ! You may need to populate these values throughout the config based on your setup:
 ! <vpc_subnet> - VPC IP address range
 ! ================================================================================
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonVPC/latest/NetworkAdminGuide/images/IKE.png)  
+![\[Image NOT FOUND\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/IKE.png)  
 ! #1: Internet Key Exchange (IKE) Configuration
 ! 
 ! These sample configurations are for the minimum requirement of AES128, SHA1, and DH Group 2.
@@ -66,7 +66,7 @@ ike-id local ip your_customer_gateway_IP_address
 ike-id peer ip 72.21.209.193 
 end
 
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonVPC/latest/NetworkAdminGuide/images/IPsec.png) 
+![\[Image NOT FOUND\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/IPsec.png) 
 ! #2: IPSec Configuration
 ! 
 ! The IPSec (Phase 2) proposal defines the protocol, authentication, 
@@ -92,7 +92,7 @@ end
 !  - DPD Retries              : 3
 ! To configure Dead Peer Detection for the SonicWall device, use the SonicOS management interface.
 ! 
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonVPC/latest/NetworkAdminGuide/images/Tunnel.png) 
+![\[Image NOT FOUND\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/Tunnel.png) 
 ! #3: Tunnel Interface Configuration
 !  
 ! The tunnel interface is configured with the internal IP address.
@@ -118,7 +118,7 @@ policy interface T1 metric 1 source any destination name AWSVPC service any gate
 !    
 IPSec Tunnel !2 
 ================================================================================
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonVPC/latest/NetworkAdminGuide/images/IKE.png) 
+![\[Image NOT FOUND\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/IKE.png) 
 ! #1: Internet Key Exchange (IKE) Configuration
 ! 
 ! These sample configurations are for the minimum requirement of AES128, SHA1, and DH Group 2.
@@ -138,7 +138,7 @@ ike-id local ip your_customer_gateway_IP_address
 ike-id peer ip 72.21.209.225
 end
 !
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonVPC/latest/NetworkAdminGuide/images/IPsec.png) 
+![\[Image NOT FOUND\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/IPsec.png) 
 ! #2: IPSec Configuration
 ! 
 ! The IPSec (Phase 2) proposal defines the protocol, authentication, 
@@ -164,7 +164,7 @@ end
 !  - DPD Retries              : 3
 ! To configure Dead Peer Detection for the SonicWall device, use the SonicOS management interface.
 !  
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonVPC/latest/NetworkAdminGuide/images/Tunnel.png) 
+![\[Image NOT FOUND\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/Tunnel.png) 
 ! #3: Tunnel Interface Configuration
 !  
 ! The tunnel interface is configured with the internal IP address.
@@ -246,11 +246,11 @@ You must first test the gateway configuration for each tunnel\.
 Next, you must test the connectivity for each tunnel by launching an instance into your VPC and pinging the instance from your home network\. Before you begin, make sure of the following:
 + Use an AMI that responds to ping requests\. We recommend that you use one of the Amazon Linux AMIs\.
 + Configure your instance's security group and network ACL to enable inbound ICMP traffic\.
-+ Ensure that you have configured routing for your VPN connection; your subnet's route table must contain a route to the virtual private gateway\. For more information, see [Enable Route Propagation in Your Route Table](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html#vpn-configure-routing) in the *Amazon VPC User Guide*\.
++ Ensure that you have configured routing for your VPN connection; your subnet's route table must contain a route to the virtual private gateway\. For more information, see [Enable Route Propagation in Your Route Table](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_VPN.html#vpn-configure-routing) in the *Amazon VPC User Guide*\.
 
 **To test the end\-to\-end connectivity of each tunnel**
 
-1. Launch an instance of one of the Amazon Linux AMIs into your VPC\. The Amazon Linux AMIs are available in the **Quick Start** menu when you use the Launch Instances wizard in the AWS Management Console\. For more information, see the [Amazon VPC Getting Started Guide](http://docs.aws.amazon.com/AmazonVPC/latest/GettingStartedGuide/)\.
+1. Launch an instance of one of the Amazon Linux AMIs into your VPC\. The Amazon Linux AMIs are available in the **Quick Start** menu when you use the Launch Instances wizard in the AWS Management Console\. For more information, see the [Amazon VPC Getting Started Guide](https://docs.aws.amazon.com/AmazonVPC/latest/GettingStartedGuide/)\.
 
 1. After the instance is running, get its private IP address \(for example, 10\.0\.0\.4\)\. The console displays the address as part of the instance's details\.
 

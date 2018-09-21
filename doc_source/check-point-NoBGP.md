@@ -12,7 +12,7 @@ This section has example configuration information provided by your integration 
 
 The following diagram shows the general details of your customer gateway\. Note that the VPN connection consists of two separate tunnels\. Using redundant tunnels ensures continuous availability in the case that a device fails\.
 
-![\[Check Point without BGP high-level diagram\]](http://docs.aws.amazon.com/AmazonVPC/latest/NetworkAdminGuide/images/highlevel-generic-nobgp-diagram.png)
+![\[Check Point without BGP high-level diagram\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/highlevel-generic-nobgp-diagram.png)
 
 ## Configuration File<a name="check-point-NoBGP-example-config"></a>
 
@@ -84,7 +84,7 @@ The first step is to create the VPN tunnels and provide the private \(inside\) I
    + For **Peer**, enter a unique name for your tunnel, such as `AWS_VPC_Tunnel_1` or `AWS_VPC_Tunnel_2`\.
    + Ensure that **Numbered** is selected, and for **Local Address**, enter the IP address specified for `CGW Tunnel IP` in the configuration file, for example, `169.254.44.234`\. 
    + For **Remote Address**, enter the IP address specified for `VGW Tunnel IP` in the configuration file, for example, `169.254.44.233`\.  
-![\[Check Point Add VPN Tunnel dialog box\]](http://docs.aws.amazon.com/AmazonVPC/latest/NetworkAdminGuide/images/check-point-create-tunnel.png)
+![\[Check Point Add VPN Tunnel dialog box\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/check-point-create-tunnel.png)
 
 1. Connect to your security gateway over SSH\. If you're using the non\-default shell, change to clish by running the following command: `clish`
 
@@ -119,7 +119,7 @@ In this step, you'll specify the static route to the subnet in the VPC for each 
 1. Select **Ping**\.
 
 1. Repeat steps 3 and 4 for the second tunnel, using the `VGW Tunnel IP` value under the `IPSec Tunnel #2` section of the configuration file\. Specify a priority of 2\.  
-![\[Check Point Edit Destination Route dialog box\]](http://docs.aws.amazon.com/AmazonVPC/latest/NetworkAdminGuide/images/check-point-static-routes.png)
+![\[Check Point Edit Destination Route dialog box\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/check-point-static-routes.png)
 
 1. Choose **Save**\.
 
@@ -140,7 +140,7 @@ In this step, you create a network object for each VPN tunnel, specifying the pu
 1. For **Name**, enter the name you provided for your tunnel, for example, `AWS_VPC_Tunnel_1` or `AWS_VPC_Tunnel_2`\.
 
 1. For **IPv4 Address**, enter the outside IP address of the virtual private gateway provided in the configuration file, for example, `54.84.169.196`\. Save your settings and close the dialog box\.  
-![\[Check Point Interoperable Device dialog box\]](http://docs.aws.amazon.com/AmazonVPC/latest/NetworkAdminGuide/images/check-point-network-device.png)
+![\[Check Point Interoperable Device dialog box\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/check-point-network-device.png)
 
 1. In the SmartDashboard, open your gateway properties and in the category pane, choose **Topology**\. 
 
@@ -188,7 +188,7 @@ In this step, you create a VPN community on your Check Point gateway, to which y
 1. Select the peer name for the first tunnel, choose **Edit**, and enter the pre\-shared key as specified in the configuration file in the `IPSec Tunnel #1` section\.
 
 1. Select the peer name for the second tunnel, choose **Edit**, and enter the pre\-shared key as specified in the configuration file in the `IPSec Tunnel #2` section\.  
-![\[Check Point Interoperable Shared Secret dialog box\]](http://docs.aws.amazon.com/AmazonVPC/latest/NetworkAdminGuide/images/check-point-shared-secret.png)
+![\[Check Point Interoperable Shared Secret dialog box\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/check-point-shared-secret.png)
 
 1. Still in the **Advanced Settings** category, choose **Advanced VPN Properties**, configure the properties as follows, and choose **OK** when you're done:
    + IKE \(Phase 1\):
@@ -291,11 +291,11 @@ You can test the gateway configuration for each tunnel\.
 Next you must test the connectivity for each tunnel by launching an instance into your VPC, and pinging the instance from your home network\. Before you begin, make sure of the following:
 + Use an AMI that responds to ping requests\. We recommend that you use one of the Amazon Linux AMIs\.
 + Configure your instance's security group and network ACL to enable inbound ICMP traffic\.
-+ Ensure that you have configured routing for your VPN connection \- your subnet's route table must contain a route to the virtual private gateway\. For more information, see [Enable Route Propagation in Your Route Table](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html#vpn-configure-routing) in the *Amazon VPC User Guide*\.
++ Ensure that you have configured routing for your VPN connection \- your subnet's route table must contain a route to the virtual private gateway\. For more information, see [Enable Route Propagation in Your Route Table](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_VPN.html#vpn-configure-routing) in the *Amazon VPC User Guide*\.
 
 **To test the end\-to\-end connectivity of each tunnel**
 
-1. Launch an instance of one of the Amazon Linux AMIs into your VPC\. The Amazon Linux AMIs are listed in the launch wizard when you launch an instance from the AWS Management Console\. For more information, see the [Amazon VPC Getting Started Guide](http://docs.aws.amazon.com/AmazonVPC/latest/GettingStartedGuide/)\.
+1. Launch an instance of one of the Amazon Linux AMIs into your VPC\. The Amazon Linux AMIs are listed in the launch wizard when you launch an instance from the AWS Management Console\. For more information, see the [Amazon VPC Getting Started Guide](https://docs.aws.amazon.com/AmazonVPC/latest/GettingStartedGuide/)\.
 
 1. After the instance is running, get its private IP address \(for example, `10.0.0.4`\)\. The console displays the address as part of the instance's details\.
 
@@ -333,4 +333,4 @@ In the options that display, choose 1 to verify the IKE associations and 2 to ve
 
 You can also use the Check Point Smart Tracker Log to verify that packets over the connection are being encrypted\. For example, the following log indicates that a packet to the VPC was sent over tunnel 1 and was encrypted\.
 
-![\[Check Point log file\]](http://docs.aws.amazon.com/AmazonVPC/latest/NetworkAdminGuide/images/check-point-log.png)
+![\[Check Point log file\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/check-point-log.png)

@@ -21,7 +21,7 @@ To configure Windows Server as a customer gateway, ensure that you have Windows 
   1. Select your Windows Server instance, and choose **Actions**, **Networking**, **Change Source/Dest\. Check**\. Choose **Yes, Disable**\.
 + Update your adapter settings so that you can route traffic from other instances:
 
-  1. Connect to your Windows instance\. For more information, see [Connecting to Your Windows Instance](http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/connecting_to_windows_instance.html)\.
+  1. Connect to your Windows instance\. For more information, see [Connecting to Your Windows Instance](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/connecting_to_windows_instance.html)\.
 
   1. Open the Control Panel, and start the Device Manager\.
 
@@ -76,14 +76,14 @@ The IP address must be static and may be behind a device performing network addr
 1. Select the **Static** routing option, enter the **Static IP Prefixes** values for your network in CIDR notation, and then choose **Yes, Create**\.
 
 **To configure your VPC**
-+ Create a private subnet in your VPC \(if you don't have one already\) for launching instances that will communicate with the Windows server\. For more information, see [Adding a Subnet to Your VPC](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Subnets.html#AddaSubnet)\. 
++ Create a private subnet in your VPC \(if you don't have one already\) for launching instances that will communicate with the Windows server\. For more information, see [Adding a Subnet to Your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html#AddaSubnet)\. 
 **Note**  
 A private subnet is a subnet that does not have a route to an Internet gateway\. The routing for this subnet is described in the next item\.
 + Update your route tables for the VPN connection:
   + Add a route to your private subnet's route table with the virtual private gateway as the target, and the Windows server's network \(CIDR range\) as the destination\.
-  + Enable route propagation for the virtual private gateway\. For more information, see [Route Tables](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Route_Tables.html) in the *Amazon VPC User Guide*\.
+  + Enable route propagation for the virtual private gateway\. For more information, see [Route Tables](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html) in the *Amazon VPC User Guide*\.
 + Create a security group configuration for your instances that allows communication between your VPC and network:
-  + Add rules that allow inbound RDP or SSH access from your network\. This enables you to connect to instances in your VPC from your network\. For example, to allow computers in your network to access Linux instances in your VPC, create an inbound rule with a type of SSH, and the source set to the CIDR range of your network; for example, `172.31.0.0/16`\. For more information, see [Security Groups for Your VPC](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html) in the *Amazon VPC User Guide*\.
+  + Add rules that allow inbound RDP or SSH access from your network\. This enables you to connect to instances in your VPC from your network\. For example, to allow computers in your network to access Linux instances in your VPC, create an inbound rule with a type of SSH, and the source set to the CIDR range of your network; for example, `172.31.0.0/16`\. For more information, see [Security Groups for Your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) in the *Amazon VPC User Guide*\.
   + Add a rule that allows inbound ICMP access from your network\. This enables you to test your VPN connection by pinging an instance in your VPC from your Windows server\. 
 
 ## Step 2: Download the Configuration File for the VPN Connection<a name="DownloadConfigFile"></a>
@@ -179,7 +179,7 @@ Before you set up the VPN tunnel, you must install and configure Routing and Rem
    1. On the **Network Policy and Access Services** page, click **Next**\.
 
    1. On the **Select Role Services** page, click **Routing and Remote Access Services**, leave **Remote Access Service** and **Routing** selected, and then click **Next**\.  
-![\[Add Roles Wizard: Select Role Services\]](http://docs.aws.amazon.com/AmazonVPC/latest/NetworkAdminGuide/images/selectroleservices.png)
+![\[Add Roles Wizard: Select Role Services\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/selectroleservices.png)
 
    1. On the **Confirm Installation Selections** page, click **Install**\.
 
@@ -262,7 +262,7 @@ In this section, you configure a security rule on your Windows server to create 
 1. On the **Tunnel Type** page, under **What type of tunnel would you like to create**, click **Custom Configuration**\. Under **Would you like to exempt IPsec\-protected connections from this tunnel**, leave the default value checked \(**No\. Send all network traffic that matches this connection security rule through the tunnel**\), and then click **Next**\.
 
 1. On the **Requirements** page, click **Require authentication for inbound connections\. Do not establish tunnels for outbound connections**, and then click **Next**\.  
-![\[Requirements page\]](http://docs.aws.amazon.com/AmazonVPC/latest/NetworkAdminGuide/images/requirepage.png)
+![\[Requirements page\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/requirepage.png)
 
 1. On **Tunnel Endpoints** page, under **Which computers are in Endpoint 1**, click **Add**\. Enter the CIDR range of your network \(behind your Windows server customer gateway\), and then click **OK**\. \(Note that the range can include the IP address of your customer gateway\.\)
 
@@ -275,7 +275,7 @@ If you are repeating this procedure for Tunnel 2, be sure to select the endpoint
 1. Under **Which computers are in Endpoint 2**, click **Add**\. Enter the CIDR block of your VPC, and then click **OK**\.
 **Important**  
 You must scroll in the dialog box until you locate **Which computers are in Endpoint 2**\. Do not click **Next** until you have completed this step, or you won't be able to connect to your server\.  
-![\[New Connection Security Rule Wizard: Tunnel Endpoints\]](http://docs.aws.amazon.com/AmazonVPC/latest/NetworkAdminGuide/images/tunnelendpoints_complete.png)
+![\[New Connection Security Rule Wizard: Tunnel Endpoints\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/tunnelendpoints_complete.png)
 
 1. Confirm that all the settings you've specified are correct, and then click **Next**\.
 
@@ -286,7 +286,7 @@ You must scroll in the dialog box until you locate **Which computers are in Endp
 1. Select **Pre\-Shared key**, enter the pre\-shared key value from the configuration file, and click **OK**\.
 **Important**  
 If you are repeating this procedure for Tunnel 2, be sure to select the pre\-shared key for Tunnel 2\.  
-![\[Add First Authentication Method\]](http://docs.aws.amazon.com/AmazonVPC/latest/NetworkAdminGuide/images/addauthmetho.png)
+![\[Add First Authentication Method\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/addauthmetho.png)
 
 1. Ensure that **First authentication is optional** is not selected, and click **OK**\.
 
@@ -295,7 +295,7 @@ If you are repeating this procedure for Tunnel 2, be sure to select the pre\-sha
 1. On the **Profile** page, select all three check boxes: **Domain**, **Private**, and **Public**, and then click **Next**\.
 
 1. On the **Name** page, enter a name for your connection rule, and then click **Finish**\.  
-![\[New Connection Security Rule Wizard\]](http://docs.aws.amazon.com/AmazonVPC/latest/NetworkAdminGuide/images/vpn-name.png)
+![\[New Connection Security Rule Wizard\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/vpn-name.png)
 
 Repeat the above procedure, specifying the data for Tunnel 2 from your configuration file\. 
 
@@ -360,7 +360,7 @@ After setting up your security rules on your server, configure some basic IPsec 
    MainModeSecMethods: DHGroup2-AES128-SHA1,DHGroup2-3DES-SHA1
    MainModeKeyLifetime: 480min,0sec
    ```  
-![\[Customize Advanced Key Exchange Settings\]](http://docs.aws.amazon.com/AmazonVPC/latest/NetworkAdminGuide/images/minutes.png)
+![\[Customize Advanced Key Exchange Settings\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/minutes.png)
 
 1. Under **Key exchange options**, select **Use Diffie\-Hellman for enhanced security**, and then click **OK**\.
 

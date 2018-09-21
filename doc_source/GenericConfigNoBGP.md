@@ -13,7 +13,7 @@ Two diagrams illustrate the example configuration\. The first diagram shows the 
 
 The following diagram shows the general details of your customer gateway\. Note that the VPN connection consists of two separate tunnels: *Tunnel 1* and *Tunnel 2*\. Using redundant tunnels ensures continuous availability in the case that a device fails\.
 
-![\[Generic high-level diagram\]](http://docs.aws.amazon.com/AmazonVPC/latest/NetworkAdminGuide/images/highlevel-generic-nobgp-diagram.png)
+![\[Generic high-level diagram\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/highlevel-generic-nobgp-diagram.png)
 
 ## A Detailed View of the Customer Gateway and an Example Configuration<a name="DetailedViewCustomerGateway6"></a>
 
@@ -28,7 +28,7 @@ The example configuration includes several example values to help you understand
 
 In the following diagram and example configuration, you must replace the items in red italics with values that apply to your particular configuration\.
 
-![\[Generic detailed diagram\]](http://docs.aws.amazon.com/AmazonVPC/latest/NetworkAdminGuide/images/detailed-generic-nobgp-diagram.png)
+![\[Generic detailed diagram\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/detailed-generic-nobgp-diagram.png)
 
 **Important**  
 The following configuration information is an example of what you can expect an integration team to provide \. Many of the values in the following example will be different from the actual configuration information that you receive\. You must use the actual values and not the example values shown here, or your implementation will fail\.
@@ -54,7 +54,7 @@ It is important that both tunnel security associations be configured.
                 
 IPSec Tunnel #1
 ================================================================================
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonVPC/latest/NetworkAdminGuide/images/IKE.png) 
+![\[Image NOT FOUND\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/IKE.png) 
 #1: Internet Key Exchange Configuration
 
 Configure the IKE SA as follows
@@ -72,7 +72,7 @@ To ensure that NAT traversal (NAT-T) can function, you must adjust your firewall
   - Phase 1 Negotiation Mode : main
   - Diffie-Hellman           : Group 2
 
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonVPC/latest/NetworkAdminGuide/images/IPsec.png) 
+![\[Image NOT FOUND\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/IPsec.png) 
 #2: IPSec Configuration
 
 Configure the IPSec SA as follows:
@@ -98,7 +98,7 @@ configuration on your Customer Gateway:
   - Clear Don't Fragment Bit : enabled
   - Fragmentation            : Before encryption
 
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonVPC/latest/NetworkAdminGuide/images/Tunnel.png)  
+![\[Image NOT FOUND\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/Tunnel.png)  
 #3: Tunnel Interface Configuration
 
 Your Customer Gateway must be configured with a tunnel interface that is
@@ -145,7 +145,7 @@ the tunnels.
                 
 IPSec Tunnel #2 
 ================================================================================
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonVPC/latest/NetworkAdminGuide/images/IKE.png) 
+![\[Image NOT FOUND\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/IKE.png) 
 #1: Internet Key Exchange Configuration
 
 Configure the IKE SA as follows:
@@ -163,7 +163,7 @@ To ensure that NAT traversal (NAT-T) can function, you must adjust your firewall
   - Phase 1 Negotiation Mode : main
   - Diffie-Hellman           : Group 2
   
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonVPC/latest/NetworkAdminGuide/images/IPsec.png) 
+![\[Image NOT FOUND\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/IPsec.png) 
 #2: IPSec Configuration
 
 Configure the IPSec SA as follows:
@@ -189,7 +189,7 @@ configuration on your Customer Gateway:
   - Clear Don't Fragment Bit : enabled
   - Fragmentation            : Before encryption
 
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonVPC/latest/NetworkAdminGuide/images/Tunnel.png)  
+![\[Image NOT FOUND\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/Tunnel.png)  
 #3: Tunnel Interface Configuration
 
 Your Customer Gateway must be configured with a tunnel interface that is
@@ -243,11 +243,11 @@ You must first test the gateway configuration for each tunnel\.
 Next you must test the connectivity for each tunnel by launching an instance into your VPC, and pinging the instance from your home network\. Before you begin, make sure of the following:
 + Use an AMI that responds to ping requests\. We recommend that you use one of the Amazon Linux AMIs\.
 + Configure your instance's security group and network ACL to enable inbound ICMP traffic\.
-+ Ensure that you have configured routing for your VPN connection \- your subnet's route table must contain a route to the virtual private gateway\. For more information, see [Enable Route Propagation in Your Route Table](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html#vpn-configure-routing) in the *Amazon VPC User Guide*\.
++ Ensure that you have configured routing for your VPN connection \- your subnet's route table must contain a route to the virtual private gateway\. For more information, see [Enable Route Propagation in Your Route Table](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_VPN.html#vpn-configure-routing) in the *Amazon VPC User Guide*\.
 
 **To test the end\-to\-end connectivity of each tunnel**
 
-1. Launch an instance of one of the Amazon Linux AMIs into your VPC\. The Amazon Linux AMIs are available in the Quick Start menu when you use the Launch Instances Wizard in the AWS Management Console\. For more information, see the [Amazon VPC Getting Started Guide](http://docs.aws.amazon.com/AmazonVPC/latest/GettingStartedGuide/)\.
+1. Launch an instance of one of the Amazon Linux AMIs into your VPC\. The Amazon Linux AMIs are available in the Quick Start menu when you use the Launch Instances Wizard in the AWS Management Console\. For more information, see the [Amazon VPC Getting Started Guide](https://docs.aws.amazon.com/AmazonVPC/latest/GettingStartedGuide/)\.
 
 1. After the instance is running, get its private IP address \(for example, 10\.0\.0\.4\)\. The console displays the address as part of the instance's details\.
 

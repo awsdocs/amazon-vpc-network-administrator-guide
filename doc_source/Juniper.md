@@ -13,7 +13,7 @@ Two diagrams illustrate the example configuration\. The first diagram shows the 
 
 The following diagram shows the general details of your customer gateway\. Note that the VPN connection consists of two separate tunnels\. Using redundant tunnels ensures continuous availability in the case that a device fails\.
 
-![\[Juniper JunOS high-level diagram\]](http://docs.aws.amazon.com/AmazonVPC/latest/NetworkAdminGuide/images/highlevel-juniper-diagram.png)
+![\[Juniper JunOS high-level diagram\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/highlevel-juniper-diagram.png)
 
 ## A Detailed View of the Customer Gateway and an Example Configuration<a name="CustomerGatewayDetailedView2"></a>
 
@@ -34,7 +34,7 @@ In addition, you must:
 
 In the following diagram and example configuration, you must replace the items in red italics with values that apply to your particular configuration\.
 
-![\[Juniper JunOS detailed diagram\]](http://docs.aws.amazon.com/AmazonVPC/latest/NetworkAdminGuide/images/detailed-juniper-diagram.png)
+![\[Juniper JunOS detailed diagram\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/detailed-juniper-diagram.png)
 
 **Warning**  
 The following configuration information is an example of what you can expect your integration team to provide\. Many of the values in the following example will be different from the actual configuration information that you receive\. You must use the actual values and not the example values shown here, or your implementation will fail\.
@@ -58,7 +58,7 @@ The following configuration information is an example of what you can expect you
 # -------------------------------------------------------------------------
 # IPsec Tunnel #1
 # -------------------------------------------------------------------------
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonVPC/latest/NetworkAdminGuide/images/IKE.png)  
+![\[Image NOT FOUND\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/IKE.png)  
 # #1: Internet Key Exchange (IKE) Configuration
 #
 # A proposal is established for the supported IKE encryption, 
@@ -105,7 +105,7 @@ set security ike gateway gw-vpn-44a8938f-1 address 72.21.209.225
 # set security ike traceoptions file files 10
 # set security ike traceoptions flag all
 
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonVPC/latest/NetworkAdminGuide/images/IPsec.png)  
+![\[Image NOT FOUND\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/IPsec.png)  
 # #2: IPsec Configuration
 #
 # The IPsec proposal defines the protocol, authentication, encryption, and
@@ -139,7 +139,7 @@ set security ipsec vpn vpn-44a8938f-1 df-bit clear
 #
 set security ike gateway gw-vpn-44a8938f-1 dead-peer-detection
 
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonVPC/latest/NetworkAdminGuide/images/Tunnel.png)  
+![\[Image NOT FOUND\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/Tunnel.png)  
 # #3: Tunnel Interface Configuration
 #
 
@@ -164,7 +164,7 @@ set security zones security-zone trust host-inbound-traffic protocols bgp
 #
 set security flow tcp-mss ipsec-vpn mss 1387
 
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonVPC/latest/NetworkAdminGuide/images/BGP.png)  
+![\[Image NOT FOUND\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/BGP.png)  
 # #4: Border Gateway Protocol (BGP) Configuration
 #                                                                                     
 # BGP is used within the tunnel to exchange prefixes between the
@@ -201,7 +201,7 @@ set protocols bgp group ebgp neighbor 169.254.255.1 local-as YOUR_BGP_ASN
 # -------------------------------------------------------------------------
 # IPsec Tunnel #2
 # -------------------------------------------------------------------------
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonVPC/latest/NetworkAdminGuide/images/IKE.png)  
+![\[Image NOT FOUND\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/IKE.png)  
 # #1: Internet Key Exchange (IKE) Configuration
 #
 # A proposal is established for the supported IKE encryption, 
@@ -247,7 +247,7 @@ set security ike gateway gw-vpn-44a8938f-2 address 72.21.209.193
 # set security ike traceoptions file files 10
 # set security ike traceoptions flag all
 
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonVPC/latest/NetworkAdminGuide/images/IPsec.png)  
+![\[Image NOT FOUND\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/IPsec.png)  
 # #2: IPsec Configuration
 #
 # The IPsec proposal defines the protocol, authentication, encryption, and
@@ -281,7 +281,7 @@ set security ipsec vpn vpn-44a8938f-2 df-bit clear
 #
 set security ike gateway gw-vpn-44a8938f-2 dead-peer-detection
 
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonVPC/latest/NetworkAdminGuide/images/Tunnel.png)  
+![\[Image NOT FOUND\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/Tunnel.png)  
 # #3: Tunnel Interface Configuration
 #
 
@@ -306,7 +306,7 @@ set security zones security-zone trust host-inbound-traffic protocols bgp
 #
 set security flow tcp-mss ipsec-vpn mss 1387
 
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonVPC/latest/NetworkAdminGuide/images/BGP.png)  
+![\[Image NOT FOUND\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/BGP.png)  
 # #4: Border Gateway Protocol (BGP) Configuration
 #                                                                                     
 # BGP is used within the tunnel to exchange prefixes between the
@@ -358,11 +358,11 @@ When properly established, your BGP peering should be receiving one route from t
 Next you must test the connectivity for each tunnel by launching an instance into your VPC, and pinging the instance from your home network\. Before you begin, make sure of the following:
 + Use an AMI that responds to ping requests\. We recommend that you use one of the Amazon Linux AMIs\.
 + Configure your instance's security group and network ACL to enable inbound ICMP traffic\.
-+ Ensure that you have configured routing for your VPN connection: your subnet's route table must contain a route to the virtual private gateway\. For more information, see [Enable Route Propagation in Your Route Table](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html#vpn-configure-routing) in the *Amazon VPC User Guide*\.
++ Ensure that you have configured routing for your VPN connection: your subnet's route table must contain a route to the virtual private gateway\. For more information, see [Enable Route Propagation in Your Route Table](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_VPN.html#vpn-configure-routing) in the *Amazon VPC User Guide*\.
 
 **To test the end\-to\-end connectivity of each tunnel**
 
-1. Launch an instance of one of the Amazon Linux AMIs into your VPC\. The Amazon Linux AMIs are listed in the launch wizard when you launch an instance from the Amazon EC2 Console\. For more information, see the [Amazon VPC Getting Started Guide](http://docs.aws.amazon.com/AmazonVPC/latest/GettingStartedGuide/)\.
+1. Launch an instance of one of the Amazon Linux AMIs into your VPC\. The Amazon Linux AMIs are listed in the launch wizard when you launch an instance from the Amazon EC2 Console\. For more information, see the [Amazon VPC Getting Started Guide](https://docs.aws.amazon.com/AmazonVPC/latest/GettingStartedGuide/)\.
 
 1. After the instance is running, get its private IP address \(for example, `10.0.0.4`\)\. The console displays the address as part of the instance's details\.
 

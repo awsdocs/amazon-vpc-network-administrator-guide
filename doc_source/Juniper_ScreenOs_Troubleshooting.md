@@ -1,6 +1,6 @@
 # Troubleshooting Juniper ScreenOS Customer Gateway Connectivity<a name="Juniper_ScreenOs_Troubleshooting"></a>
 
-When you troubleshoot the connectivity of a Juniper ScreenOS\-based customer gateway you need to consider four things: IKE, IPsec, tunnel, and BGP\. You can troubleshoot these areas in any order, but we recommend that you start with IKE \(at the bottom of the network stack\) and move up\. 
+When you troubleshoot the connectivity of a Juniper ScreenOS\-based customer gateway, consider four things: IKE, IPsec, tunnel, and BGP\. You can troubleshoot these areas in any order, but we recommend that you start with IKE \(at the bottom of the network stack\) and move up\. 
 
 ## IKE and IPsec<a name="IKEIPsec"></a>
 
@@ -19,7 +19,7 @@ HEX ID    Gateway         Port Algorithm     SPI      Life:sec kb Sta   PID vsys
 00000001>   72.21.209.193  500 esp:a128/sha1 14bf7894  3580 unlim A/-    -1 0
 ```
 
-You should see one or more lines containing a Remote Address of the Remote Gateway specified in the tunnels\. The *Sta* should be `A/-` and the *SPI* should be a hexadecimal number other than `00000000`\. Entries in other states indicate that IKE is not configured properly\.
+You should see one or more lines containing a Remote Address of the Remote Gateway specified in the tunnels\. The `Sta` value should be `A/-` and `SPI` should be a hexadecimal number other than `00000000`\. Entries in other states indicate that IKE is not configured properly\.
 
 For further troubleshooting, enable the IKE trace options \(as recommended in the example configuration information \(see [Example: Juniper ScreenOS Device](Juniper-with-screenos.md)\)\.
 
@@ -27,7 +27,7 @@ For further troubleshooting, enable the IKE trace options \(as recommended in th
 
 First, double\-check that you have the necessary firewall rules in place\. For a list of the rules, see [Configuring a Firewall Between the Internet and Your Customer Gateway](Introduction.md#FirewallRules)\.
 
-If your firewall rules are set up correctly, then continue troubleshooting with the following command\.
+If your firewall rules are set up correctly, then continue troubleshooting with the following command:
 
 ```
 ssg5-serial-> get interface tunnel.1
@@ -61,7 +61,7 @@ ssg5-serial-> get interface tunnel.1
              total allocated gbw 0kbps
 ```
 
-Make sure that you see *link:ready*, and that the *IP* address matches the customer gateway tunnel inside address\.
+Make sure that you see `link:ready`, and that the `IP` address matches the customer gateway tunnel inside address\.
 
 Next, use the following command, replacing `169.254.255.1` with the inside IP address of your virtual private gateway\. Your results should look like the response shown here\.
 
@@ -81,7 +81,7 @@ For further troubleshooting, review the configuration\.
 
 ## BGP<a name="BGPCommand"></a>
 
-Use the following command\.
+Use the following command:
 
 ```
 ssg5-serial-> get vrouter trust-vr protocol bgp neighbor
@@ -133,7 +133,7 @@ connected: 2 minutes 6 seconds
 Elapsed time since last update: 2 minutes 6 seconds
 ```
 
-If the BGP peering is up, verify that your customer gateway router is advertising the default route \(0\.0\.0\.0/0\) to the VPC\. Note that this command applies to ScreenOS version 6\.2\.0 and higher\.
+If the BGP peering is up, verify that your customer gateway router is advertising the default route \(0\.0\.0\.0/0\) to the VPC\. This command applies to ScreenOS version 6\.2\.0 and higher\.
 
 ```
 ssg5-serial-> get vr trust-vr protocol bgp  rib neighbor 169.254.255.1 advertised
@@ -147,7 +147,7 @@ i: IBGP route, e: EBGP route, >: best route, *: valid route
 Total IPv4 routes advertised: 1
 ```
 
-Additionally, ensure that you're receiving the prefix corresponding to your VPC from the virtual private gateway\. Note that this command applies to ScreenOS version 6\.2\.0 and higher\.
+Additionally, ensure that you're receiving the prefix corresponding to your VPC from the virtual private gateway\. This command applies to ScreenOS version 6\.2\.0 and higher\.
 
 ```
 ssg5-serial-> get vr trust-vr protocol bgp  rib neighbor 169.254.255.1 received
@@ -163,6 +163,6 @@ Total IPv4 routes received: 1
 
 ## Virtual Private Gateway Attachment<a name="VGWAttachment"></a>
 
-Make sure your virtual private gateway is attached to your VPC\. Your integration team does this with the AWS Management Console\.
+Make sure that your virtual private gateway is attached to your VPC\. Your integration team does this with the AWS Management Console\.
 
 If you have questions or need further assistance, please use the [Amazon VPC forum](https://forums.aws.amazon.com/forum.jspa?forumID=58)\. 

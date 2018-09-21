@@ -1,6 +1,6 @@
 # Troubleshooting Yamaha Customer Gateway Connectivity<a name="Yamaha_Troubleshooting"></a>
 
-When you troubleshoot the connectivity of a Yamaha customer gateway you need to consider four things: IKE, IPsec, tunnel, and BGP\. You can troubleshoot these areas in any order, but we recommend that you start with IKE \(at the bottom of the network stack\) and move up\.
+When you troubleshoot the connectivity of a Yamaha customer gateway, consider four things: IKE, IPsec, tunnel, and BGP\. You can troubleshoot these areas in any order, but we recommend that you start with IKE \(at the bottom of the network stack\) and move up\.
 
 ## IKE<a name="YamahaIKE"></a>
 
@@ -16,7 +16,7 @@ sgw  flags local-id                      remote-id        # of sa
 1    U K   YOUR_LOCAL_NETWORK_ADDRESS     72.21.209.225    i:2 s:1 r:1
 ```
 
-You should see a line containing a *remote\-id* of the Remote Gateway specified in the tunnels\. You can list all the security associations \(SAs\) by omitting the tunnel number\.
+You should see a line containing a `remote-id` value for the Remote Gateway specified in the tunnels\. You can list all the security associations \(SAs\) by omitting the tunnel number\.
 
 For further troubleshooting, run the following commands to enable DEBUG level log messages that provide diagnostic information\.
 
@@ -25,7 +25,7 @@ For further troubleshooting, run the following commands to enable DEBUG level lo
 # ipsec ike log message-info payload-info key-info
 ```
 
-To cancel the logged items, use the following command\.
+To cancel the logged items, use the following command:
 
 ```
 # no ipsec ike log
@@ -78,7 +78,7 @@ Key: ** ** ** ** **  (confidential)   ** ** ** ** **
 ----------------------------------------------------
 ```
 
-For each tunnel interface, you should see both *receive sas* and *send sas*\.
+For each tunnel interface, you should see both `receive sas` and `send sas`\.
 
 For further troubleshooting, use the following command to enable debugging\.
 
@@ -98,7 +98,7 @@ Use the following command to disable debugging\.
 
 First, check that you have the necessary firewall rules in place\. For a list of the rules, see [Configuring a Firewall Between the Internet and Your Customer Gateway](Introduction.md#FirewallRules)\.
 
-If your firewall rules are set up correctly, then continue troubleshooting with the following command\.
+If your firewall rules are set up correctly, then continue troubleshooting with the following command:
 
 ```
 # show status tunnel 1
@@ -117,11 +117,11 @@ Description:
                (IPv6) 0 packet [0 octet]
 ```
 
-Ensure the *current status* is online\. Also, ensure that *Interface type* is IPsec\. Make sure to run the command on both tunnel interfaces\. To resolve any problems here, review the configuration\.
+Make sure that the `current status` value is online and that `Interface type` is IPsec\. Make sure to run the command on both tunnel interfaces\. To resolve any problems here, review the configuration\.
 
 ## BGP<a name="YamahaBGP"></a>
 
-Use the following command\.
+Use the following command:
 
 ```
 # show status bgp neighbor
@@ -151,7 +151,7 @@ Local host: unspecified
 Foreign host: 169.254.255.5, Foreign port:
 ```
 
-Here, both neighbors should be listed\. For each, you should see a *BGP state* value of Active\.
+Here, both neighbors should be listed\. For each, you should see a `BGP state` value of Active\.
 
 If the BGP peering is up, verify that your customer gateway router is advertising the default route \(0\.0\.0\.0/0\) to the VPC\. 
 
@@ -182,6 +182,6 @@ For further troubleshooting, review the configuration\.
 
 ## Virtual Private Gateway Attachment<a name="YamahaVGW"></a>
 
-Make sure your virtual private gateway is attached to your VPC\. Your integration team does this with the AWS Management Console\.
+Make sure that your virtual private gateway is attached to your VPC\. Your integration team does this with the AWS Management Console\.
 
 If you have questions or need further assistance, please use the [Amazon VPC forum](https://forums.aws.amazon.com/forum.jspa?forumID=58)\. 

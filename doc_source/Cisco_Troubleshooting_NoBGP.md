@@ -1,6 +1,6 @@
 # Troubleshooting Cisco IOS Customer Gateway without Border Gateway Protocol Connectivity<a name="Cisco_Troubleshooting_NoBGP"></a>
 
-When you troubleshoot the connectivity of a Cisco customer gateway, you need to consider three things: IKE, IPsec and tunnel\. You can troubleshoot these areas in any order, but we recommend that you start with IKE \(at the bottom of the network stack\) and move up\.
+When you troubleshoot the connectivity of a Cisco customer gateway, consider three things: IKE, IPsec, and tunnel\. You can troubleshoot these areas in any order, but we recommend that you start with IKE \(at the bottom of the network stack\) and move up\.
 
 ## IKE<a name="IOS_NoBGP_IKE"></a>
 
@@ -17,7 +17,7 @@ dst             src             state          conn-id slot status
 174.78.144.73 205.251.233.122 QM_IDLE           2002    0 ACTIVE
 ```
 
-You should see one or more lines containing an *src* of the remote gateway specified in the tunnels\. The *state* should be `QM_IDLE` and *status* should be `ACTIVE`\. The absence of an entry, or any entry in another state, indicates that IKE is not configured properly\.
+You should see one or more lines containing an `src` value for the remote gateway specified in the tunnels\. The `state` should be `QM_IDLE` and `status` should be `ACTIVE`\. The absence of an entry, or any entry in another state, indicates that IKE is not configured properly\.
 
 For further troubleshooting, run the following commands to enable log messages that provide diagnostic information\.
 
@@ -26,7 +26,7 @@ router# term mon
 router# debug crypto isakmp
 ```
 
-To disable debugging, use the following command\.
+To disable debugging, use the following command:
 
 ```
 router# no debug crypto isakmp
@@ -136,7 +136,7 @@ interface: Tunnel2
      outbound pcp sas:
 ```
 
-For each tunnel interface, you should see both an inbound esp sas and outbound esp sas\. This assumes that an SA is listed \(for example, spi: 0x48B456A6\), the status is `ACTIVE`, and IPsec is configured correctly\.
+For each tunnel interface, you should see both an inbound `esp sas` and outbound `esp sas`\. This assumes that an SA is listed \(for example, `spi: 0x48B456A6`\), the status is `ACTIVE`, and IPsec is configured correctly\.
 
 For further troubleshooting, use the following command to enable debugging\.
 
@@ -144,7 +144,7 @@ For further troubleshooting, use the following command to enable debugging\.
 router# debug crypto ipsec
 ```
 
-To disable debugging, use the following command\.
+To disable debugging, use the following command:
 
 ```
 router# no debug crypto ipsec
@@ -152,9 +152,9 @@ router# no debug crypto ipsec
 
 ## Tunnel<a name="IOS_NoBGP_tunnel"></a>
 
-First, check that you have the necessary firewall rules in place\. For a list of the rules, see [Configuring a Firewall Between the Internet and Your Customer Gateway](Introduction.md#FirewallRules)\.
+First, check that you have the necessary firewall rules in place\. For more information, see [Configuring a Firewall Between the Internet and Your Customer Gateway](Introduction.md#FirewallRules)\.
 
-If your firewall rules are set up correctly, then continue troubleshooting with the following command\.
+If your firewall rules are set up correctly, then continue troubleshooting with the following command:
 
 ```
 router# show interfaces tun1
@@ -186,7 +186,7 @@ Tunnel1 is up, line protocol is up
     Received 0 broadcasts, 0 runts, 0 giants, 0 throttles
 ```
 
-Ensure the line protocol is up\. Check that the tunnel source IP address, source interface, and destination respectively match the tunnel configuration for the customer gateway outside IP address, interface, and virtual private gateway outside IP address\. Ensure that Tunnel protection through IPSec is present\. Make sure to run the command on both tunnel interfaces\. To resolve any problems, review the configuration\.
+Make sure that the line protocol is up\. Check that the tunnel source IP address, source interface, and destination respectively match the tunnel configuration for the customer gateway outside IP address, interface, and virtual private gateway outside IP address\. Make sure that that Tunnel protection through IPSec is present\. Make sure to run the command on both tunnel interfaces\. To resolve any problems, review the configuration\.
 
 You can also use the following command, replacing `169.254.249.18` with the inside IP address of your virtual private gateway\.
 
@@ -205,7 +205,7 @@ You should see five exclamation points\.
 
 ### Routing<a name="IOS_NoBGP_routing"></a>
 
-To see your static route table, use the following command\.
+To see your static route table, use the following command:
 
 ```
 router# sh ip route static
@@ -217,7 +217,7 @@ S       10.0.0.0/16 is directly connected, Tunnel1
 is directly connected, Tunnel2
 ```
 
-You should see that the static route for the VPC CIDR through both tunnels exists\. If it does not exist, add the static routes as shown here\.
+You should see that the static route for the VPC CIDR through both tunnels exists\. If it does not exist, add the static routes as shown here:
 
 ```
 router# ip route 10.0.0.0 255.255.0.0 Tunnel1 track 100 

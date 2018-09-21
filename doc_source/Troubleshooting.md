@@ -1,6 +1,6 @@
 # Troubleshooting<a name="Troubleshooting"></a>
 
-The following topics contain troubleshooting information that you can use if your tunnels aren't in the correct state when you test your customer gateway\.
+If your tunnels aren't in the correct state when you test your customer gateway, use the following troubleshooting information\.
 
 **Topics**
 + [Troubleshooting Cisco ASA Customer Gateway Connectivity](Cisco_ASA_Troubleshooting.md)

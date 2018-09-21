@@ -1,6 +1,6 @@
 # Troubleshooting Cisco IOS Customer Gateway Connectivity<a name="Cisco_Troubleshooting"></a>
 
-When you troubleshoot the connectivity of a Cisco customer gateway you need to consider four things: IKE, IPsec, tunnel, and BGP\. You can troubleshoot these areas any order, but we recommend that you start with IKE \(at the bottom of the network stack\) and move up\. 
+When you troubleshoot the connectivity of a Cisco customer gateway, consider four things: IKE, IPsec, tunnel, and BGP\. You can troubleshoot these areas in any order, but we recommend that you start with IKE \(at the bottom of the network stack\) and move up\. 
 
 ## IKE<a name="IKE"></a>
 
@@ -17,7 +17,7 @@ dst             src             state          conn-id slot status
 192.168.37.160  72.21.209.225   QM_IDLE           2002    0 ACTIVE
 ```
 
-You should see one or more lines containing a *src* of the Remote Gateway specified in the tunnels\. The *state* should be `QM_IDLE` and *status* should be `ACTIVE`\. The absence of an entry, or any entry in another indicate that IKE is not configured properly\.
+You should see one or more lines containing an `src` value for the Remote Gateway specified in the tunnels\. The `state` should be `QM_IDLE` and `status` should be `ACTIVE`\. The absence of an entry, or any entry in another indicate that IKE is not configured properly\.
 
 For further troubleshooting, run the following commands to enable log messages that provide diagnostic information\.
 
@@ -26,7 +26,7 @@ router# term mon
 router# debug crypto isakmp
 ```
 
-To disable debugging, use the following command\.
+To disable debugging, use the following command:
 
 ```
 router# no debug crypto isakmp
@@ -136,7 +136,7 @@ interface: Tunnel2
      outbound pcp sas:
 ```
 
-For each tunnel interface, you should see both an *inbound esp sas* and *outbound esp sas*\. Assuming an SA is listed \("spi: 0xF95D2F3C", for example\) and the *Status* is `ACTIVE`, IPsec is configured correctly\.
+For each tunnel interface, you should see both `inbound esp sas` and `outbound esp sas`\. Assuming an SA is listed \(`spi: 0xF95D2F3C`, for example\) and the `Status` is `ACTIVE`, IPsec is configured correctly\.
 
 For further troubleshooting, use the following command to enable debugging\.
 
@@ -152,9 +152,9 @@ router# no debug crypto ipsec
 
 ## Tunnel<a name="Tunnel"></a>
 
-First, check that you have the necessary firewall rules in place\. For a list of the rules, see [Configuring a Firewall Between the Internet and Your Customer Gateway](Introduction.md#FirewallRules)\.
+First, check that you have the necessary firewall rules in place\. For more information, see [Configuring a Firewall Between the Internet and Your Customer Gateway](Introduction.md#FirewallRules)\.
 
-If your firewall rules are set up correctly, then continue troubleshooting with the following command\.
+If your firewall rules are set up correctly, then continue troubleshooting with the following command:
 
 ```
 router# show interfaces tun1
@@ -186,7 +186,7 @@ Tunnel1 is up, line protocol is up
     Received 0 broadcasts, 0 runts, 0 giants, 0 throttles
 ```
 
-Ensure the *line protocol* is up\. Check that the tunnel source IP address, source interface and destination respectively match the tunnel configuration for the customer gateway outside IP address, interface, and virtual private gateway outside IP address\. Ensure that *Tunnel protection via IPSec* is present\. Make sure to run the command on both tunnel interfaces\. To resolve any problems here, review the configuration\.
+ Make sure that the `line protocol` is up\. Check that the tunnel source IP address, source interface and destination respectively match the tunnel configuration for the customer gateway outside IP address, interface, and virtual private gateway outside IP address\. Make sure that `Tunnel protection via IPSec` is present\. Make sure to run the command on both tunnel interfaces\. To resolve any problems here, review the configuration\.
 
 Also use the following command, replacing `169.254.255.1` with the inside IP address of your virtual private gateway\.
 
@@ -201,13 +201,13 @@ Packet sent with the DF bit set
 !!!!!
 ```
 
-You should see 5 exclamation points\.
+You should see five exclamation points\.
 
 For further troubleshooting, review the configuration\.
 
 ## BGP<a name="BGP"></a>
 
-Use the following command\.
+Use the following command:
 
 ```
 router# show ip bgp summary
@@ -231,7 +231,7 @@ Neighbor        V    AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
 169.254.255.5   4  7224     364     323        8    0    0 00:00:24        1
 ```
 
-Here, both neighbors should be listed\. For each, you should see a *State/PfxRcd* value of 1\.
+Here, both neighbors should be listed\. For each, you should see a `State/PfxRcd` value of 1\.
 
 If the BGP peering is up, verify that your customer gateway router is advertising the default route \(0\.0\.0\.0/0\) to the VPC\. 
 
@@ -269,6 +269,6 @@ For further troubleshooting, review the configuration\.
 
 ## Virtual Private Gateway Attachment<a name="VirtualPrivateGatewayAttachment"></a>
 
-Make sure your virtual private gateway is attached to your VPC\. Your integration team does this with the AWS Management Console\.
+Make sure that your virtual private gateway is attached to your VPC\. Your integration team does this with the AWS Management Console\.
 
-If you have questions or need further assistance, please use the [Amazon VPC forum](https://forums.aws.amazon.com/forum.jspa?forumID=58)\. 
+If you have questions or need further assistance, use the [Amazon VPC forum](https://forums.aws.amazon.com/forum.jspa?forumID=58)\. 

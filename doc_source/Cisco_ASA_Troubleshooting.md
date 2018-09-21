@@ -1,6 +1,6 @@
 # Troubleshooting Cisco ASA Customer Gateway Connectivity<a name="Cisco_ASA_Troubleshooting"></a>
 
-When you troubleshoot the connectivity of a Cisco customer gateway, you need to consider three things: IKE, IPsec, and routing\. You can troubleshoot these areas in any order, but we recommend that you start with IKE \(at the bottom of the network stack\) and move up\.
+When you troubleshoot the connectivity of a Cisco customer gateway, consider three things: IKE, IPsec, and routing\. You can troubleshoot these areas in any order, but we recommend that you start with IKE \(at the bottom of the network stack\) and move up\.
 
 **Important**  
 Some Cisco ASAs only support Active/Standby mode\. When you use these Cisco ASAs, you can have only one active tunnel at a time\. The other standby tunnel becomes active only if the first tunnel becomes unavailable\. The standby tunnel may produce the following error in your log files, which can be ignored: `Rejecting IPSec tunnel: no matching crypto map entry for remote proxy 0.0.0.0/0.0.0.0/0/0 local proxy 0.0.0.0/0.0.0.0/0/0 on interface outside` 
@@ -23,7 +23,7 @@ Total IKE SA: 2
     Rekey   : no              State   : MM_ACTIVE
 ```
 
-You should see one or more lines containing an *src* of the remote gateway specified in the tunnels\. The *state* should be `MM_ACTIVE` and *status* should be `ACTIVE`\. The absence of an entry, or any entry in another state, indicates that IKE is not configured properly\.
+You should see one or more lines containing an `src` value for the remote gateway specified in the tunnels\. The `state` value should be `MM_ACTIVE` and `status` should be `ACTIVE`\. The absence of an entry, or any entry in another state, indicates that IKE is not configured properly\.
 
 For further troubleshooting, run the following commands to enable log messages that provide diagnostic information\.
 
@@ -32,7 +32,7 @@ router# term mon
 router# debug crypto isakmp
 ```
 
-To disable debugging, use the following command\.
+To disable debugging, use the following command:
 
 ```
 router# no debug crypto isakmp
@@ -91,11 +91,11 @@ interface: outside
          0x00000000 0x00000001
 ```
 
-For each tunnel interface, you should see both an inbound esp sas and outbound esp sas\. This assumes that an SA is listed \(for example, spi: 0x48B456A6\), and IPsec is configured correctly\.
+For each tunnel interface, you should see both `inbound esp sas` and `outbound esp sas`\. This assumes that an SA is listed \(for example, `spi: 0x48B456A6`\), and IPsec is configured correctly\.
 
-In Cisco ASA, the IPsec will only come up after "interesting traffic" is sent\. To always keep the IPsec active, we recommend configuring SLA monitor\. SLA monitor will continue to send interesting traffic, keeping the IPsec active\.
+In Cisco ASA, the IPsec only comes up after "interesting traffic" is sent\. To always keep the IPsec active, we recommend configuring SLA monitor\. SLA monitor continues to send interesting traffic, keeping the IPsec active\.
 
-You can also use the following ping command to force your IPsec to start negotiation and go up\.
+You can also use the following ping command to force your IPsec to start negotiation and go up:
 
 ```
 ping ec2_instance_ip_address
@@ -115,13 +115,13 @@ Approximate round trip times in milliseconds:
 Minimum = 0ms, Maximum = 0ms, Average = 0ms
 ```
 
-For further troubleshooting, use the following command to enable debugging\.
+For further troubleshooting, use the following command to enable debugging:
 
 ```
 router# debug crypto ipsec
 ```
 
-To disable debugging, use the following command\.
+To disable debugging, use the following command:
 
 ```
 router# no debug crypto ipsec
@@ -150,7 +150,7 @@ If you are not able to reach your instances, check the following:
    crypto map VPN_crypto_map_name 1 set security-association lifetime seconds 3600
    ```
 
-1. Next, check the access list as follows\.
+1. Next, check the access list as follows:
 
    ```
    ciscoasa# show run access-list access-list-name
@@ -170,6 +170,6 @@ If you are not able to reach your instances, check the following:
 
 1. Run a traceroute from the Cisco ASA device, to see if it reaches the Amazon routers \(for example, *AWS\_ENDPOINT\_1*/*AWS\_ENDPOINT\_2*\)\.
 
-   If this reaches the Amazon router, then check the static routes you added in the Amazon console, and also the security groups for the particular instances\.
+   If this reaches the Amazon router, then check the static routes that you added in the AWS Management Console, and also the security groups for the particular instances\.
 
 1. For further troubleshooting, review the configuration\.

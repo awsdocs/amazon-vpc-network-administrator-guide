@@ -15,15 +15,15 @@ An Amazon VPC VPN connection links your data center \(or network\) to your Amazo
 
 The following diagram shows your network, the customer gateway, the VPN connection that goes to the virtual private gateway, and the VPC\. There are two lines between the customer gateway and virtual private gateway because the VPN connection consists of two tunnels to provide increased availability for the Amazon VPC service\. If there's a device failure within AWS, your VPN connection automatically fails over to the second tunnel so that your access isn't interrupted\. From time to time, AWS also performs routine maintenance on the virtual private gateway, which may briefly disable one of the two tunnels of your VPN connection\. Your VPN connection automatically fails over to the second tunnel while this maintenance is performed\. When you configure your customer gateway, it's therefore important that you configure both tunnels\.
 
-![\[Basic VPN diagram\]](http://docs.aws.amazon.com/AmazonVPC/latest/NetworkAdminGuide/images/basic-cust-gateway-diagram.png)
+![\[Basic VPN diagram\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/basic-cust-gateway-diagram.png)
 
 You can create additional VPN connections to other VPCs using the same customer gateway device\. You can reuse the same customer gateway IP address for each of those VPN connections\.
 
-When you create a VPN connection, the VPN tunnel comes up when traffic is generated from your side of the VPN connection\. The virtual private gateway is not the initiator; your customer gateway must initiate the tunnels\.
+When you create a VPN connection, the VPN tunnel comes up when traffic is generated from your side of the VPN connection\. The virtual private gateway is not the initiator; your customer gateway must initiate the tunnels\. AWS VPN endpoints support rekey and can start renegotiations when phase 1 is about to expire if the customer gateway hasn't sent any renegotiation traffic\.
 
- For more information about the components of a VPN connection, see [VPN Connections](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpn-connections.html) in the *Amazon VPC User Guide*\.
+ For more information about the components of a VPN connection, see [VPN Connections](https://docs.aws.amazon.com/vpc/latest/userguide/vpn-connections.html) in the *Amazon VPC User Guide*\.
 
-To protect against a loss of connectivity if your customer gateway becomes unavailable, you can set up a second VPN connection\. For more information, see [Using Redundant VPN Connections to Provide Failover](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html#VPNConnections)\.
+To protect against a loss of connectivity if your customer gateway becomes unavailable, you can set up a second VPN connection\. For more information, see [Using Redundant VPN Connections to Provide Failover](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_VPN.html#VPNConnections)\.
 
 ### Your Role<a name="YourRole"></a>
 
@@ -39,7 +39,7 @@ To set up a VPN connection, follow these general steps:
 
 1. Get the necessary [Network Information](#DetermineNetworkInfo), and provide this information to the team that will create the VPN connection in AWS\.
 
-1. Create the VPN connection in AWS and get the configuration file for your customer gateway\. For more information, see [Setting Up an AWS VPN Connection](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/SetUpVPNConnections.html) in the *Amazon VPC User Guide*\.
+1. Create the VPN connection in AWS and get the configuration file for your customer gateway\. For more information, see [Setting Up an AWS VPN Connection](https://docs.aws.amazon.com/vpc/latest/userguide/SetUpVPNConnections.html) in the *Amazon VPC User Guide*\.
 
 1. Configure your customer gateway using the information from the configuration file\. Examples are provided in this guide\.
 
@@ -57,8 +57,8 @@ To create a VPN connection in AWS, you need the following information\.
 | Customer gateway vendor \(for example, Cisco\), platform \(for example, ISR Series Routers\), and software version \(for example, IOS 12\.4\) | This information is used to generate a configuration file for the customer gateway\. | 
 | The internet\-routable IP address for the customer gateway device's external interface\. | The value must be static\. Your customer gateway may reside behind a device performing network address translation \(NAT\)\.  For a NAT configuration, traffic sent across a VPN tunnel must not be translated to the customer gateway IP address\.  | 
 | \(Optional\) Border Gateway Protocol \(BGP\) Autonomous System Number \(ASN\) of the customer gateway\. | You can use an existing ASN assigned to your network\. If you don't have one, you can use a private ASN in the 64512–65534 range\. Otherwise, we assume that the BGP ASN for the customer gateway is 65000\. | 
-|  \(Optional\) The ASN for the Amazon side of the BGP session\.  |  Specified when creating a virtual private gateway\. If you do not specify a value, the default ASN applies\. For more information, see [Virtual Private Gateway](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html#VPNGateway)\.  | 
-|  \(Optional\) Tunnel information for each VPN tunnel  |  You can specify the following tunnel information for the VPN connection: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonVPC/latest/NetworkAdminGuide/Introduction.html) For more information, see [Configuring the VPN Tunnels for Your VPN Connection](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html#VPNTunnels)\.  | 
+|  \(Optional\) The ASN for the Amazon side of the BGP session\.  |  Specified when creating a virtual private gateway\. If you do not specify a value, the default ASN applies\. For more information, see [Virtual Private Gateway](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_VPN.html#VPNGateway)\.  | 
+|  \(Optional\) Tunnel information for each VPN tunnel  |  You can specify the following tunnel information for the VPN connection: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/vpc/latest/adminguide/Introduction.html) For more information, see [Configuring the VPN Tunnels for Your VPN Connection](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_VPN.html#VPNTunnels)\.  | 
 
 The configuration file for your customer gateway includes the values that you specify for the above items\. It also contains any additional values required for setting up the VPN tunnels, including the outside IP address for the virtual private gateway\. This value is static unless you recreate the VPN connection in AWS\.
 
@@ -72,7 +72,7 @@ If you use the AWS VPN CloudHub configuration, multiple sites can access your VP
 
 To configure the AWS VPN CloudHub, use the Amazon VPC console to create multiple customer gateways, each with the public IP address of the gateway\. You must use a unique Border Gateway Protocol \(BGP\) Autonomous System Number \(ASN\) for each\. Then create a VPN connection from each customer gateway to a common virtual private gateway\. Use the instructions that follow to configure each customer gateway to connect to the virtual private gateway\.
 
-To enable instances in your VPC to reach the virtual private gateway \(and then your customer gateways\), you must configure routes in your VPC routing tables\. For complete instructions, see [VPN Connections](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpn-connections.html) in the *Amazon VPC User Guide*\. For AWS VPN CloudHub, you can configure an aggregate route in your VPC routing table \(for example, 10\.0\.0\.0/16\), and use more specific prefixes between customer gateways and the virtual private gateway\.
+To enable instances in your VPC to reach the virtual private gateway \(and then your customer gateways\), you must configure routes in your VPC routing tables\. For complete instructions, see [VPN Connections](https://docs.aws.amazon.com/vpc/latest/userguide/vpn-connections.html) in the *Amazon VPC User Guide*\. For AWS VPN CloudHub, you can configure an aggregate route in your VPC routing table \(for example, 10\.0\.0\.0/16\), and use more specific prefixes between customer gateways and the virtual private gateway\.
 
 ## Configuring Multiple VPN Connections to Your VPC<a name="MultipleVPNConnections"></a>
 
@@ -87,7 +87,7 @@ When you have customer gateways at multiple geographic locations, each customer 
 
 The virtual private gateway receives routing information from all customer gateways and calculates the set of preferred paths using the BGP best path selection algorithm\. The rules of that algorithm, as it applies to VPC, are:
 
-1. The most specific IP prefix is preferred \(for example, 10\.0\.0\.0/24 is preferable to 10\.0\.0\.0/16\)\. For more information, see [Route Priority](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Route_Tables.html#route-tables-priority) in the *Amazon VPC User Guide*\.
+1. The most specific IP prefix is preferred \(for example, 10\.0\.0\.0/24 is preferable to 10\.0\.0\.0/16\)\. For more information, see [Route Priority](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html#route-tables-priority) in the *Amazon VPC User Guide*\.
 
 1. When the prefixes are the same, statically configured VPN connections, if they exist, are preferred\. For matching prefixes where each VPN connection uses BGP, the AS PATH is compared and the prefix with the shortest AS PATH is preferred\. Alternatively, you can prepend AS\_PATH, so that the path is less preferred\. 
 
@@ -95,7 +95,7 @@ The virtual private gateway receives routing information from all customer gatew
 
 The following diagram shows the configuration of multiple VPNs\.
 
-![\[Multiple VPN layout\]](http://docs.aws.amazon.com/AmazonVPC/latest/NetworkAdminGuide/images/branch-offices-diagram.png)
+![\[Multiple VPN layout\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/branch-offices-diagram.png)
 
 ## Customer Gateway Devices We've Tested<a name="DevicesTested"></a>
 
@@ -129,10 +129,10 @@ There are four main parts to the configuration of your customer gateway\. Throug
 
 |  |  | 
 | --- |--- |
-|  ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonVPC/latest/NetworkAdminGuide/images/IKE.png)  |  IKE Security Association \(required to exchange keys used to establish the IPsec security association\)  | 
-|  ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonVPC/latest/NetworkAdminGuide/images/IPsec.png)  |  IPsec Security Association \(handles the tunnel's encryption, authentication, and so on\.\)  | 
-|  ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonVPC/latest/NetworkAdminGuide/images/Tunnel.png)  |  Tunnel interface \(receives traffic going to and from the tunnel\)  | 
-| Optional ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonVPC/latest/NetworkAdminGuide/images/BGP.png)  |  BGP peering \(exchanges routes between the customer gateway and the virtual private gateway\) for devices that use BGP  | 
+|  ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/IKE.png)  |  IKE Security Association \(required to exchange keys used to establish the IPsec security association\)  | 
+|  ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/IPsec.png)  |  IPsec Security Association \(handles the tunnel's encryption, authentication, and so on\.\)  | 
+|  ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/Tunnel.png)  |  Tunnel interface \(receives traffic going to and from the tunnel\)  | 
+| Optional ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/BGP.png)  |  BGP peering \(exchanges routes between the customer gateway and the virtual private gateway\) for devices that use BGP  | 
 
 If you have a device that isn't in the preceding list of tested devices, this section describes the requirements the device must meet for you to use it with Amazon VPC\. The following table lists the requirement the customer gateway must adhere to, the related RFC \(for reference\), and comments about the requirement\. For an example of the configuration information if your device isn't one of the tested Cisco or Juniper devices, see [Example: Generic Customer Gateway Using Border Gateway Protocol](GenericConfig.md)\.
 
@@ -143,15 +143,15 @@ The VPN tunnel comes up when traffic is generated from your side of the VPN conn
 
 |  Requirement  |  RFC |  Comments | 
 | --- | --- | --- | 
-|  Establish IKE Security Association using pre\-shared keys   ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonVPC/latest/NetworkAdminGuide/images/IKE.png)   |   [RFC 2409](http://tools.ietf.org/html/rfc2409)   |  The IKE Security Association is established first between the virtual private gateway and customer gateway using the pre\-shared key as the authenticator\. Upon establishment, IKE negotiates an ephemeral key to secure future IKE messages\. Proper establishment of an IKE Security Association requires complete agreement among the parameters, including encryption and authentication parameters\. When you create a VPN connection in AWS, you can specify your own pre\-shared key for each tunnel, or you can let AWS generate one for you\. For more information, see [Configuring the VPN Tunnels for Your VPN Connection](http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html#VPNTunnels)\.  | 
-|  Establish IPsec Security Associations in Tunnel mode  ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonVPC/latest/NetworkAdminGuide/images/IPsec.png)   |   [RFC 4301](http://tools.ietf.org/html/rfc4301)   |  Using the IKE ephemeral key, keys are established between the virtual private gateway and customer gateway to form an IPsec Security Association \(SA\)\. Traffic between gateways is encrypted and decrypted using this SA\. The ephemeral keys used to encrypt traffic within the IPsec SA are automatically rotated by IKE on a regular basis to ensure confidentiality of communications\.  | 
+|  Establish IKE Security Association using pre\-shared keys   ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/IKE.png)   |   [RFC 2409](http://tools.ietf.org/html/rfc2409)   |  The IKE Security Association is established first between the virtual private gateway and customer gateway using the pre\-shared key as the authenticator\. Upon establishment, IKE negotiates an ephemeral key to secure future IKE messages\. Proper establishment of an IKE Security Association requires complete agreement among the parameters, including encryption and authentication parameters\. When you create a VPN connection in AWS, you can specify your own pre\-shared key for each tunnel, or you can let AWS generate one for you\. For more information, see [Configuring the VPN Tunnels for Your VPN Connection](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_VPN.html#VPNTunnels)\.  | 
+|  Establish IPsec Security Associations in Tunnel mode  ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/IPsec.png)   |   [RFC 4301](http://tools.ietf.org/html/rfc4301)   |  Using the IKE ephemeral key, keys are established between the virtual private gateway and customer gateway to form an IPsec Security Association \(SA\)\. Traffic between gateways is encrypted and decrypted using this SA\. The ephemeral keys used to encrypt traffic within the IPsec SA are automatically rotated by IKE on a regular basis to ensure confidentiality of communications\.  | 
 |  Utilize the AES 128\-bit encryption or AES 256\-bit encryption function  |   [RFC 3602](http://tools.ietf.org/html/rfc3602)   |  The encryption function is used to ensure privacy among both IKE and IPsec Security Associations\.  | 
 |  Utilize the SHA\-1 or SHA\-256 hashing function  |   [RFC 2404](http://tools.ietf.org/html/rfc2404)   |  This hashing function is used to authenticate both IKE and IPsec Security Associations\.  | 
-|  Utilize Diffie\-Hellman Perfect Forward Secrecy\. The following groups are supported: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/AmazonVPC/latest/NetworkAdminGuide/Introduction.html)  |   [RFC 2409](http://tools.ietf.org/html/rfc2409)   |  IKE uses Diffie\-Hellman to establish ephemeral keys to secure all communication between customer gateways and virtual private gateways\.  | 
+|  Utilize Diffie\-Hellman Perfect Forward Secrecy\. The following groups are supported: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/vpc/latest/adminguide/Introduction.html)  |   [RFC 2409](http://tools.ietf.org/html/rfc2409)   |  IKE uses Diffie\-Hellman to establish ephemeral keys to secure all communication between customer gateways and virtual private gateways\.  | 
 |  Utilize IPsec Dead Peer Detection  |   [RFC 3706](http://tools.ietf.org/html/rfc3706)   |  The use of Dead Peer Detection enables the VPN devices to rapidly identify when a network condition prevents delivery of packets across the internet\. When this occurs, the gateways delete the Security Associations and attempt to create new associations\. During this process, the alternate IPsec tunnel is utilized if possible\.  | 
-|  Bind tunnel to logical interface \(route\-based VPN\)  ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonVPC/latest/NetworkAdminGuide/images/Tunnel.png)   |   None   |  Your gateway must support the ability to bind the IPsec tunnel to a logical interface\. The logical interface contains an IP address used to establish BGP peering to the virtual private gateway\. This logical interface should perform no additional encapsulation \(for example, GRE, IP in IP\)\. Your interface should be set to a 1399 byte Maximum Transmission Unit \(MTU\)\.   | 
+|  Bind tunnel to logical interface \(route\-based VPN\)  ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/Tunnel.png)   |   None   |  Your gateway must support the ability to bind the IPsec tunnel to a logical interface\. The logical interface contains an IP address used to establish BGP peering to the virtual private gateway\. This logical interface should perform no additional encapsulation \(for example, GRE, IP in IP\)\. Your interface should be set to a 1399 byte Maximum Transmission Unit \(MTU\)\.   | 
 |  Fragment IP packets before encryption  |   [RFC 4459](http://tools.ietf.org/html/rfc4459)   |  When packets are too large to be transmitted, they must be fragmented\. We will not reassemble fragmented encrypted packets\. Therefore, your VPN device must fragment packets *before* encapsulating with the VPN headers\. The fragments are individually transmitted to the remote host, which reassembles them\. For more information about fragmentation, see the [ IP fragmentation](http://en.wikipedia.org/wiki/IP_fragmentation) Wikipedia article\.  | 
-|  \(Optional\) Establish BGP peerings  ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/AmazonVPC/latest/NetworkAdminGuide/images/BGP.png)   |   [RFC 4271](http://tools.ietf.org/html/rfc4271)   |  BGP is used to exchange routes between the customer gateway and virtual private gateway for devices that use BGP\. All BGP traffic is encrypted and transmitted via the IPsec Security Association\. BGP is required for both gateways to exchange the IP prefixes reachable through the IPsec SA\.  | 
+|  \(Optional\) Establish BGP peerings  ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/BGP.png)   |   [RFC 4271](http://tools.ietf.org/html/rfc4271)   |  BGP is used to exchange routes between the customer gateway and virtual private gateway for devices that use BGP\. All BGP traffic is encrypted and transmitted via the IPsec Security Association\. BGP is required for both gateways to exchange the IP prefixes reachable through the IPsec SA\.  | 
 
 We recommend you use the techniques listed in the following table to minimize problems related to the amount of data that can be transmitted through the IPsec tunnel\. Because the connection encapsulates packets with additional network headers \(including IPsec\), the amount of data that can be transmitted in a single packet is reduced\. 
 
