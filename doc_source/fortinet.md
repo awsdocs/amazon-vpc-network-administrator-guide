@@ -123,7 +123,7 @@ config vpn ipsec phase2-interface
 config system interface
  edit "vpn-44a8938f-0"
   set vdom "root"
-  set ip 169.254.255.2 255.255.255.255 
+  set ip 169.254.255.2 255.255.255.252 
   set allowaccess ping 
   set type tunnel 
 
@@ -318,7 +318,7 @@ config vpn ipsec phase2-interface
 config system interface
  edit "vpn-44a8938f-1"
   set vdom "root"
-  set ip 169.254.255.6 255.255.255.255 
+  set ip 169.254.255.6 255.255.255.252 
   set allowaccess ping 
   set type tunnel 
 
