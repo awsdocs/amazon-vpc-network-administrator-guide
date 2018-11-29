@@ -10,13 +10,13 @@ This section has example configuration information provided by your integration 
 
 ## High\-Level View of the Customer Gateway<a name="check-point-bgp-overview"></a>
 
-The following diagram shows the general details of your customer gateway\. Note that the VPN connection consists of two separate tunnels\. Using redundant tunnels ensures continuous availability in the case that a device fails\.
+The following diagram shows the general details of your customer gateway\. The VPN connection consists of two separate tunnels\. Using redundant tunnels ensures continuous availability in the case that a device fails\.
 
 ![\[Check Point with BGP high-level diagram\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/highlevel-generic-diagram.png)
 
 ## Configuration File<a name="check-point-bgp-example-config"></a>
 
-Your integration team will provide you with a configuration file with the values you need in order to configure each tunnel and the IKE and IPsec settings for your VPN device\. The configuration file includes instructions on how to use the Gaia web portal and Check Point SmartDashboard to configure your device\. The same steps are provided in the next section\.
+Your integration team can provide you with a configuration file with the values you need in order to configure each tunnel and the IKE and IPsec settings for your VPN device\. The configuration file includes instructions on how to use the Gaia web portal and Check Point SmartDashboard to configure your device\. The same steps are provided in the next section\.
 
 The following is an extract of an example configuration file\. The file contains two sections: `IPSec Tunnel #1` and `IPSec Tunnel #2`\. You must use the values provided in each section to configure each tunnel\.
 
@@ -129,7 +129,7 @@ The first step to create the VPN tunnels and provide the private \(inside\) IP a
 
 ### Step 2: Configure BGP<a name="check-point-bgp-configure-bgp"></a>
 
-In this step, you create a BGP policy that allows the import of routes that are advertised by AWS, and then configure your customer gateway to advertise its local routes to AWS\.
+In this step, you create a BGP policy that allows the import of routes that are advertised by AWS\. Then, configure your customer gateway to advertise its local routes to AWS\.
 
 **To create a BGP policy**
 
@@ -174,9 +174,9 @@ In this step, you create a network object for each VPN tunnel, specifying the pu
 
 1. Go to your gateway network object, open your gateway or cluster object, and choose **Topology**\.
 
-1. In the **VPN Domain** section, choose **Manually defined**, and browse to and select the empty simple group that you created in step 2\. Choose **OK**
+1. In the **VPN Domain** section, choose **Manually defined**, and browse to and select the empty simple group that you created in step 2\. Choose **OK**\.
 **Note**  
-You can keep any existing VPN domain that you've configured; however, ensure that the hosts and networks that are used or served by the new VPN connection are not declared in that VPN domain, especially if the VPN domain is automatically derived\.
+You can keep any existing VPN domain that you've configured\. However, ensure that the hosts and networks that are used or served by the new VPN connection are not declared in that VPN domain, especially if the VPN domain is automatically derived\.
 
 **Note**  
 If you're using clusters, then edit the topology and define the interfaces as cluster interfaces\. Use the IP addresses specified in the configuration file\. 
@@ -256,9 +256,9 @@ In this step, you configure a policy with firewall rules and directional match r
 
 Your Check Point gateway can use Dead Peer Detection \(DPD\) to identify when an IKE association is down\.
 
-To configure DPD for a permanent tunnel, the permanent tunnel must be configured in the AWS VPN community \(refer to Step 8 in [Step 4: Create a VPN Community and Configure IKE and IPsec](#check-point-bgp-vpn-community)\)\.
+To configure DPD for a permanent tunnel, the permanent tunnel must be configured in the AWS VPN community\. For more information, see Step 8 in [Step 4: Create a VPN Community and Configure IKE and IPsec](#check-point-bgp-vpn-community)\)\.
 
-By default, the `tunnel_keepalive_method` property for a VPN gateway is set to `tunnel_test`\. You must change the value to `dpd`\. Each VPN gateway in the VPN community that requires DPD monitoring must be configured with the `tunnel_keepalive_method` property, including any 3rd party VPN gateway \(you cannot configure different monitoring mechanisms for the same gateway\)\.
+By default, the `tunnel_keepalive_method` property for a VPN gateway is set to `tunnel_test`\. You must change the value to `dpd`\. Each VPN gateway in the VPN community that requires DPD monitoring must be configured with the `tunnel_keepalive_method` property, including any 3rd party VPN gateway\. You cannot configure different monitoring mechanisms for the same gateway\.
 
 You can update the `tunnel_keepalive_method` property using the GuiDBedit tool\.
 
@@ -280,9 +280,9 @@ You can update the `tunnel_keepalive_method` property using the GuiDBedit tool\.
 
 1. Press CTRL\+F, or use the **Search** menu to search for the following: `tunnel_keepalive_method`\.
 
-1. In the lower pane, open the context menu for `tunnel_keepalive_method`, and select **Edit\.\.\.**\. Choose **dpd** and choose **OK**\.
+1. In the lower pane, open the context menu for `tunnel_keepalive_method`, and select **Edit\.\.\.**\. Choose **dpd**, **OK**\.
 
-1. Repeat steps 7 \- 9 for each gateway that's part of the AWS VPN Community\.
+1. Repeat steps 7–9 for each gateway that's part of the AWS VPN Community\.
 
 1. Choose **File**, **Save All**\.
 
@@ -327,7 +327,7 @@ Next you must test the connectivity for each tunnel by launching an instance int
 
 **To test the end\-to\-end connectivity of each tunnel**
 
-1. Launch an instance of one of the Amazon Linux AMIs into your VPC\. The Amazon Linux AMIs are listed in the launch wizard when you launch an instance from the Amazon EC2 Console\. For more information, see the [Amazon VPC Getting Started Guide](https://docs.aws.amazon.com/AmazonVPC/latest/GettingStartedGuide/)\.
+1. Launch an instance of one of the Amazon Linux AMIs into your VPC\. The Amazon Linux AMIs are listed in the launch wizard when you launch an instance from the Amazon EC2 console\. For more information, see the [Amazon VPC Getting Started Guide](https://docs.aws.amazon.com/AmazonVPC/latest/GettingStartedGuide/)\.
 
 1. After the instance is running, get its private IP address \(for example, `10.0.0.4`\)\. The console displays the address as part of the instance's details\.
 

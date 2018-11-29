@@ -40,7 +40,7 @@ To configure Windows Server as a customer gateway, ensure that you have Windows 
 
   1. For **Instance**, select your Windows Server instance\. Choose **Associate**\.
 
-  Take note of this address — you will need it when you create the customer gateway in your VPC\. 
+  Take note of this address — you need it when you create the customer gateway in your VPC\. 
 + Ensure the instance's security group rules allow outbound IPsec traffic\. By default, a security group allows all outbound traffic; however, if the security group's outbound rules have been modified from their original state, you must create the following outbound custom protocol rules for IPsec traffic: IP protocol 50, IP protocol 51, and UDP 500\. 
 
 Take note of the CIDR range for your network in which the Windows server is located, for example, `172.31.0.0/16`\.
@@ -53,19 +53,19 @@ To create a VPN connection from your VPC, you must first create a virtual privat
 
 1. Open the Amazon VPC console at [https://console\.aws\.amazon\.com/vpc/](https://console.aws.amazon.com/vpc/)\.
 
-1. In the navigation pane, choose **Virtual Private Gateways**, and then **Create Virtual Private Gateway**\.
+1. In the navigation pane, choose **Virtual Private Gateways**, **Create Virtual Private Gateway**\.
 
-1. You can optionally enter a name for your virtual private gateway, and then choose **Yes, Create**\.
+1. You can optionally enter a name for your virtual private gateway and choose **Yes, Create**\.
 
-1. Select the virtual private gateway that you created, and then choose **Attach to VPC**\.
+1. Select the virtual private gateway that you created and choose **Attach to VPC**\.
 
-1. In the **Attach to VPC** dialog box, select your VPC from the list, and then choose **Yes, Attach**\.
+1. In the **Attach to VPC** dialog box, select your VPC from the list and choose **Yes, Attach**\.
 
 **To create a VPN connection**
 
 1. Open the Amazon VPC console at [https://console\.aws\.amazon\.com/vpc/](https://console.aws.amazon.com/vpc/)\.
 
-1. In the navigation pane, choose **VPN Connections**, and then **Create VPN Connection**\.
+1. In the navigation pane, choose **VPN Connections**, **Create VPN Connection**\.
 
 1. Select the virtual private gateway from the list\. 
 
@@ -76,9 +76,9 @@ The IP address must be static and may be behind a device performing network addr
 1. Select the **Static** routing option, enter the **Static IP Prefixes** values for your network in CIDR notation, and then choose **Yes, Create**\.
 
 **To configure your VPC**
-+ Create a private subnet in your VPC \(if you don't have one already\) for launching instances that will communicate with the Windows server\. For more information, see [Adding a Subnet to Your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html#AddaSubnet)\. 
++ Create a private subnet in your VPC \(if you don't have one already\) for launching instances to communicate with the Windows server\. For more information, see [Adding a Subnet to Your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html#AddaSubnet)\. 
 **Note**  
-A private subnet is a subnet that does not have a route to an Internet gateway\. The routing for this subnet is described in the next item\.
+A private subnet is a subnet that does not have a route to an internet gateway\. The routing for this subnet is described in the next item\.
 + Update your route tables for the VPN connection:
   + Add a route to your private subnet's route table with the virtual private gateway as the target, and the Windows server's network \(CIDR range\) as the destination\.
   + Enable route propagation for the virtual private gateway\. For more information, see [Route Tables](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html) in the *Amazon VPC User Guide*\.
@@ -96,11 +96,11 @@ You can use the Amazon VPC console to download a Windows server configuration fi
 
 1. In the navigation pane, choose **VPN Connections**\.
 
-1. Select your VPN connection, and then choose **Download Configuration**\.
+1. Select your VPN connection and choose **Download Configuration**\.
 
 1. Select **Microsoft** as the vendor, **Windows Server** as the platform, and **2012 R2** as the software\. Choose **Yes, Download**\. You can open the file or save it\.
 
-The configuration file contains a section of information similar to the following example\. You’ll see this information presented twice, one time for each tunnel\. You'll use this information when configuring the Windows Server 2012 R2 server\.
+The configuration file contains a section of information similar to the following example\. You see this information presented twice, one time for each tunnel\. Use this information when configuring the Windows Server 2012 R2 server\.
 
 ```
 vgw-1a2b3c4d Tunnel1
@@ -157,7 +157,7 @@ The encryption and authentication algorithms for the IPsec SA\. These are the su
 
 ## Step 3: Configure the Windows Server<a name="cgw-win2012-configure-server"></a>
 
-Before you set up the VPN tunnel, you must install and configure Routing and Remote Access Services on your Windows server to allow remote users to access resources on your network\.
+Before you set up the VPN tunnel, you must install and configure Routing and Remote Access Services on your Windows server\. That allows remote users to access resources on your network\.
 
 **To install Routing and Remote Access Services on Windows Server 2012 R2**
 
@@ -177,7 +177,7 @@ Before you set up the VPN tunnel, you must install and configure Routing and Rem
 
    1. Select **Network Policy and Access Services** in the list\. In the dialog box that displays, choose **Add Features** to confirm the features that are required for this role\.
 
-   1. In the same list, choose **Remote Access**, and then choose **Next**\.
+   1. In the same list, choose **Remote Access**, **Next**\.
 
    1. On the **Select features** page, choose **Next**\.
 
@@ -199,9 +199,9 @@ Before you set up the VPN tunnel, you must install and configure Routing and Rem
 
 1. In the **Routing and Remote Access Server Setup Wizard**, on the first page, choose **Next**\.
 
-1. On the **Configuration** page, choose **Custom Configuration** and **Next**\.
+1. On the **Configuration** page, choose **Custom Configuration**, **Next**\.
 
-1. Choose **LAN routing**, **Next**, and **Finish**\.
+1. Choose **LAN routing**, **Next**, **Finish**\.
 
 1. When prompted by the **Routing and Remote Access** dialog box, choose **Start service**\.
 
@@ -269,7 +269,7 @@ In this section, you configure a security rule on your Windows server to create 
 
 1. On the **Requirements** page, choose **Require authentication for inbound connections\. Do not establish tunnels for outbound connections**, and then choose **Next**\.
 
-1. On **Tunnel Endpoints** page, under **Which computers are in Endpoint 1**, choose **Add**\. Enter the CIDR range of your network \(behind your Windows server customer gateway; for example, `172.31.0.0/16` \), and then choose **OK**\. \(Note that the range can include the IP address of your customer gateway\.\)
+1. On **Tunnel Endpoints** page, under **Which computers are in Endpoint 1**, choose **Add**\. Enter the CIDR range of your network \(behind your Windows server customer gateway; for example, `172.31.0.0/16` \), and then choose **OK**\. The range can include the IP address of your customer gateway\.
 
 1. Under **What is the local tunnel endpoint \(closest to computer in Endpoint 1\)**, choose **Edit**\. In the **IPv4 address** field, enter the private IP address of your Windows server, and then choose **OK**\.
 
@@ -282,13 +282,13 @@ If you are repeating this procedure for Tunnel 2, be sure to select the endpoint
 You must scroll in the dialog box until you locate **Which computers are in Endpoint 2**\. Do not choose **Next** until you have completed this step, or you won't be able to connect to your server\.  
 ![\[New Connection Security Rule Wizard: Tunnel Endpoints\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/tunnelendpoints_complete_win2012.png)
 
-1. Confirm that all the settings you've specified are correct, and then choose **Next**\.
+1. Confirm that all the settings you've specified are correct and choose **Next**\.
 
-1. On the **Authentication Method** page, select **Advanced**, and then choose **Customize**\.
+1. On the **Authentication Method** page, select **Advanced** and choose **Customize**\.
 
 1. Under **First authentication methods**, choose **Add**\.
 
-1. Select **Preshared key**, enter the pre\-shared key value from the configuration file, and choose **OK**\.
+1. Select **Preshared key**, enter the pre\-shared key value from the configuration file and choose **OK**\.
 **Important**  
 If you are repeating this procedure for Tunnel 2, be sure to select the pre\-shared key for Tunnel 2\.
 
@@ -296,7 +296,7 @@ If you are repeating this procedure for Tunnel 2, be sure to select the pre\-sha
 
 1. Choose **Next**\.
 
-1. On the **Profile** page, select all three checkboxes: **Domain**, **Private**, and **Public**, and then choose **Next**\.
+1. On the **Profile** page, select all three check boxes: **Domain**, **Private**, and **Public**\. Choose **Next**\.
 
 1. On the **Name** page, enter a name for your connection rule; for example, `VPN to AWS Tunnel 1`, and then choose **Finish**\.
 
@@ -388,18 +388,18 @@ After setting up your security rules on your server, configure some basic IPsec 
    + Encryption: AES\-CBC 128
    + Lifetime: 60 minutes
 
-   These value correspond to the following entry from the configuration file\.
+   These values correspond to the following entry from the configuration file\.
 
    ```
    QuickModeSecMethods: 
    ESP:SHA1-AES128+60min+100000kb
    ```
 
-1. Choose **OK** to return to the **Customize IPsec Settings** dialog box and choose **OK** again to save the configuration \.
+1. Choose **OK** to return to the **Customize IPsec Settings** dialog box and choose **OK** again to save the configuration\.
 
 ## Step 5: Enable Dead Gateway Detection<a name="cgw-win2012-gateway-detection"></a>
 
-Next, you need to configure TCP to detect when a gateway becomes unavailable\. You can do this by modifying this registry key: `HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters`\. Do not perform this step until you’ve completed the preceding sections\. After you change the registry key, you must reboot the server\.
+Next, configure TCP to detect when a gateway becomes unavailable\. You can do this by modifying this registry key: `HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters`\. Do not perform this step until you’ve completed the preceding sections\. After you change the registry key, you must reboot the server\.
 
 **To enable dead gateway detection**
 
@@ -411,17 +411,17 @@ Next, you need to configure TCP to detect when a gateway becomes unavailable\. Y
 
 1. Enter the name **EnableDeadGWDetect**\.
 
-1. Select **EnableDeadGWDetect**, and choose **Modify** from the **Edit** menu\.
+1. Select **EnableDeadGWDetect** and choose **Edit**, **Modify**\.
 
 1. In **Value data**, enter **1**, and then choose **OK**\.
 
 1. Close the Registry Editor and reboot the server\.
 
-For more information, go to [EnableDeadGWDetect](http://technet.microsoft.com/en-us/library/cc960464.aspx) in the *Microsoft TechNet Library*\.
+For more information, see [EnableDeadGWDetect](http://technet.microsoft.com/en-us/library/cc960464.aspx) in the *Microsoft TechNet Library*\.
 
 ## Step 6: Test the VPN Connection<a name="cgw-win2012-test-connection"></a>
 
-To test that the VPN connection is working correctly, launch an instance into your VPC, and ensure that it does not have an Internet connection\. After you've launched the instance, ping its private IP address from your Windows server\. The VPN tunnel comes up when traffic is generated from the customer gateway, therefore the ping command also initiates the VPN connection\.
+To test that the VPN connection is working correctly, launch an instance into your VPC, and ensure that it does not have an internet connection\. After you've launched the instance, ping its private IP address from your Windows server\. The VPN tunnel comes up when traffic is generated from the customer gateway, therefore the ping command also initiates the VPN connection\.
 
 **To launch an instance in your VPC and get its private IP address**
 
@@ -433,11 +433,11 @@ To test that the VPN connection is working correctly, launch an instance into yo
 
 1. In the **Auto\-assign Public IP** list, ensure that the setting is set to **Disable**\.
 
-1. Choose **Next** until you get to the** Step 6: Configure Security Group** page\. You can either select an existing security group that you configured in [ Step 1: Create a VPN Connection and Configure Your VPC](#cgw-win2012-create-vpn), or you can create a new security group and ensure that it has a rule that allows all ICMP traffic from the IP address of your Windows server\.
+1. Choose **Next** until you get to the** Step 6: Configure Security Group** page\. You can select an existing security group that you configured in [ Step 1: Create a VPN Connection and Configure Your VPC](#cgw-win2012-create-vpn)\. Or, you can create a new security group and ensure that it has a rule that allows all ICMP traffic from the IP address of your Windows server\.
 
 1. Complete the rest of the steps in the wizard, and launch your instance\. 
 
-1. On the **Instances** page, select your instance\. Get the private IP address in the **Private IPs** field on the details pane\.
+1. On the **Instances** page, select your instance\. For **Private IPs**, note the private IP address on the details pane\.
 
 Connect to or log on to your Windows server, open the command prompt, and then use the `ping` command to ping your instance using its private IP address; for example:
 
@@ -462,7 +462,7 @@ If the `ping` command fails, check the following information:
 + Ensure that you have configured your security group rules to allow ICMP to the instance in your VPC\. If your Windows server is an EC2 instance, ensure that its security group's outbound rules allow IPsec traffic\. For more information, see [Configuring Your Windows Server](#cgw-win2012-prerequisites-windows-server)\.
 + Ensure that the operating system on the instance you are pinging is configured to respond to ICMP\. We recommend that you use one of the Amazon Linux AMIs\.
 + If the instance you are pinging is a Windows instance, connect to the instance and enable inbound ICMPv4 on the Windows firewall\.
-+ Ensure that you have configured the route tables correctly for your VPC or your subnet \. For more information, see [ Step 1: Create a VPN Connection and Configure Your VPC](#cgw-win2012-create-vpn)\.
++ Ensure that you have configured the route tables correctly for your VPC or your subnet\. For more information, see [ Step 1: Create a VPN Connection and Configure Your VPC](#cgw-win2012-create-vpn)\.
 + If your customer gateway is a Windows server instance, ensure that you've disabled source/destination checking for the instance\. For more information, see [Configuring Your Windows Server](#cgw-win2012-prerequisites-windows-server)\.
 
-In the Amazon VPC console, on the **VPN Connections** page, select your VPN connection\. The first tunnel is in the UP state\. The second tunnel should be configured, but it won't be used unless the first tunnel goes down\. It may take a few moments to establish the encrypted tunnels\.
+In the Amazon VPC console, on the **VPN Connections** page, select your VPN connection\. The first tunnel is in the UP state\. The second tunnel should be configured, but it isn't used unless the first tunnel goes down\. It may take a few moments to establish the encrypted tunnels\.

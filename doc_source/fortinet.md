@@ -11,7 +11,7 @@ Two diagrams illustrate the example configuration\. The first diagram shows the 
 
 ## A High\-Level View of the Customer Gateway<a name="fortinet-high-level"></a>
 
-The following diagram shows the general details of your customer gateway\. Note that the VPN connection consists of two separate tunnels\. Using redundant tunnels ensures continuous availability in the case that a device fails\.
+The following diagram shows the general details of your customer gateway\. The VPN connection consists of two separate tunnels\. Using redundant tunnels ensures continuous availability in the case that a device fails\.
 
 ![\[Customer gateway high-level diagram\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/highlevel-generic-diagram.png)
 
@@ -23,14 +23,14 @@ In addition, the example configuration refers to these items that you must provi
 + *YOUR\_UPLINK\_ADDRESS*—The IP address for the Internet\-routable external interface on the customer gateway \(which must be static, and may be behind a device performing network address translation \(NAT\)\.
 + *YOUR\_BGP\_ASN*—The customer gateway's BGP ASN \(we use 65000 by default\)
 
-The example configuration includes several example values to help you understand how configuration works\. For example, we provide example values for the VPN connection ID \(vpn\-44a8938f\), virtual private gateway ID \(vgw\-8db04f81\), the IP addresses \(72\.21\.209\.\*, 169\.254\.255\.\*\), and the remote ASN \(7224\)\. You'll replace these example values with the actual values from the configuration information that you receive\.
+The example configuration includes several example values to help you understand how configuration works\. For example, we provide example values for the VPN connection ID \(vpn\-44a8938f\), virtual private gateway ID \(vgw\-8db04f81\), the IP addresses \(72\.21\.209\.\*, 169\.254\.255\.\*\), and the remote ASN \(7224\)\. Replace these example values with the actual values from the configuration information that you receive\.
 
 In the following diagram and example configuration, you must replace the items in red italics with values that apply to your particular configuration\.
 
 ![\[Fortinet detailed diagram\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/detailed-fortinet-diagram.png)
 
 **Warning**  
-The following configuration information is an example of what you can expect your integration team to provide\. Many of the values in the following example will be different from the actual configuration information that you receive\. You must use the actual values and not the example values shown here, or your implementation will fail\.
+The following configuration information is an example of what you can expect your integration team to provide\. Many of the values in the following example are different from the actual configuration information that you receive\. You must use the actual values and not the example values shown here, or your implementation will fail\.
 
 ```
 ! Amazon Web Services
@@ -466,7 +466,7 @@ Next you must test the connectivity for each tunnel by launching an instance int
 
 **To test the end\-to\-end connectivity of each tunnel**
 
-1. Launch an instance of one of the Amazon Linux AMIs into your VPC\. The Amazon Linux AMIs are listed in the launch wizard when you launch an instance from the Amazon EC2 Console\. For more information, see the [Amazon VPC Getting Started Guide](https://docs.aws.amazon.com/AmazonVPC/latest/GettingStartedGuide/)\.
+1. Launch an instance of one of the Amazon Linux AMIs into your VPC\. The Amazon Linux AMIs are listed in the launch wizard when you launch an instance from the Amazon EC2 console\. For more information, see the [Amazon VPC Getting Started Guide](https://docs.aws.amazon.com/AmazonVPC/latest/GettingStartedGuide/)\.
 
 1. After the instance is running, get its private IP address \(for example, `10.0.0.4`\)\. The console displays the address as part of the instance's details\.
 

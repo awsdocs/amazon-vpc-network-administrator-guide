@@ -5,11 +5,11 @@
 + [Example Configuration](#cisco-asa-vti-bgp-details)
 + [How to Test the Customer Gateway Configuration](#cisco-asa-vti-bgp-test)
 
-In this section we walk you through an example of the configuration information provided by your integration team if your customer gateway is a Cisco ASA device running Cisco ASA 9\.7\.1\+ software\.
+In this section, you get an example of the configuration information provided by your integration team if your customer gateway is a Cisco ASA device running Cisco ASA 9\.7\.1\+ software\.
 
 ## A High\-Level View of the Customer Gateway<a name="cisco-asa-vti-bgp-overview"></a>
 
-The following diagram shows the general details of your customer gateway\. Note that the VPN connection consists of two separate tunnels\. Using redundant tunnels ensures continuous availability in the case that a device fails\.
+The following diagram shows the general details of your customer gateway\. The VPN connection consists of two separate tunnels\. Using redundant tunnels ensures continuous availability in the case that a device fails\.
 
 ![\[Cisco ASA high-level diagram\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/highlevel-generic-diagram.png)
 
@@ -19,7 +19,7 @@ Cisco ASAs from version 9\.7\.1 and later support Active/Active mode\. When you 
 
 The configuration in this section is an example of the configuration information your integration team should provide\. The example configuration contains a set of information for each of the tunnels that you must configure\.
 
-The example configuration includes example values to help you understand how configuration works\. For example, we provide example values for the VPN connection ID \(vpn\-12345678\) and virtual private gateway ID \(vgw\-12345678\), and placeholders for the AWS endpoints \(*AWS\_ENDPOINT\_1* and *AWS\_ENDPOINT\_2*\)\. You'll replace these example values with the actual values from the configuration information that you receive\.
+The example configuration includes example values to help you understand how configuration works\. For example, we provide example values for the VPN connection ID \(vpn\-12345678\) and virtual private gateway ID \(vgw\-12345678\), and placeholders for the AWS endpoints \(*AWS\_ENDPOINT\_1* and *AWS\_ENDPOINT\_2*\)\. Replace these example values with the actual values from the configuration information that you receive\.
 
 In addition, you must do the following:
 + Configure the outside interface\.
@@ -28,7 +28,7 @@ In addition, you must do the following:
 + Configure all internal routing that moves traffic between the customer gateway and your local network\.
 
 **Important**  
-The following configuration information is an example of what you can expect your integration team to provide\. Many of the values in the following example will be different from the actual configuration information that you receive\. You must use the actual values and not the example values shown here, or your implementation will fail\.
+The following configuration information is an example of what you can expect your integration team to provide\. Many of the values in the following example are different from the actual configuration information that you receive\. You must use the actual values and not the example values shown here, or your implementation will fail\.
 
 ```
 ! Amazon Web Services

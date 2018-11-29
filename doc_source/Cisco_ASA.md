@@ -5,13 +5,13 @@
 + [An Example Configuration](#Cisco_ASA_details)
 + [How to Test the Customer Gateway Configuration](#TestCustomerGateway_ASA)
 
-In this section we walk you through an example of the configuration information provided by your integration team if your customer gateway is a Cisco ASA device running Cisco ASA 8\.2\+ software\.
+In this section, you get an example of the configuration information provided by your integration team if your customer gateway is a Cisco ASA device running Cisco ASA 8\.2\+ software\.
 
 The diagram shows the high\-level layout of the customer gateway\. You should use the real configuration information that you receive from your integration team and apply it to your customer gateway\.
 
 ## A High\-Level View of the Customer Gateway<a name="Cisco_ASA_overview"></a>
 
-The following diagram shows the general details of your customer gateway\. Note that the VPN connection consists of two separate tunnels\. Using redundant tunnels ensures continuous availability in the case that a device fails\.
+The following diagram shows the general details of your customer gateway\. The VPN connection consists of two separate tunnels\. Using redundant tunnels ensures continuous availability in the case that a device fails\.
 
 ![\[Cisco ASA high-level diagram\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/highlevel-cisco-asa-diagram.png)
 
@@ -21,7 +21,7 @@ Please note that some Cisco ASAs only support Active/Standby mode\. When you use
 
  The configuration in this section is an example of the configuration information your integration team should provide\. The example configuration contains a set of information for each of the tunnels that you must configure\.
 
-The example configuration includes example values to help you understand how configuration works\. For example, we provide example values for the VPN connection ID \(vpn\-12345678\) and virtual private gateway ID \(vgw\-12345678\), and placeholders for the AWS endpoints \(*AWS\_ENDPOINT\_1* and *AWS\_ENDPOINT\_2*\)\. You'll replace these example values with the actual values from the configuration information that you receive\.
+The example configuration includes example values to help you understand how configuration works\. For example, we provide example values for the VPN connection ID \(vpn\-12345678\) and virtual private gateway ID \(vgw\-12345678\), and placeholders for the AWS endpoints \(*AWS\_ENDPOINT\_1* and *AWS\_ENDPOINT\_2*\)\. Replace these example values with the actual values from the configuration information that you receive\.
 
 In addition, you must:
 + Configure the outside interface\.
@@ -32,7 +32,7 @@ In addition, you must:
 + Configure all internal routing that moves traffic between the customer gateway and your local network\.
 
 **Important**  
-The following configuration information is an example of what you can expect your integration team to provide\. Many of the values in the following example will be different from the actual configuration information that you receive\. You must use the actual values and not the example values shown here, or your implementation will fail\.
+The following configuration information is an example of what you can expect your integration team to provide\. Many of the values in the following example are different from the actual configuration information that you receive\. You must use the actual values and not the example values shown here, or your implementation will fail\.
 
 ```
 ! Amazon Web Services
@@ -238,12 +238,12 @@ exit
 
 ## How to Test the Customer Gateway Configuration<a name="TestCustomerGateway_ASA"></a>
 
-When using Cisco ASA as a customer gateway, only one tunnel will be in the UP state\. The second tunnel should be configured, but will only be used if the first tunnel goes down\. The second tunnel cannot be in the UP state when the first tunnel is in the UP state\. Your console will display that only one tunnel is up and it will show the second tunnel as down\. This is expected behavior for Cisco ASA customer gateway tunnels because ASA as a customer gateway only supports a single tunnel being up at one time\.
+When using Cisco ASA as a customer gateway, only one tunnel is in the UP state\. The second tunnel should be configured, but is only used if the first tunnel goes down\. The second tunnel cannot be in the UP state when the first tunnel is in the UP state\. Your console displays that only one tunnel is up and shows the second tunnel as down\. This is expected behavior for Cisco ASA customer gateway tunnels because ASA as a customer gateway only supports a single tunnel being up at one time\.
 
 You can test the gateway configuration for each tunnel\.
 
 **To test the customer gateway configuration for each tunnel**
-+ Ensure that a static route has been added to the VPN connection so that traffic can get back to your customer gateway\. For example, if your local subnet prefix is `198.10.0.0/16`, you need to add a static route with that CIDR range to your VPN connection\. Make sure that both tunnels have a static route to your VPC\.
++ Ensure that a static route has been added to the VPN connection so that traffic can get back to your customer gateway\. For example, if your local subnet prefix is `198.10.0.0/16`, add a static route with that CIDR range to your VPN connection\. Make sure that both tunnels have a static route to your VPC\.
 
 Next you must test the connectivity for each tunnel by launching an instance into your VPC, and pinging the instance from your home network\. Before you begin, make sure of the following:
 + Use an AMI that responds to ping requests\. We recommend that you use one of the Amazon Linux AMIs\.

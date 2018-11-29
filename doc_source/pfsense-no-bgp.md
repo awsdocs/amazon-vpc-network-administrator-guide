@@ -11,7 +11,7 @@ This topic assumes that you've configured a VPN connection with static routing i
 
 ## A High\-Level View of the Customer Gateway<a name="pfsense-high-level"></a>
 
-The following diagram shows the general details of your customer gateway\. Note that the VPN connection consists of two separate tunnels: *Tunnel 1* and *Tunnel 2*\. Using redundant tunnels ensures continuous availability in the case that a device fails\. 
+The following diagram shows the general details of your customer gateway\. The VPN connection consists of two separate tunnels: *Tunnel 1* and *Tunnel 2*\. Using redundant tunnels ensures continuous availability in the case that a device fails\. 
 
 You should use the real configuration information that you receive from your integration team and apply it to your customer gateway\. 
 
@@ -24,7 +24,7 @@ The example configuration includes several example values to help you understand
 In the following example configuration, you must replace the items in red italics with values that apply to your particular configuration\.
 
 **Important**  
-The following configuration information is an example of what you can expect an integration team to provide \. Many of the values in the following example will be different from the actual configuration information that you receive\. You must use the actual values and not the example values shown here, or your implementation will fail\.
+The following configuration information is an example of what you can expect an integration team to provide\. Many of the values in the following example are different from the actual configuration information that you receive\. You must use the actual values and not the example values shown here, or your implementation will fail\.
 
 ```
 ! Amazon Web Services

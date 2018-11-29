@@ -2,7 +2,7 @@
 
 Welcome to the *Amazon VPC Network Administrator Guide*\. This guide is for customers who plan to use an AWS managed IPsec VPN connection with their virtual private cloud \(VPC\)\. The topics in this guide help you configure your customer gateway, which is the device on your side of the VPN connection\. 
 
-The VPN connection lets you bridge your VPC and IT infrastructure, and extend your existing security and management policies to EC2 instances in your VPC as if they were running within your own infrastructure\. 
+The VPN connection lets you bridge your VPC and IT infrastructure\. You extend your existing security and management policies to EC2 instances in your VPC as if they were running within your own infrastructure\. 
 
 For more information, see the following topics:
 + [Your Customer Gateway](Introduction.md)

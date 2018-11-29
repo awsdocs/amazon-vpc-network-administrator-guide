@@ -12,16 +12,16 @@ This section assumes that a VPN connection with static routing has been configur
 
 ## A High\-Level View of the Customer Gateway<a name="sonicwall-static-overview"></a>
 
-The following diagram shows the general details of your customer gateway\. Note that the VPN connection consists of two separate tunnels: *Tunnel 1* and *Tunnel 2*\. Using redundant tunnels ensures continuous availability in the case that a device fails\.
+The following diagram shows the general details of your customer gateway\. The VPN connection consists of two separate tunnels: *Tunnel 1* and *Tunnel 2*\. Using redundant tunnels ensures continuous availability in the case that a device fails\.
 
 ![\[Customer gateway high-level diagram\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/highlevel-generic-nobgp-diagram.png)
 
 ## Example Configuration File<a name="sonicwall-static-config-file"></a>
 
-The configuration file that you download from the Amazon VPC console includes the values that you need in order to use the command line tools on OS 6\.2 to configure each tunnel and the IKE and IPsec settings for your SonicWALL device\. 
+The configuration file downloaded from Amazon VPC includes the values needed to use the command line tools on OS 6\.2 and configure each tunnel and the IKE and IPsec settings for your SonicWALL device\. 
 
 **Important**  
-The following configuration information uses example values — you must use the actual values and not the example values shown here, or your implementation will fail\.
+The following configuration information uses example values\. You must use the actual values and not the example values shown here, or your implementation will fail\.
 
 ```
 ! Amazon Web Services

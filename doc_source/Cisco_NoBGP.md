@@ -5,13 +5,13 @@
 + [A Detailed View of the Customer Gateway and an Example Configuration](#Cisco_NoBGP_details)
 + [How to Test the Customer Gateway Configuration](#TestCustomerGateway_NoBGP)
 
-In this section we walk you through an example of the configuration information provided by your integration team if your customer gateway is a Cisco Integrated Services router running Cisco IOS software\.
+In this section, you get an example of the configuration information provided by your integration team if your customer gateway is a Cisco Integrated Services router running Cisco IOS software\.
 
 Two diagrams illustrate the example configuration\. The first diagram shows the high\-level layout of the customer gateway, and the second diagram shows details from the example configuration\. You should use the real configuration information that you receive from your integration team, and apply it to your customer gateway\.
 
 ## A High\-Level View of the Customer Gateway<a name="Cisco_NoBGP_overview"></a>
 
-The following diagram shows the general details of your customer gateway\. Note that the VPN connection consists of two separate tunnels\. Using redundant tunnels ensures continuous availability in the case that a device fails\.
+The following diagram shows the general details of your customer gateway\. The VPN connection consists of two separate tunnels\. Using redundant tunnels ensures continuous availability in the case that a device fails\.
 
 ![\[Cisco ISO without BGP high-level diagram\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/highlevel-cisco-asa-diagram.png)
 
@@ -22,7 +22,7 @@ The diagram in this section illustrates an example Cisco IOS customer gateway \(
 In addition, the example configuration refers to this item that you must provide:
 + *YOUR\_UPLINK\_ADDRESS*—The IP address for the Internet\-routable external interface on the customer gateway\. The address must be static, and may be behind a device performing network address translation \(NAT\)\. To ensure that NAT traversal \(NAT\-T\) can function, you must adjust your firewall rules to unblock UDP port 4500\.
 
-The example configuration includes several example values to help you understand how configuration works\. For example, we provide example values for the VPN connection ID \(vpn\-1a2b3c4d\), virtual private gateway ID \(vgw\-12345678\), the IP addresses \(205\.251\.233\.\*, 169\.254\.255\.\*\)\. You'll replace these example values with the actual values from the configuration information that you receive\.
+The example configuration includes several example values to help you understand how configuration works\. For example, we provide example values for the VPN connection ID \(vpn\-1a2b3c4d\), virtual private gateway ID \(vgw\-12345678\), the IP addresses \(205\.251\.233\.\*, 169\.254\.255\.\*\)\. Replace these example values with the actual values from the configuration information that you receive\.
 
 In addition, you must:
 + Configure the outside interface\.
@@ -37,7 +37,7 @@ In the following diagram and example configuration, you must replace the items i
 ![\[Cisco ISO without BGP detailed diagram\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/detailed-cisco-nobgp-diagram.png)
 
 **Warning**  
-The following configuration information is an example of what you can expect your integration team to provide\. Many of the values in the following example will be different from the actual configuration information that you receive\. You must use the actual values and not the example values shown here, or your implementation will fail\.
+The following configuration information is an example of what you can expect your integration team to provide\. Many of the values in the following example are different from the actual configuration information that you receive\. You must use the actual values and not the example values shown here, or your implementation will fail\.
 
 ```
 ! --------------------------------------------------------------------------------
