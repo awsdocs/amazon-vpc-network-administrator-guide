@@ -21,13 +21,13 @@ You can create additional VPN connections to other VPCs using the same customer 
 
 When you create a VPN connection, the VPN tunnel comes up when traffic is generated from your side of the VPN connection\. The virtual private gateway is not the initiator; your customer gateway must initiate the tunnels\. AWS VPN endpoints support rekey and can start renegotiations when phase 1 is about to expire if the customer gateway hasn't sent any renegotiation traffic\.
 
- For more information about the components of a VPN connection, see [VPN Connections](https://docs.aws.amazon.com/vpc/latest/userguide/vpn-connections.html) in the *Amazon VPC User Guide*\.
+ For more information about the components of a VPN connection, see [VPN Connections](https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html#VPN) in the *AWS Site\-to\-Site VPN User Guide*\.
 
-To protect against a loss of connectivity if your customer gateway becomes unavailable, you can set up a second VPN connection\. For more information, see [Using Redundant VPN Connections to Provide Failover](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_VPN.html#VPNConnections)\.
+To protect against a loss of connectivity if your customer gateway becomes unavailable, you can set up a second VPN connection\. For more information about redundant connections, see [Using Redundant VPN Connections to Provide Failover](https://docs.aws.amazon.com/vpn/latest/s2svpn/VPNConnections.html) in the *AWS Site\-to\-Site VPN User Guide*\.
 
 ### Your Role<a name="YourRole"></a>
 
-Throughout this guide, we refer to your company's *integration team*, which is the person \(or persons\) at your company working to integrate your infrastructure with Amazon VPC\. This team \(which may or may not consist of you\) must use the [AWS Management Console](http://aws.amazon.com/console) to create a VPN connection and get the information that you need for configuring your customer gateway\. Your company might have a separate team for each task \(an integration team that uses the AWS Management Console\. They might have a separate network engineering group that has access to network devices and configures the customer gateway\. This guide assumes that you're someone in the network engineering group who receives information from your company's integration team so you can then configure the customer gateway device\. 
+Throughout this guide, we refer to your company's *integration team*, which is the person \(or persons\) at your company working to integrate your infrastructure with Amazon VPC\. This team \(which may or may not consist of you\) must use the [AWS Management Console](http://aws.amazon.com/console) to create a VPN connection and get the information that you need for configuring your customer gateway\. Your company might have a separate team for each task \(an integration team that uses the AWS Management Console\)\. They might have a separate network engineering group that has access to network devices and configures the customer gateway\. This guide assumes that you're someone in the network engineering group who receives information from your company's integration team so you can then configure the customer gateway device\. 
 
 ## Overview of Setting Up a VPN Connection<a name="Summary"></a>
 
@@ -39,7 +39,7 @@ To set up a VPN connection, follow these general steps:
 
 1. Get the necessary [Network Information](#DetermineNetworkInfo), and provide this information to the team to create the VPN connection in AWS\.
 
-1. Create the VPN connection in AWS and get the configuration file for your customer gateway\. For more information, see [Setting Up an AWS VPN Connection](https://docs.aws.amazon.com/vpc/latest/userguide/SetUpVPNConnections.html) in the *Amazon VPC User Guide*\.
+1. Create the VPN connection in AWS and get the configuration file for your customer gateway\. For more information about how to configure an AWS VPN connection, see [Setting Up an AWS VPN Connection](https://docs.aws.amazon.com/vpn/latest/s2svpn/SetUpVPNConnections.html) in the *AWS Site\-to\-Site VPN User Guide*\.
 
 1. Configure your customer gateway using the information from the configuration file\. Examples are provided in this guide\.
 
@@ -58,7 +58,7 @@ To create a VPN connection in AWS, you need the following information\.
 | The internet\-routable IP address for the customer gateway device's external interface\. | The value must be static\. Your customer gateway may reside behind a device performing network address translation \(NAT\)\.  For a NAT configuration, traffic sent across a VPN tunnel must not be translated to the customer gateway IP address\.  | 
 | \(Optional\) Border Gateway Protocol \(BGP\) Autonomous System Number \(ASN\) of the customer gateway\. | You can use an existing ASN assigned to your network\. If you don't have one, you can use a private ASN in the 64512–65534 range\. Otherwise, we assume that the BGP ASN for the customer gateway is 65000\. | 
 |  \(Optional\) The ASN for the Amazon side of the BGP session\.  |  Specified when creating a virtual private gateway\. If you do not specify a value, the default ASN applies\. For more information, see [Virtual Private Gateway](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_VPN.html#VPNGateway)\.  | 
-|  \(Optional\) Tunnel information for each VPN tunnel  |  You can specify the following tunnel information for the VPN connection: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/vpc/latest/adminguide/Introduction.html) For more information, see [Configuring the VPN Tunnels for Your VPN Connection](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_VPN.html#VPNTunnels)\.  | 
+|  \(Optional\) Tunnel information for each VPN tunnel  |  You can specify the following tunnel information for the VPN connection: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/vpc/latest/adminguide/Introduction.html) For more information, about configuring VPN tunnels see [Configuring the VPN Tunnels for Your VPN Connection](https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html#VPNTunnels) in the *AWS Site\-to\-Site VPN User Guide*\.  | 
 
 The configuration file for your customer gateway includes the values that you specify for the above items\. It also contains any additional values required for setting up the VPN tunnels, including the outside IP address for the virtual private gateway\. This value is static unless you recreate the VPN connection in AWS\.
 
@@ -72,7 +72,7 @@ If you use the AWS VPN CloudHub configuration, multiple sites can access your VP
 
 To configure the AWS VPN CloudHub, use the Amazon VPC console to create multiple customer gateways, each with the public IP address of the gateway\. You must use a unique Border Gateway Protocol \(BGP\) Autonomous System Number \(ASN\) for each\. Then create a VPN connection from each customer gateway to a common virtual private gateway\. Use the instructions that follow to configure each customer gateway to connect to the virtual private gateway\.
 
-To enable instances in your VPC to reach the virtual private gateway \(and then your customer gateways\), you must configure routes in your VPC routing tables\. For complete instructions, see [VPN Connections](https://docs.aws.amazon.com/vpc/latest/userguide/vpn-connections.html) in the *Amazon VPC User Guide*\. For AWS VPN CloudHub, you can configure an aggregate route in your VPC routing table \(for example, 10\.0\.0\.0/16\)\. Use more specific prefixes between customer gateways and the virtual private gateway\.
+To enable instances in your VPC to reach the virtual private gateway \(and then your customer gateways\), you must configure routes in your VPC routing tables\. For complete instructions, see [VPN Connections](https://docs.aws.amazon.com/vpn/latest/s2svpn/vpn-connections.html) in the *AWS Site\-to\-Site VPN User Guide*\. For AWS VPN CloudHub, you can configure an aggregate route in your VPC routing table \(for example, 10\.0\.0\.0/16\)\. Use more specific prefixes between customer gateways and the virtual private gateway\.
 
 ## Configuring Multiple VPN Connections to Your VPC<a name="MultipleVPNConnections"></a>
 
@@ -81,7 +81,7 @@ You can create up to ten VPN connections for your VPC\. You can use multiple VPN
 **Note**  
 If you need more than ten VPN connections, complete the [Request to Increase Amazon VPC Limits](http://aws.amazon.com/contact-us/vpc-request/) form to request an increased limit\.
 
-When you create multiple VPN connections, the virtual private gateway sends network traffic to the appropriate VPN connection using statically assigned routes or BGP route advertisements\. Which one depends on how the VPN connection was configured\. Statically assigned routes are preferred over BGP advertised routes in cases where identical routes exist in the virtual private gateway\.
+When you create multiple VPN connections, the virtual private gateway sends network traffic to the appropriate VPN connection using statically assigned routes or BGP route advertisements\. Which one depends on how the VPN connection was configured\. Statically assigned routes are preferred over BGP advertised routes in cases where identical routes exist in the virtual private gateway\. If you select the option to use BGP advertisement, then you cannot specify static routes\.
 
 When you have customer gateways at multiple geographic locations, each customer gateway should advertise a unique set of IP ranges specific to the location\. When you establish redundant customer gateways at a single location, both gateways should advertise the same IP ranges\.
 
@@ -101,9 +101,7 @@ The following diagram shows the configuration of multiple VPNs\.
 
 Your customer gateway can be a physical or software appliance\.
 
-For information about the specific routers that we've tested, see **What customer gateway devices are known to work with Amazon VPC?** in the [Connectivity](https://aws.amazon.com/vpc/faqs/#Connectivity) section of the Amazon VPC FAQ\.
-
-This guide presents information about how to configure the following devices:
+This guide presents information about how to configure the following devices that we have tested with:
 + Check Point Security Gateway running R77\.10 \(or later\) software
 + Cisco ASA running Cisco ASA 8\.2 \(or later\) software
 + Cisco IOS running Cisco IOS 12\.4 \(or later\) software
@@ -143,7 +141,7 @@ The VPN tunnel comes up when traffic is generated from your side of the VPN conn
 
 |  Requirement  |  RFC |  Comments | 
 | --- | --- | --- | 
-|  Establish IKE Security Association using pre\-shared keys   ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/IKE.png)   |   [RFC 2409](http://tools.ietf.org/html/rfc2409)   |  The IKE Security Association is established first between the virtual private gateway and customer gateway using the pre\-shared key as the authenticator\. Upon establishment, IKE negotiates an ephemeral key to secure future IKE messages\. Proper establishment of an IKE Security Association requires complete agreement among the parameters, including encryption and authentication parameters\. When you create a VPN connection in AWS, you can specify your own pre\-shared key for each tunnel, or you can let AWS generate one for you\. For more information, see [Configuring the VPN Tunnels for Your VPN Connection](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_VPN.html#VPNTunnels)\.  | 
+|  Establish IKE Security Association using pre\-shared keys   ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/IKE.png)   |   [RFC 2409](http://tools.ietf.org/html/rfc2409)  [RFC 7296](https://tools.ietf.org/html/rfc7296)  |  The IKE Security Association is established first between the virtual private gateway and customer gateway using the pre\-shared key as the authenticator\. Upon establishment, IKE negotiates an ephemeral key to secure future IKE messages\. Proper establishment of an IKE Security Association requires complete agreement among the parameters, including encryption and authentication parameters\. When you create a VPN connection in AWS, you can specify your own pre\-shared key for each tunnel, or you can let AWS generate one for you\. For more information, about configuring VPN tunnels see [Configuring the VPN Tunnels for Your VPN Connection](https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html#VPNTunnels) in the *AWS Site\-to\-Site VPN User Guide*\. The following versions are supported: IKEv1 and IKEv2\.  | 
 |  Establish IPsec Security Associations in Tunnel mode  ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/IPsec.png)   |   [RFC 4301](http://tools.ietf.org/html/rfc4301)   |  Using the IKE ephemeral key, keys are established between the virtual private gateway and customer gateway to form an IPsec Security Association \(SA\)\. Traffic between gateways is encrypted and decrypted using this SA\. The ephemeral keys used to encrypt traffic within the IPsec SA are automatically rotated by IKE on a regular basis to ensure confidentiality of communications\.  | 
 |  Use the AES 128\-bit encryption or AES 256\-bit encryption function  |   [RFC 3602](http://tools.ietf.org/html/rfc3602)   |  The encryption function is used to ensure privacy among both IKE and IPsec Security Associations\.  | 
 |  Use the SHA\-1 or SHA\-256 hashing function  |   [RFC 2404](http://tools.ietf.org/html/rfc2404)   |  This hashing function is used to authenticate both IKE and IPsec Security Associations\.  | 

@@ -1,6 +1,8 @@
 # Welcome<a name="Welcome"></a>
 
-Welcome to the *Amazon VPC Network Administrator Guide*\. This guide is for customers who plan to use an AWS managed IPsec VPN connection with their virtual private cloud \(VPC\)\. The topics in this guide help you configure your customer gateway, which is the device on your side of the VPN connection\. 
+Welcome to the *Amazon VPC Network Administrator Guide*\. This guide is for customers who plan to use an AWS Site\-to\-Site VPN connection with their virtual private cloud \(VPC\)\. The topics in this guide help you configure your customer gateway, which is the device on your side of the VPN connection\. 
+
+Although the term VPN connection is a general term, in this documentation, a VPN connection refers to the connection between your VPC and your own on\-premises network\. Site\-to\-Site VPN supports Internet Protocol security \(IPsec\) VPN connections\. For a list of customer gateways that we have tested with, see [Customer Gateway Devices We've Tested](Introduction.md#DevicesTested)\.
 
 The VPN connection lets you bridge your VPC and IT infrastructure\. You extend your existing security and management policies to EC2 instances in your VPC as if they were running within your own infrastructure\. 
 
