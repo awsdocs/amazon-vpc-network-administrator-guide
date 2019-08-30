@@ -349,9 +349,9 @@ You can test the gateway configuration for each tunnel\.
 
 **To test the customer gateway configuration for each tunnel**
 
-1. On your customer gateway, determine whether the BGP status is `Active`\.
+1. On your customer gateway, determine whether the BGP status is `Established`\.
 
-   It takes approximately 30 seconds for a BGP peering to become active\.
+   It takes approximately 30 seconds for a BGP peering to be established\.
 
 1. Ensure that the customer gateway is advertising a route to the virtual private gateway\. The route may be the default route \(`0.0.0.0/0`\) or a more specific route you prefer\.
 
