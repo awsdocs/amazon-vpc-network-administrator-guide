@@ -1,6 +1,6 @@
-# Example: Dell SonicWALL Device<a name="sonicwall-bgp"></a>
+# Example: SonicWALL Device<a name="sonicwall-bgp"></a>
 
-This topic provides an example of how to configure your router if your customer gateway is a Dell SonicWALL router\.
+This topic provides an example of how to configure your router if your customer gateway is a SonicWALL router\.
 
 This section assumes that a VPN connection with static routing has been configured in the Amazon VPC console\. For more information, see [Adding a Virtual Private Gateway to Your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_VPN.html) in the *Amazon VPC User Guide*\.
 
