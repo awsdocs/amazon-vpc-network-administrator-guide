@@ -106,7 +106,7 @@ This guide presents information about how to configure the following devices tha
 + Check Point Security Gateway running R77\.10 \(or later\) software
 + Cisco ASA running Cisco ASA 8\.2 \(or later\) software
 + Cisco IOS running Cisco IOS 12\.4 \(or later\) software
-+ Dell SonicWALL running SonicOS 5\.9 \(or later\) software
++ SonicWALL running SonicOS 5\.9 \(or later\) software
 + Fortinet Fortigate 40\+ Series running FortiOS 4\.0 \(or later\) software 
 + Juniper J\-Series running JunOS 9\.5 \(or later\) software
 + Juniper SRX running JunOS 11\.0 \(or later\) software

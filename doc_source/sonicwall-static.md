@@ -1,6 +1,6 @@
-# Example: Dell SonicWALL SonicOS Device Without Border Gateway Protocol<a name="sonicwall-static"></a>
+# Example: SonicWALL SonicOS Device Without Border Gateway Protocol<a name="sonicwall-static"></a>
 
-This topic provides an example of how to configure your router if your customer gateway is a Dell SonicWALL router running SonicOS 5\.9 or 6\.2\. 
+This topic provides an example of how to configure your router if your customer gateway is a SonicWALL router running SonicOS 5\.9 or 6\.2\. 
 
 This section assumes that a VPN connection with static routing has been configured in the Amazon VPC console\. For more information, see [Adding a Virtual Private Gateway to Your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_VPN.html) in the *Amazon VPC User Guide*\.
 
