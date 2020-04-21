@@ -1,19 +1,26 @@
 # Example: Netgate PfSense Device without Border Gateway Protocol<a name="pfsense-no-bgp"></a>
 
-**Topics**
-+ [A High\-Level View of the Customer Gateway](#pfsense-high-level)
-+ [Example Configuration](#pfsense-example)
-+ [How to Test the Customer Gateway Configuration](#pfsense-test)
+
+|  | 
+| --- |
+| This guide \(the Network Administrator Guide\) has been merged into the AWS Site\-to\-Site VPN User Guide and is no longer maintained\. For more information about configuring your customer gateway device, see the [AWS Site\-to\-Site VPN User Guide](https://docs.aws.amazon.com/vpn/latest/s2svpn/your-cgw.html)\. | 
 
 This topic provides an example of how to configure your router if your customer gateway is a Netgate pfSense firewall running OS 2\.2\.5 or later\.
 
-This topic assumes that you've configured a VPN connection with static routing in the Amazon VPC console\. For more information, see [Adding a Hardware Virtual Private Gateway to Your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_VPN.html) in the *Amazon VPC User Guide*\.
+Before you begin, ensure that you've done the following:
++ You've created a Site\-to\-Site VPN connection in Amazon VPC\. For more information, see [Getting Started](https://docs.aws.amazon.com/vpc/latest/userguide/SetUpVPNConnections.html) in the *AWS Site\-to\-Site VPN User Guide*\.
++ You've read the [requirements](Introduction.md#CGRequirements) for your customer gateway device\.
 
-## A High\-Level View of the Customer Gateway<a name="pfsense-high-level"></a>
+**Topics**
++ [A High\-Level View of the Customer Gateway Device](#pfsense-high-level)
++ [Example Configuration](#pfsense-example)
++ [How to Test the Customer Gateway Configuration](#pfsense-test)
 
-The following diagram shows the general details of your customer gateway\. The VPN connection consists of two separate tunnels: *Tunnel 1* and *Tunnel 2*\. Using redundant tunnels ensures continuous availability in the case that a device fails\. 
+## A High\-Level View of the Customer Gateway Device<a name="pfsense-high-level"></a>
 
-You should use the real configuration information that you receive from your integration team and apply it to your customer gateway\. 
+The following diagram shows the general details of your customer gateway device\. The VPN connection consists of two separate tunnels: *Tunnel 1* and *Tunnel 2*\. Using redundant tunnels ensures continuous availability in the case that a device fails\. 
+
+You should use the real configuration information that you receive from your integration team and apply it to your customer gateway device\. 
 
 ![\[Generic high-level diagram\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/highlevel-generic-nobgp-diagram.png)
 
@@ -21,7 +28,7 @@ You should use the real configuration information that you receive from your int
 
 The example configuration includes several example values to help you understand how configuration works\. For example, we provide example values for the VPN connection ID \(vpn\-12345678\), virtual private gateway ID \(vgw\-12345678\), and placeholders for the AWS endpoints \(AWS\_ENDPOINT\_1 and AWS\_ENDPOINT\_2\)\. 
 
-In the following example configuration, you must replace the items in red italics with values that apply to your particular configuration\.
+In the following example configuration, you must replace the placeholder values are indicated by colored italic text with values that apply to your particular configuration\.
 
 **Important**  
 The following configuration information is an example of what you can expect an integration team to provide\. Many of the values in the following example are different from the actual configuration information that you receive\. You must use the actual values and not the example values shown here, or your implementation will fail\.

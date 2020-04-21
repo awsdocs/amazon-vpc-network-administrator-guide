@@ -1,5 +1,10 @@
 # Troubleshooting Cisco ASA Customer Gateway Connectivity<a name="Cisco_ASA_Troubleshooting"></a>
 
+
+|  | 
+| --- |
+| This guide \(the Network Administrator Guide\) has been merged into the AWS Site\-to\-Site VPN User Guide and is no longer maintained\. For more information about configuring your customer gateway device, see the [AWS Site\-to\-Site VPN User Guide](https://docs.aws.amazon.com/vpn/latest/s2svpn/your-cgw.html)\. | 
+
 When you troubleshoot the connectivity of a Cisco customer gateway, consider three things: IKE, IPsec, and routing\. You can troubleshoot these areas in any order, but we recommend that you start with IKE \(at the bottom of the network stack\) and move up\.
 
 **Important**  

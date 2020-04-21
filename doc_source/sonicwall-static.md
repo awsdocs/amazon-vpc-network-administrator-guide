@@ -1,18 +1,25 @@
 # Example: SonicWALL SonicOS Device Without Border Gateway Protocol<a name="sonicwall-static"></a>
 
-This topic provides an example of how to configure your router if your customer gateway is a SonicWALL router running SonicOS 5\.9 or 6\.2\. 
 
-This section assumes that a VPN connection with static routing has been configured in the Amazon VPC console\. For more information, see [Adding a Virtual Private Gateway to Your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_VPN.html) in the *Amazon VPC User Guide*\.
+|  | 
+| --- |
+| This guide \(the Network Administrator Guide\) has been merged into the AWS Site\-to\-Site VPN User Guide and is no longer maintained\. For more information about configuring your customer gateway device, see the [AWS Site\-to\-Site VPN User Guide](https://docs.aws.amazon.com/vpn/latest/s2svpn/your-cgw.html)\. | 
+
+This topic provides an example of how to configure your router if your customer gateway device is a SonicWALL router running SonicOS 5\.9 or 6\.2\. 
+
+Before you begin, ensure that you've done the following:
++ You've created a Site\-to\-Site VPN connection in Amazon VPC\. For more information, see [Getting Started](https://docs.aws.amazon.com/vpc/latest/userguide/SetUpVPNConnections.html) in the *AWS Site\-to\-Site VPN User Guide*\.
++ You've read the [requirements](Introduction.md#CGRequirements) for your customer gateway device\.
 
 **Topics**
-+ [A High\-Level View of the Customer Gateway](#sonicwall-static-overview)
++ [A High\-Level View of the Customer Gateway Device](#sonicwall-static-overview)
 + [Example Configuration File](#sonicwall-static-config-file)
 + [Configuring the SonicWALL Device Using the Management Interface](#sonicwall-static-configure-device)
 + [How to Test the Customer Gateway Configuration](#sonicwall-static-test)
 
-## A High\-Level View of the Customer Gateway<a name="sonicwall-static-overview"></a>
+## A High\-Level View of the Customer Gateway Device<a name="sonicwall-static-overview"></a>
 
-The following diagram shows the general details of your customer gateway\. The VPN connection consists of two separate tunnels: *Tunnel 1* and *Tunnel 2*\. Using redundant tunnels ensures continuous availability in the case that a device fails\.
+The following diagram shows the general details of your customer gateway device\. The VPN connection consists of two separate tunnels: *Tunnel 1* and *Tunnel 2*\. Using redundant tunnels ensures continuous availability in the case that a device fails\.
 
 ![\[Customer gateway high-level diagram\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/highlevel-generic-nobgp-diagram.png)
 
@@ -198,7 +205,7 @@ The following procedure demonstrates how to configure the VPN tunnels on the Son
 1. In the left pane, choose **VPN**, **Settings**\. Under **VPN Policies**, choose **Add\.\.\.**\.
 
 1. In the VPN policy window on the **General ** tab, complete the following information:
-   + **Policy Type**: Choose **Site to Site**\.
+   + **Policy Type**: Choose **Tunnel Interface**\.
    + **Authentication Method**: Choose **IKE using Preshared Secret**\.
    + **Name**: Enter a name for the VPN policy\. We recommend that you use the name of the VPN ID, as provided in the configuration file\.
    + **IPsec Primary Gateway Name or Address**: Enter the IP address of the virtual private gateway \(AWS endpoint\) as provided in the configuration file; for example, `72.21.209.193`\.
@@ -240,8 +247,8 @@ If you created your virtual private gateway before October 2015, you must specif
 
 You must first test the gateway configuration for each tunnel\.
 
-**To test the customer gateway configuration for each tunnel**
-+ On your customer gateway, verify that you have added a static route to the VPC CIDR IP space to use the tunnel interface\.
+**To test the customer gateway device configuration for each tunnel**
++ On your customer gateway device, verify that you have added a static route to the VPC CIDR IP space to use the tunnel interface\.
 
 Next, you must test the connectivity for each tunnel by launching an instance into your VPC and pinging the instance from your home network\. Before you begin, make sure of the following:
 + Use an AMI that responds to ping requests\. We recommend that you use one of the Amazon Linux AMIs\.

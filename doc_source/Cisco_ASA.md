@@ -1,13 +1,22 @@
 # Example: Cisco ASA Device<a name="Cisco_ASA"></a>
 
-**Topics**
-+ [A High\-Level View of the Customer Gateway](#Cisco_ASA_overview)
-+ [An Example Configuration](#Cisco_ASA_details)
-+ [How to Test the Customer Gateway Configuration](#TestCustomerGateway_ASA)
+
+|  | 
+| --- |
+| This guide \(the Network Administrator Guide\) has been merged into the AWS Site\-to\-Site VPN User Guide and is no longer maintained\. For more information about configuring your customer gateway device, see the [AWS Site\-to\-Site VPN User Guide](https://docs.aws.amazon.com/vpn/latest/s2svpn/your-cgw.html)\. | 
 
 In this section, you get an example of the configuration information provided by your integration team if your customer gateway is a Cisco ASA device running Cisco ASA 8\.2\+ software\.
 
 The diagram shows the high\-level layout of the customer gateway\. You should use the real configuration information that you receive from your integration team and apply it to your customer gateway\.
+
+Before you begin, ensure that you've done the following:
++ You've created a Site\-to\-Site VPN connection in Amazon VPC\. For more information, see [Getting Started](https://docs.aws.amazon.com/vpc/latest/userguide/SetUpVPNConnections.html) in the *AWS Site\-to\-Site VPN User Guide*\.
++ You've read the [requirements](Introduction.md#CGRequirements) for your customer gateway device\.
+
+**Topics**
++ [A High\-Level View of the Customer Gateway](#Cisco_ASA_overview)
++ [An Example Configuration](#Cisco_ASA_details)
++ [How to Test the Customer Gateway Configuration](#TestCustomerGateway_ASA)
 
 ## A High\-Level View of the Customer Gateway<a name="Cisco_ASA_overview"></a>
 

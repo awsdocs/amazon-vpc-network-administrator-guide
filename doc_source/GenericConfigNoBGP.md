@@ -1,30 +1,39 @@
-# Example: Generic Customer Gateway without Border Gateway Protocol<a name="GenericConfigNoBGP"></a>
+# Example: Generic Customer Gateway Device without Border Gateway Protocol<a name="GenericConfigNoBGP"></a>
+
+
+|  | 
+| --- |
+| This guide \(the Network Administrator Guide\) has been merged into the AWS Site\-to\-Site VPN User Guide and is no longer maintained\. For more information about configuring your customer gateway device, see the [AWS Site\-to\-Site VPN User Guide](https://docs.aws.amazon.com/vpn/latest/s2svpn/your-cgw.html)\. | 
+
+If your customer gateway device isn't one of the types discussed earlier in this guide, your integration team can provide you with generic information that you can use to configure your customer gateway device\. This section contains an example of that information\. 
+
+Two diagrams illustrate the example configuration\. The first diagram shows the high\-level layout of the customer gateway device, and the second diagram shows details from the example configuration\. You should use the real configuration information that you receive from your integration team and apply it to your customer gateway device\.
+
+Before you begin, ensure that you've done the following:
++ You've created a Site\-to\-Site VPN connection in Amazon VPC\. For more information, see [Getting Started](https://docs.aws.amazon.com/vpc/latest/userguide/SetUpVPNConnections.html) in the *AWS Site\-to\-Site VPN User Guide*\.
++ You've read the [requirements](Introduction.md#CGRequirements) for your customer gateway device\.
 
 **Topics**
-+ [A High\-Level View of the Customer Gateway](#HighLevelCustomerGateway6)
-+ [A Detailed View of the Customer Gateway and an Example Configuration](#DetailedViewCustomerGateway6)
++ [A High\-Level View of the Customer Gateway Device](#HighLevelCustomerGateway6)
++ [A Detailed View of the Customer Gateway Device and an Example Configuration](#DetailedViewCustomerGateway6)
 + [How to Test the Customer Gateway Configuration](#TestingConfig6)
 
-If your customer gateway isn't one of the types discussed earlier in this guide, your integration team can provide you with generic information that you can use to configure your customer gateway\. This section contains an example of that information\. 
+## A High\-Level View of the Customer Gateway Device<a name="HighLevelCustomerGateway6"></a>
 
-Two diagrams illustrate the example configuration\. The first diagram shows the high\-level layout of the customer gateway, and the second diagram shows details from the example configuration\. You should use the real configuration information that you receive from your integration team and apply it to your customer gateway\.
-
-## A High\-Level View of the Customer Gateway<a name="HighLevelCustomerGateway6"></a>
-
-The following diagram shows the general details of your customer gateway\. The VPN connection consists of two separate tunnels: *Tunnel 1* and *Tunnel 2*\. Using redundant tunnels ensures continuous availability in the case that a device fails\.
+The following diagram shows the general details of your customer gateway device\. The VPN connection consists of two separate tunnels: *Tunnel 1* and *Tunnel 2*\. Using redundant tunnels ensures continuous availability in the case that a device fails\.
 
 ![\[Generic high-level diagram\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/highlevel-generic-nobgp-diagram.png)
 
-## A Detailed View of the Customer Gateway and an Example Configuration<a name="DetailedViewCustomerGateway6"></a>
+## A Detailed View of the Customer Gateway Device and an Example Configuration<a name="DetailedViewCustomerGateway6"></a>
 
-The diagram in this section illustrates a generic customer gateway that uses static routing for its VPN connection\. It does not support dynamic routing, or Border Gateway Protocol \(BGP\)\. Following the diagram, there is a corresponding example of the configuration information your integration team should give you\. The example configuration contains a set of information for each of the two tunnels you must configure\.
+The diagram in this section illustrates a generic customer gateway device that uses static routing for its VPN connection\. It does not support dynamic routing, or Border Gateway Protocol \(BGP\)\. Following the diagram, there is a corresponding example of the configuration information your integration team should give you\. The example configuration contains a set of information for each of the two tunnels you must configure\.
 
 In addition, the example configuration refers to one item that you must provide:
-+ *YOUR\_UPLINK\_ADDRESS*—The IP address for the Internet\-routable external interface on the customer gateway\. The address must be static, and may be behind a device performing network address translation \(NAT\)\. To ensure that NAT traversal \(NAT\-T\) can function, you must adjust your firewall rules to unblock UDP port 4500\.
++ *YOUR\_UPLINK\_ADDRESS*—The IP address for the Internet\-routable external interface on the customer gateway device\. The address must be static, and may be behind a device performing network address translation \(NAT\)\. To ensure that NAT traversal \(NAT\-T\) can function, you must adjust your firewall rules to unblock UDP port 4500\.
 
 The example configuration includes several example values to help you understand how configuration works\. For example, we provide example values for the VPN connection ID \(vpn\-44a8938f\), virtual private gateway ID \(vgw\-8db04f81\), and the VGW IP addresses \(72\.21\.209\.\*, 169\.254\.255\.\*\)\. Replace these example values with the actual values from the configuration information that you receive\.
 
-In the following diagram and example configuration, you must replace the items in red italics with values that apply to your particular configuration\.
+In the following diagram and example configuration, you must replace the placeholder values are indicated by colored italic text with values that apply to your particular configuration\.
 
 ![\[Generic detailed diagram\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/detailed-generic-nobgp-diagram.png)
 
@@ -235,8 +244,8 @@ the tunnels.
 
 You must first test the gateway configuration for each tunnel\.
 
-**To test the customer gateway configuration for each tunnel**
-+ On your customer gateway, verify that you have added a static route to the VPC CIDR IP space to use the tunnel interface\.
+**To test the customer gateway device configuration for each tunnel**
++ On your customer gateway device, verify that you have added a static route to the VPC CIDR IP space to use the tunnel interface\.
 
 Next you must test the connectivity for each tunnel by launching an instance into your VPC, and pinging the instance from your home network\. Before you begin, make sure of the following:
 + Use an AMI that responds to ping requests\. We recommend that you use one of the Amazon Linux AMIs\.

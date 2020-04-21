@@ -1,6 +1,15 @@
 # Example: Check Point Device with Border Gateway Protocol<a name="check-point-bgp"></a>
 
+
+|  | 
+| --- |
+| This guide \(the Network Administrator Guide\) has been merged into the AWS Site\-to\-Site VPN User Guide and is no longer maintained\. For more information about configuring your customer gateway device, see the [AWS Site\-to\-Site VPN User Guide](https://docs.aws.amazon.com/vpn/latest/s2svpn/your-cgw.html)\. | 
+
 This section has example configuration information provided by your integration team if your customer gateway is a Check Point Security Gateway device running R77\.10 or above, and using the Gaia operating system\. 
+
+Before you begin, ensure that you've done the following:
++ You've created a Site\-to\-Site VPN connection in Amazon VPC\. For more information, see [Getting Started](https://docs.aws.amazon.com/vpc/latest/userguide/SetUpVPNConnections.html) in the *AWS Site\-to\-Site VPN User Guide*\.
++ You've read the [requirements](Introduction.md#CGRequirements) for your customer gateway device\.
 
 **Topics**
 + [High\-Level View of the Customer Gateway](#check-point-bgp-overview)
@@ -310,13 +319,13 @@ TCP MSS clamping reduces the maximum segment size of TCP packets to prevent pack
 
 You can test the gateway configuration for each tunnel\.
 
-**To test the customer gateway configuration for each tunnel**
+**To test the customer gateway device configuration for each tunnel**
 
-1. On your customer gateway, determine whether the BGP status is `Established`\.
+1. On your customer gateway device, determine whether the BGP status is `Established`\.
 
    It takes approximately 30 seconds for a BGP peering to be established\.
 
-1. Ensure that the customer gateway is advertising a route to the virtual private gateway\. The route may be the default route \(`0.0.0.0/0`\) or a more specific route you prefer\.
+1. Ensure that the customer gateway device is advertising a route to the virtual private gateway\. The route may be the default route \(`0.0.0.0/0`\) or a more specific route you prefer\.
 
 When properly established, your BGP peering should be receiving one route from the virtual private gateway corresponding to the prefix that your VPC integration team specified for the VPC \(for example, `10.0.0.0/24`\)\. If the BGP peering is established, you are receiving a prefix, and you are advertising a prefix, your tunnel is configured correctly\. Make sure that both tunnels are in this state\.
 
@@ -331,7 +340,7 @@ Next you must test the connectivity for each tunnel by launching an instance int
 
 1. After the instance is running, get its private IP address \(for example, `10.0.0.4`\)\. The console displays the address as part of the instance's details\.
 
-1. On a system in your home network, use the ping command with the instance's IP address\. Make sure that the computer you ping from is behind the customer gateway\. A successful response should be similar to the following\.
+1. On a system in your home network, use the ping command with the instance's IP address\. Make sure that the computer you ping from is behind the customer gateway device\. A successful response should be similar to the following\.
 
    ```
    ping 10.0.0.4
@@ -351,9 +360,9 @@ Next you must test the connectivity for each tunnel by launching an instance int
    Minimum = 0ms, Maximum = 0ms, Average = 0ms
    ```
 **Note**  
-If you ping an instance from your customer gateway router, ensure that you are sourcing ping messages from an internal IP address, not a tunnel IP address\. Some AMIs don't respond to ping messages from tunnel IP addresses\.
+If you ping an instance from your customer gateway device router, ensure that you are sourcing ping messages from an internal IP address, not a tunnel IP address\. Some AMIs don't respond to ping messages from tunnel IP addresses\.
 
-1. \(Optional\) To test tunnel failover, you can temporarily disable one of the tunnels on your customer gateway, and repeat the above step\. You cannot disable a tunnel on the AWS side of the VPN connection\.
+1. \(Optional\) To test tunnel failover, you can temporarily disable one of the tunnels on your customer gateway device, and repeat the above step\. You cannot disable a tunnel on the AWS side of the VPN connection\.
 
 On the Check Point gateway side, you can verify the tunnel status by running the following command from the command line tool in expert mode:
 

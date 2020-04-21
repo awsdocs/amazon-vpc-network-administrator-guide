@@ -1,26 +1,35 @@
 # Example: Yamaha Device<a name="Yamaha"></a>
 
+
+|  | 
+| --- |
+| This guide \(the Network Administrator Guide\) has been merged into the AWS Site\-to\-Site VPN User Guide and is no longer maintained\. For more information about configuring your customer gateway device, see the [AWS Site\-to\-Site VPN User Guide](https://docs.aws.amazon.com/vpn/latest/s2svpn/your-cgw.html)\. | 
+
+In this section, we walk you through an example of the configuration information provided by your integration team if your customer gateway device is a Yamaha RT107e, RTX1200, RTX1210, RTX1500, RTX3000, or SRT100 router\.
+
+Two diagrams illustrate the example configuration\. The first diagram shows the high\-level layout of the customer gateway device, and the second diagram shows the details of the example configuration\. You should use the real configuration information that you receive from your integration team and apply it to your customer gateway device\.
+
+Before you begin, ensure that you've done the following:
++ You've created a Site\-to\-Site VPN connection in Amazon VPC\. For more information, see [Getting Started](https://docs.aws.amazon.com/vpc/latest/userguide/SetUpVPNConnections.html) in the *AWS Site\-to\-Site VPN User Guide*\.
++ You've read the [requirements](Introduction.md#CGRequirements) for your customer gateway device\.
+
 **Topics**
-+ [A High\-Level View of the Customer Gateway](#CustomerGateway4)
-+ [A Detailed View of the Customer Gateway and an Example Configuration](#CustomerGatewayDetailedView4)
++ [A High\-Level View of the Customer Gateway Device](#CustomerGateway4)
++ [A Detailed View of the Customer Gateway Device and an Example Configuration](#CustomerGatewayDetailedView4)
 + [How to Test the Customer Gateway Configuration](#TestingConfig4)
 
-In this section, we walk you through an example of the configuration information provided by your integration team if your customer gateway is a Yamaha RT107e, RTX1200, RTX1210, RTX1500, RTX3000, or SRT100 router\.
+## A High\-Level View of the Customer Gateway Device<a name="CustomerGateway4"></a>
 
-Two diagrams illustrate the example configuration\. The first diagram shows the high\-level layout of the customer gateway, and the second diagram shows the details of the example configuration\. You should use the real configuration information that you receive from your integration team and apply it to your customer gateway\.
-
-## A High\-Level View of the Customer Gateway<a name="CustomerGateway4"></a>
-
-The following diagram shows the general details of your customer gateway\. The VPN connection consists of two separate tunnels\. Using redundant tunnels ensures continuous availability in case a device fails\.
+The following diagram shows the general details of your customer gateway device\. The VPN connection consists of two separate tunnels\. Using redundant tunnels ensures continuous availability in case a device fails\.
 
 ![\[Yamaha high-level diagram\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/highlevel-yamaha-diagram.png)
 
-## A Detailed View of the Customer Gateway and an Example Configuration<a name="CustomerGatewayDetailedView4"></a>
+## A Detailed View of the Customer Gateway Device and an Example Configuration<a name="CustomerGatewayDetailedView4"></a>
 
-The diagram in this section illustrates an example Yamaha customer gateway\. Following the diagram, there is a corresponding example of the configuration information your integration team should provide\. The example configuration contains a set of information for each of the tunnels that you must configure\.
+The diagram in this section illustrates an example Yamaha customer gateway device\. Following the diagram, there is a corresponding example of the configuration information your integration team should provide\. The example configuration contains a set of information for each of the tunnels that you must configure\.
 
 In addition, the example configuration refers to these items that you must provide:
-+ *YOUR\_UPLINK\_ADDRESS*—The IP address for the Internet\-routable external interface on the customer gateway\. The address must be static, and may be behind a device performing network address translation \(NAT\)\. To ensure that NAT traversal \(NAT\-T\) can function, you must adjust your firewall rules to unblock UDP port 4500\.
++ *YOUR\_UPLINK\_ADDRESS*—The IP address for the Internet\-routable external interface on the customer gateway device\. The address must be static, and may be behind a device performing network address translation \(NAT\)\. To ensure that NAT traversal \(NAT\-T\) can function, you must adjust your firewall rules to unblock UDP port 4500\.
 + *YOUR\_LOCAL\_NETWORK\_ADDRESS*—The IP address that is assigned to the LAN interface connected to your local network \(most likely a private address such as 192\.168\.0\.1\)
 + *YOUR\_BGP\_ASN*—The customer gateway's BGP ASN \(we use 65000 by default\)
 
@@ -31,7 +40,7 @@ In addition, you must also:
 + Configure the tunnel interface IDs \(referred to as *Tunnel \#1* and *Tunnel \#2* in the example configuration\)\.
 + Configure all internal routing that moves traffic between the customer gateway and your local network\.
 
-In the following diagram and example configuration, you must replace the items in red italics with values that apply to your particular configuration\.
+In the following diagram and example configuration, you must replace the placeholder values are indicated by colored italic text with values that apply to your particular configuration\.
 
 ![\[Yamaha detailed diagram\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/detailed-yamaha-diagram.png)
 
@@ -135,7 +144,9 @@ ipsec ike keepalive use 1 on dpd 10 3
 # Connection must be recreated with Amazon VPC. 
 # 
 ipsec ike local address 1 YOUR_LOCAL_NETWORK_ADDRESS 
-ipsec ike remote address 1 72.21.209.225 
+ipsec ike remote address 1 72.21.209.225
+ipsec ike local address id <id> 0.0.0.0/0
+ipsec ike remote address id <id> 0.0.0.0/0
 ip tunnel address 169.254.255.2/30 
 ip tunnel remote address 169.254.255.1 
    
@@ -264,7 +275,9 @@ ipsec ike keepalive use 2 on dpd 10 3
 # Connection must be recreated with Amazon VPC. 
 # 
 ipsec ike local address 2 YOUR_LOCAL_NETWORK_ADDRESS
-ipsec ike remote address 2 72.21.209.193 
+ipsec ike remote address 2 72.21.209.193
+ipsec ike local address id <id> 0.0.0.0/0
+ipsec ike remote address id <id> 0.0.0.0/0
 ip tunnel address 169.254.255.6/30 
 ip tunnel remote address 169.254.255.5 
 
@@ -318,13 +331,13 @@ bgp configure refresh
 
 You can test the gateway configuration for each tunnel\.
 
-**To test the customer gateway configuration for each tunnel**
+**To test the customer gateway device configuration for each tunnel**
 
-1. On your customer gateway, determine whether the BGP status is `Established`\.
+1. On your customer gateway device, determine whether the BGP status is `Established`\.
 
    It takes approximately 30 seconds for a BGP peering to be established\.
 
-1. Ensure that the customer gateway is advertising a route to the virtual private gateway\. The route may be the default route \(`0.0.0.0/0`\) or a more specific route you prefer\.
+1. Ensure that the customer gateway device is advertising a route to the virtual private gateway\. The route may be the default route \(`0.0.0.0/0`\) or a more specific route you prefer\.
 
 When properly established, your BGP peering should be receiving one route from the virtual private gateway corresponding to the prefix that your VPC integration team specified for the VPC \(for example, `10.0.0.0/24`\)\. If the BGP peering is established, you are receiving a prefix, and you are advertising a prefix, your tunnel is configured correctly\. Make sure that both tunnels are in this state\.
 
@@ -339,7 +352,7 @@ Next you must test the connectivity for each tunnel by launching an instance int
 
 1. After the instance is running, get its private IP address \(for example, `10.0.0.4`\)\. The console displays the address as part of the instance's details\.
 
-1. On a system in your home network, use the ping command with the instance's IP address\. Make sure that the computer you ping from is behind the customer gateway\. A successful response should be similar to the following\.
+1. On a system in your home network, use the ping command with the instance's IP address\. Make sure that the computer you ping from is behind the customer gateway device\. A successful response should be similar to the following\.
 
    ```
    ping 10.0.0.4
@@ -359,8 +372,8 @@ Next you must test the connectivity for each tunnel by launching an instance int
    Minimum = 0ms, Maximum = 0ms, Average = 0ms
    ```
 **Note**  
-If you ping an instance from your customer gateway router, ensure that you are sourcing ping messages from an internal IP address, not a tunnel IP address\. Some AMIs don't respond to ping messages from tunnel IP addresses\.
+If you ping an instance from your customer gateway device router, ensure that you are sourcing ping messages from an internal IP address, not a tunnel IP address\. Some AMIs don't respond to ping messages from tunnel IP addresses\.
 
-1. \(Optional\) To test tunnel failover, you can temporarily disable one of the tunnels on your customer gateway, and repeat the above step\. You cannot disable a tunnel on the AWS side of the VPN connection\.
+1. \(Optional\) To test tunnel failover, you can temporarily disable one of the tunnels on your customer gateway device, and repeat the above step\. You cannot disable a tunnel on the AWS side of the VPN connection\.
 
 If your tunnels don't test successfully, see [Troubleshooting Yamaha Customer Gateway Connectivity](Yamaha_Troubleshooting.md)\.

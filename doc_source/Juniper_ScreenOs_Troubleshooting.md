@@ -1,5 +1,10 @@
 # Troubleshooting Juniper ScreenOS Customer Gateway Connectivity<a name="Juniper_ScreenOs_Troubleshooting"></a>
 
+
+|  | 
+| --- |
+| This guide \(the Network Administrator Guide\) has been merged into the AWS Site\-to\-Site VPN User Guide and is no longer maintained\. For more information about configuring your customer gateway device, see the [AWS Site\-to\-Site VPN User Guide](https://docs.aws.amazon.com/vpn/latest/s2svpn/your-cgw.html)\. | 
+
 When you troubleshoot the connectivity of a Juniper ScreenOS\-based customer gateway, consider four things: IKE, IPsec, tunnel, and BGP\. You can troubleshoot these areas in any order, but we recommend that you start with IKE \(at the bottom of the network stack\) and move up\. 
 
 ## IKE and IPsec<a name="IKEIPsec"></a>
@@ -25,7 +30,7 @@ For further troubleshooting, enable the IKE trace options \(as recommended in th
 
 ## Tunnel<a name="TunnelFirewall"></a>
 
-First, double\-check that you have the necessary firewall rules in place\. For a list of the rules, see [Configuring a Firewall Between the Internet and Your Customer Gateway](Introduction.md#FirewallRules)\.
+First, double\-check that you have the necessary firewall rules in place\. For a list of the rules, see [Configuring a Firewall Between the Internet and Your Customer Gateway Device](Introduction.md#FirewallRules)\.
 
 If your firewall rules are set up correctly, then continue troubleshooting with the following command:
 

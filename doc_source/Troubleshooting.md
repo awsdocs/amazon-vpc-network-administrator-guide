@@ -1,6 +1,11 @@
 # Troubleshooting<a name="Troubleshooting"></a>
 
-If your tunnels aren't in the correct state when you test your customer gateway, use the following troubleshooting information\.
+
+|  | 
+| --- |
+| This guide \(the Network Administrator Guide\) has been merged into the AWS Site\-to\-Site VPN User Guide and is no longer maintained\. For more information about configuring your customer gateway device, see the [AWS Site\-to\-Site VPN User Guide](https://docs.aws.amazon.com/vpn/latest/s2svpn/your-cgw.html)\. | 
+
+If your tunnels aren't in the correct state when you test your customer gateway device, use the following troubleshooting information\.
 
 **Topics**
 + [Troubleshooting Cisco ASA Customer Gateway Connectivity](Cisco_ASA_Troubleshooting.md)

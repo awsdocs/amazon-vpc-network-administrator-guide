@@ -1,13 +1,18 @@
 # Welcome<a name="Welcome"></a>
 
-Welcome to the *Amazon VPC Network Administrator Guide*\. This guide is for customers who plan to use an AWS Site\-to\-Site VPN connection with their virtual private cloud \(VPC\)\. The topics in this guide help you configure your customer gateway, which is the device on your side of the VPN connection\. 
 
-Although the term VPN connection is a general term, in this documentation, a VPN connection refers to the connection between your VPC and your own on\-premises network\. Site\-to\-Site VPN supports Internet Protocol security \(IPsec\) VPN connections\. For a list of customer gateways that we have tested with, see [Customer Gateway Devices We've Tested](Introduction.md#DevicesTested)\.
+|  | 
+| --- |
+| This guide \(the Network Administrator Guide\) has been merged into the AWS Site\-to\-Site VPN User Guide and is no longer maintained\. For more information about configuring your customer gateway device, see the [AWS Site\-to\-Site VPN User Guide](https://docs.aws.amazon.com/vpn/latest/s2svpn/your-cgw.html)\. | 
+
+Welcome to the *AWS Site\-to\-Site VPN Network Administrator Guide*\. This guide is for customers who plan to use an AWS Site\-to\-Site VPN connection with their virtual private cloud \(VPC\)\. The topics in this guide help you configure your customer gateway device, which is the device on your side of the VPN connection\. 
+
+Although the term VPN connection is a general term, in this documentation, a VPN connection refers to the connection between your VPC and your own on\-premises network\. Site\-to\-Site VPN supports Internet Protocol security \(IPsec\) VPN connections\. For a list of customer gateway devices that we have tested with, see [Customer Gateway Devices We've Tested](Introduction.md#DevicesTested)\.
 
 The VPN connection lets you bridge your VPC and IT infrastructure\. You extend your existing security and management policies to EC2 instances in your VPC as if they were running within your own infrastructure\. 
 
 For more information, see the following topics:
-+ [Your Customer Gateway](Introduction.md)
++ [Your Customer Gateway Device](Introduction.md)
 + [Example: Check Point Device with Border Gateway Protocol](check-point-bgp.md)
 + [Example: Check Point Device without Border Gateway Protocol](check-point-NoBGP.md)
 + [Example: Cisco ASA Device](Cisco_ASA.md)
@@ -23,7 +28,7 @@ For more information, see the following topics:
 + [Example: Netgate PfSense Device without Border Gateway Protocol](pfsense-no-bgp.md)
 + [Example: Palo Alto Networks Device](palo-alto.md)
 + [Example: Yamaha Device](Yamaha.md)
-+ [Example: Generic Customer Gateway Using Border Gateway Protocol](GenericConfig.md)
-+ [Example: Generic Customer Gateway without Border Gateway Protocol](GenericConfigNoBGP.md)
-+ [Configuring Windows Server 2008 R2 as a Customer Gateway](CustomerGateway-Windows.md)
-+ [Configuring Windows Server 2012 R2 as a Customer Gateway](customer-gateway-windows-2012.md)
++ [Example: Generic Customer Gateway Device Using Border Gateway Protocol](GenericConfig.md)
++ [Example: Generic Customer Gateway Device without Border Gateway Protocol](GenericConfigNoBGP.md)
++ [Configuring Windows Server 2008 R2 as a Customer Gateway Device](CustomerGateway-Windows.md)
++ [Configuring Windows Server 2012 R2 as a Customer Gateway Device](customer-gateway-windows-2012.md)

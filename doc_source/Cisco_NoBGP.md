@@ -1,13 +1,22 @@
 # Example: Cisco IOS Device without Border Gateway Protocol<a name="Cisco_NoBGP"></a>
 
-**Topics**
-+ [A High\-Level View of the Customer Gateway](#Cisco_NoBGP_overview)
-+ [A Detailed View of the Customer Gateway and an Example Configuration](#Cisco_NoBGP_details)
-+ [How to Test the Customer Gateway Configuration](#TestCustomerGateway_NoBGP)
+
+|  | 
+| --- |
+| This guide \(the Network Administrator Guide\) has been merged into the AWS Site\-to\-Site VPN User Guide and is no longer maintained\. For more information about configuring your customer gateway device, see the [AWS Site\-to\-Site VPN User Guide](https://docs.aws.amazon.com/vpn/latest/s2svpn/your-cgw.html)\. | 
 
 In this section, you get an example of the configuration information provided by your integration team if your customer gateway is a Cisco Integrated Services router running Cisco IOS software\.
 
 Two diagrams illustrate the example configuration\. The first diagram shows the high\-level layout of the customer gateway, and the second diagram shows details from the example configuration\. You should use the real configuration information that you receive from your integration team, and apply it to your customer gateway\.
+
+Before you begin, ensure that you've done the following:
++ You've created a Site\-to\-Site VPN connection in Amazon VPC\. For more information, see [Getting Started](https://docs.aws.amazon.com/vpc/latest/userguide/SetUpVPNConnections.html) in the *AWS Site\-to\-Site VPN User Guide*\.
++ You've read the [requirements](Introduction.md#CGRequirements) for your customer gateway device\.
+
+**Topics**
++ [A High\-Level View of the Customer Gateway](#Cisco_NoBGP_overview)
++ [A Detailed View of the Customer Gateway and an Example Configuration](#Cisco_NoBGP_details)
++ [How to Test the Customer Gateway Configuration](#TestCustomerGateway_NoBGP)
 
 ## A High\-Level View of the Customer Gateway<a name="Cisco_NoBGP_overview"></a>
 
@@ -32,7 +41,7 @@ In addition, you must:
 + Ensure that the SLA monitoring number is unique\.
 + Configure all internal routing that moves traffic between the customer gateway and your local network\.
 
-In the following diagram and example configuration, you must replace the items in red italics with values that apply to your particular configuration\.
+In the following diagram and example configuration, you must replace the placeholder values are indicated by colored italic text with values that apply to your particular configuration\.
 
 ![\[Cisco ISO without BGP detailed diagram\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/detailed-cisco-nobgp-diagram.png)
 
@@ -319,11 +328,11 @@ track 200 ip sla 200 reachability
 
 You can test the gateway configuration for each tunnel\.
 
-**To test the customer gateway configuration for each tunnel**
+**To test the customer gateway device configuration for each tunnel**
 
-1. Ensure that the customer gateway has a static route to your VPC, as suggested in the configuration templates provided by AWS\.
+1. Ensure that the customer gateway device has a static route to your VPC, as suggested in the configuration templates provided by AWS\.
 
-1. Ensure that a static route has been added to the VPN connection so that traffic can get back to your customer gateway\. For example, if your local subnet prefix is `198.10.0.0/16`, you need to add a static route with that CIDR range to your VPN connection\. Make sure that both tunnels have a static route to your VPC\.
+1. Ensure that a static route has been added to the VPN connection so that traffic can get back to your customer gateway device\. For example, if your local subnet prefix is `198.10.0.0/16`, you need to add a static route with that CIDR range to your VPN connection\. Make sure that both tunnels have a static route to your VPC\.
 
 Next you must test the connectivity for each tunnel by launching an instance into your VPC, and pinging the instance from your home network\. Before you begin, make sure of the following:
 + Use an AMI that responds to ping requests\. We recommend that you use one of the Amazon Linux AMIs\.
@@ -336,7 +345,7 @@ Next you must test the connectivity for each tunnel by launching an instance int
 
 1. After the instance is running, get its private IP address \(for example, `10.0.0.4`\)\. The console displays the address as part of the instance's details\.
 
-1. On a system in your home network, use the ping command with the instance's IP address\. Make sure that the computer you ping from is behind the customer gateway\. A successful response should be similar to the following\.
+1. On a system in your home network, use the ping command with the instance's IP address\. Make sure that the computer you ping from is behind the customer gateway device\. A successful response should be similar to the following\.
 
    ```
    ping 10.0.0.4
@@ -356,8 +365,8 @@ Next you must test the connectivity for each tunnel by launching an instance int
    Minimum = 0ms, Maximum = 0ms, Average = 0ms
    ```
 **Note**  
-If you ping an instance from your customer gateway router, ensure that you are sourcing ping messages from an internal IP address, not a tunnel IP address\. Some AMIs don't respond to ping messages from tunnel IP addresses\.
+If you ping an instance from your customer gateway device router, ensure that you are sourcing ping messages from an internal IP address, not a tunnel IP address\. Some AMIs don't respond to ping messages from tunnel IP addresses\.
 
-1. \(Optional\) To test tunnel failover, you can temporarily disable one of the tunnels on your customer gateway, and repeat the above step\. You cannot disable a tunnel on the AWS side of the VPN connection\.
+1. \(Optional\) To test tunnel failover, you can temporarily disable one of the tunnels on your customer gateway device, and repeat the above step\. You cannot disable a tunnel on the AWS side of the VPN connection\.
 
 If your tunnels don't test successfully, see [Troubleshooting Cisco IOS Customer Gateway without Border Gateway Protocol Connectivity](Cisco_Troubleshooting_NoBGP.md)\.

@@ -1,11 +1,20 @@
 # Example: Cisco ASA Device with a Virtual Tunnel Interface and Border Gateway Protocol<a name="cisco-asa-vti-bgp"></a>
 
+
+|  | 
+| --- |
+| This guide \(the Network Administrator Guide\) has been merged into the AWS Site\-to\-Site VPN User Guide and is no longer maintained\. For more information about configuring your customer gateway device, see the [AWS Site\-to\-Site VPN User Guide](https://docs.aws.amazon.com/vpn/latest/s2svpn/your-cgw.html)\. | 
+
+In this section, you get an example of the configuration information provided by your integration team if your customer gateway is a Cisco ASA device running Cisco ASA 9\.7\.1\+ software\.
+
+Before you begin, ensure that you've done the following:
++ You've created a Site\-to\-Site VPN connection in Amazon VPC\. For more information, see [Getting Started](https://docs.aws.amazon.com/vpc/latest/userguide/SetUpVPNConnections.html) in the *AWS Site\-to\-Site VPN User Guide*\.
++ You've read the [requirements](Introduction.md#CGRequirements) for your customer gateway device\.
+
 **Topics**
 + [A High\-Level View of the Customer Gateway](#cisco-asa-vti-bgp-overview)
 + [Example Configuration](#cisco-asa-vti-bgp-details)
 + [How to Test the Customer Gateway Configuration](#cisco-asa-vti-bgp-test)
-
-In this section, you get an example of the configuration information provided by your integration team if your customer gateway is a Cisco ASA device running Cisco ASA 9\.7\.1\+ software\.
 
 ## A High\-Level View of the Customer Gateway<a name="cisco-asa-vti-bgp-overview"></a>
 

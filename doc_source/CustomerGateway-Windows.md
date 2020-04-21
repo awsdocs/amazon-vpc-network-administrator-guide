@@ -1,6 +1,11 @@
-# Configuring Windows Server 2008 R2 as a Customer Gateway<a name="CustomerGateway-Windows"></a>
+# Configuring Windows Server 2008 R2 as a Customer Gateway Device<a name="CustomerGateway-Windows"></a>
 
-You can configure Windows Server 2008 R2 as a customer gateway for your VPC\. Use the following process whether you are running Windows Server 2008 R2 on an EC2 instance in a VPC, or on your own server\.
+
+|  | 
+| --- |
+| This guide \(the Network Administrator Guide\) has been merged into the AWS Site\-to\-Site VPN User Guide and is no longer maintained\. For more information about configuring your customer gateway device, see the [AWS Site\-to\-Site VPN User Guide](https://docs.aws.amazon.com/vpn/latest/s2svpn/your-cgw.html)\. | 
+
+You can configure Windows Server 2008 R2 as a customer gateway device for your VPC\. Use the following process whether you are running Windows Server 2008 R2 on an EC2 instance in a VPC, or on your own server\.
 
 **Topics**
 + [Configuring Your Windows Server](#prereq-windows-server)
@@ -13,7 +18,7 @@ You can configure Windows Server 2008 R2 as a customer gateway for your VPC\. Us
 
 ## Configuring Your Windows Server<a name="prereq-windows-server"></a>
 
-To configure Windows Server as a customer gateway, ensure that you have Windows Server 2008 R2 on your own network, or on an EC2 instance in a VPC\. If you use an EC2 instance that you launched from a Windows AMI, do the following:
+To configure Windows Server as a customer gateway device, ensure that you have Windows Server 2008 R2 on your own network, or on an EC2 instance in a VPC\. If you use an EC2 instance that you launched from a Windows AMI, do the following:
 + Disable source/destination checking for the instance:
 
   1. Open the Amazon EC2 console at [https://console\.aws\.amazon\.com/ec2/](https://console.aws.amazon.com/ec2/)\.
@@ -71,7 +76,7 @@ To create a VPN connection from your VPC, you must first create a virtual privat
 
 1. For **Customer Gateway**, choose **New**\. For **IP address**, specify the public IP address of your Windows Server\. 
 **Note**  
-The IP address must be static and may be behind a device performing network address translation \(NAT\)\. To ensure that NAT traversal \(NAT\-T\) can function, you must adjust your firewall rules to unblock UDP port 4500\. If your customer gateway is an EC2 Windows Server instance, use its Elastic IP address\.
+The IP address must be static and may be behind a device performing network address translation \(NAT\)\. To ensure that NAT traversal \(NAT\-T\) can function, you must adjust your firewall rules to unblock UDP port 4500\. If your customer gateway device is an EC2 Windows Server instance, use its Elastic IP address\.
 
 1. Select the **Static** routing option, enter the **Static IP Prefixes** values for your network in CIDR notation, and then choose **Yes, Create**\.
 
@@ -113,7 +118,7 @@ Preshared key:               xCjNLsLoCmKsakwcdoR9yX6GsEXAMPLE
 ```
 
 `Local Tunnel Endpoint`  
-The IP address for the customer gateway—in this case, your Windows server—that terminates the VPN connection on your network's side\. If your customer gateway is a Windows server instance, this is the instance's private IP address\. 
+The IP address for the customer gateway device—in this case, your Windows server—that terminates the VPN connection on your network's side\. If your customer gateway device is a Windows server instance, this is the instance's private IP address\. 
 
 `Remote Tunnel Endpoint`  
 One of two IP addresses for the virtual private gateway that terminates the VPN connection on the AWS side\.
@@ -129,7 +134,7 @@ The pre\-shared key that is used to establish the IPsec VPN connection between `
 
 We suggest that you configure both tunnels as part of the VPN connection\. Each tunnel connects to a separate VPN concentrator on the Amazon side of the VPN connection\. Although only one tunnel at a time is up, the second tunnel automatically establishes itself if the first tunnel goes down\. Having redundant tunnels ensure continuous availability in case of a device failure\. Because only one tunnel is available at a time, the Amazon VPC console indicates that one tunnel is down\. This is expected behavior, so there's no action required from you\. 
 
-With two tunnels configured, if a device failure occurs within AWS, your VPN connection automatically fails over to the second tunnel of the AWS virtual private gateway within a matter of minutes\. When you configure your customer gateway, it's important that you configure both tunnels\.
+With two tunnels configured, if a device failure occurs within AWS, your VPN connection automatically fails over to the second tunnel of the AWS virtual private gateway within a matter of minutes\. When you configure your customer gateway device, it's important that you configure both tunnels\.
 
 **Note**  
 From time to time, AWS performs routine maintenance on the virtual private gateway\. This maintenance may disable one of the two tunnels of your VPN connection for a brief period of time\. Your VPN connection automatically fails over to the second tunnel while we perform this maintenance\.
@@ -214,7 +219,7 @@ Copy the netsh script from the downloaded configuration file and replace the var
 
 ```
 netsh advfirewall consec add rule Name="VGW-1a2b3c4d Tunnel 1" Enable=Yes ^
-Profile=any Type=Static Mode=Tunnel 
+Profile=any Type=Static Mode=Tunnel ^
 LocalTunnelEndpoint=Windows_Server_Private_IP_address ^
 RemoteTunnelEndpoint=203.83.222.236 Endpoint1=Static_Route_IP_Prefix ^
 Endpoint2=VPC_CIDR_Block Protocol=Any Action=RequireInClearOut ^
@@ -264,7 +269,7 @@ In this section, you configure a security rule on your Windows server to create 
 1. On the **Requirements** page, choose **Require authentication for inbound connections\. Do not establish tunnels for outbound connections**, and then choose **Next**\.  
 ![\[Requirements page\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/requirepage.png)
 
-1. On **Tunnel Endpoints** page, under **Which computers are in Endpoint 1**, choose **Add**\. Enter the CIDR range of your network \(behind your Windows server customer gateway\), and then choose **OK**\. The range can include the IP address of your customer gateway\.
+1. On **Tunnel Endpoints** page, under **Which computers are in Endpoint 1**, choose **Add**\. Enter the CIDR range of your network \(behind your Windows server customer gateway device\), and then choose **OK**\. The range can include the IP address of your customer gateway device\.
 
 1. Under **What is the local tunnel endpoint \(closest to computer in Endpoint 1\)**, choose **Edit**\. Enter the private IP address of your Windows server, and then choose **OK**\.
 
@@ -327,7 +332,7 @@ After you've finished, you’ll have two tunnels configured for your VPN connect
 
 1. Under **IPsec tunneling**, choose **Customize**\. Verify the following IPsec tunneling settings\.
    + **Use IPsec tunneling** is selected\.
-   + **Local tunnel endpoint \(closest to Endpoint 1\)** contains the IP address of your server\. If your customer gateway is a Windows server instance, this is the instance's private IP address\. 
+   + **Local tunnel endpoint \(closest to Endpoint 1\)** contains the IP address of your server\. If your customer gateway device is a Windows server instance, this is the instance's private IP address\. 
    + **Remote tunnel endpoint \(closest to Endpoint 2\)** contains the IP address of the virtual private gateway for this tunnel\.
 
 1. Double\-click the security rule for your second tunnel\. Repeat steps 4 to 7 for this tunnel\.
@@ -407,7 +412,7 @@ For more information, go to [EnableDeadGWDetect](http://technet.microsoft.com/en
 
 ## Step 6: Test the VPN Connection<a name="TestConnection"></a>
 
-To test that the VPN connection is working correctly, launch an instance into your VPC, and ensure that it does not have an Internet connection\. After you've launched the instance, ping its private IP address from your Windows server\. The VPN tunnel comes up when traffic is generated from the customer gateway, therefore the ping command also initiates the VPN connection\.
+To test that the VPN connection is working correctly, launch an instance into your VPC, and ensure that it does not have an Internet connection\. After you've launched the instance, ping its private IP address from your Windows server\. The VPN tunnel comes up when traffic is generated from the customer gateway device, therefore the ping command also initiates the VPN connection\.
 
 **To launch an instance in your VPC and get its private IP address**
 
@@ -451,6 +456,6 @@ If the `ping` command fails, check the following information:
 + Ensure that the operating system on the instance you are pinging is configured to respond to ICMP\. We recommend that you use one of the Amazon Linux AMIs\.
 + If the instance you are pinging is a Windows instance, log in to the instance and enable inbound ICMPv4 on the Windows firewall\.
 + Ensure that you have configured the route tables for your VPC or your subnet correctly\. For more information, see [ Step 1: Create a VPN Connection and Configure Your VPC](#CreateVPNConnection)\.
-+ If your customer gateway is a Windows server instance, ensure that you've disabled source/destination checking for the instance\. For more information, see [Configuring Your Windows Server](#prereq-windows-server)\.
++ If your customer gateway device is a Windows server instance, ensure that you've disabled source/destination checking for the instance\. For more information, see [Configuring Your Windows Server](#prereq-windows-server)\.
 
 In the Amazon VPC console, on the **VPN Connections** page, select your VPN connection\. The first tunnel is in the UP state\. The second tunnel should be configured, but it isn't used unless the first tunnel goes down\. It may take a few moments to establish the encrypted tunnels\.

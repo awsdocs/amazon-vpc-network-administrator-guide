@@ -1,18 +1,25 @@
 # Example: SonicWALL Device<a name="sonicwall-bgp"></a>
 
-This topic provides an example of how to configure your router if your customer gateway is a SonicWALL router\.
 
-This section assumes that a VPN connection with static routing has been configured in the Amazon VPC console\. For more information, see [Adding a Virtual Private Gateway to Your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_VPN.html) in the *Amazon VPC User Guide*\.
+|  | 
+| --- |
+| This guide \(the Network Administrator Guide\) has been merged into the AWS Site\-to\-Site VPN User Guide and is no longer maintained\. For more information about configuring your customer gateway device, see the [AWS Site\-to\-Site VPN User Guide](https://docs.aws.amazon.com/vpn/latest/s2svpn/your-cgw.html)\. | 
+
+This topic provides an example of how to configure your router if your customer gateway device is a SonicWALL router\.
+
+Before you begin, ensure that you've done the following:
++ You've created a Site\-to\-Site VPN connection in Amazon VPC\. For more information, see [Getting Started](https://docs.aws.amazon.com/vpc/latest/userguide/SetUpVPNConnections.html) in the *AWS Site\-to\-Site VPN User Guide*\.
++ You've read the [requirements](Introduction.md#CGRequirements) for your customer gateway device\.
 
 **Topics**
-+ [A High\-Level View of the Customer Gateway](#sonicwall-bgp-overview)
++ [A High\-Level View of the Customer Gateway Device](#sonicwall-bgp-overview)
 + [Example Configuration File](#sonicwall-bgp-config-file)
 + [Configuring the SonicWALL Device Using the Management Interface](#sonicwall-bgp-configure-device)
 + [How to Test the Customer Gateway Configuration](#sonicwall-bgp-test)
 
-## A High\-Level View of the Customer Gateway<a name="sonicwall-bgp-overview"></a>
+## A High\-Level View of the Customer Gateway Device<a name="sonicwall-bgp-overview"></a>
 
-The following diagram shows the general details of your customer gateway\. The VPN connection consists of two separate tunnels: *Tunnel 1* and *Tunnel 2*\. Using redundant tunnels ensures continuous availability in the case that a device fails\.
+The following diagram shows the general details of your customer gateway device\. The VPN connection consists of two separate tunnels: *Tunnel 1* and *Tunnel 2*\. Using redundant tunnels ensures continuous availability in the case that a device fails\.
 
 ![\[Customer gateway high-level diagram\]](http://docs.aws.amazon.com/vpc/latest/adminguide/images/highlevel-generic-diagram.png)
 
@@ -230,13 +237,13 @@ You cannot configure BGP for the device using the management interface\. Instead
 
 You can test the gateway configuration for each tunnel\.
 
-**To test the customer gateway configuration for each tunnel**
+**To test the customer gateway device configuration for each tunnel**
 
-1. On your customer gateway, determine whether the BGP status is `Established`\.
+1. On your customer gateway device, determine whether the BGP status is `Established`\.
 
    It takes approximately 30 seconds for a BGP peering to be established\.
 
-1. Ensure that the customer gateway is advertising a route to the virtual private gateway\. The route may be the default route \(`0.0.0.0/0`\) or a more specific route you prefer\.
+1. Ensure that the customer gateway device is advertising a route to the virtual private gateway\. The route may be the default route \(`0.0.0.0/0`\) or a more specific route you prefer\.
 
 When properly established, your BGP peering should be receiving one route from the virtual private gateway corresponding to the prefix that your VPC integration team specified for the VPC \(for example, `10.0.0.0/24`\)\. If the BGP peering is established, you are receiving a prefix, and you are advertising a prefix, your tunnel is configured correctly\. Make sure that both tunnels are in this state\.
 
@@ -251,7 +258,7 @@ Next you must test the connectivity for each tunnel by launching an instance int
 
 1. After the instance is running, get its private IP address \(for example, `10.0.0.4`\)\. The console displays the address as part of the instance's details\.
 
-1. On a system in your home network, use the ping command with the instance's IP address\. Make sure that the computer you ping from is behind the customer gateway\. A successful response should be similar to the following\.
+1. On a system in your home network, use the ping command with the instance's IP address\. Make sure that the computer you ping from is behind the customer gateway device\. A successful response should be similar to the following\.
 
    ```
    ping 10.0.0.4
@@ -271,8 +278,8 @@ Next you must test the connectivity for each tunnel by launching an instance int
    Minimum = 0ms, Maximum = 0ms, Average = 0ms
    ```
 **Note**  
-If you ping an instance from your customer gateway router, ensure that you are sourcing ping messages from an internal IP address, not a tunnel IP address\. Some AMIs don't respond to ping messages from tunnel IP addresses\.
+If you ping an instance from your customer gateway device router, ensure that you are sourcing ping messages from an internal IP address, not a tunnel IP address\. Some AMIs don't respond to ping messages from tunnel IP addresses\.
 
-1. \(Optional\) To test tunnel failover, you can temporarily disable one of the tunnels on your customer gateway, and repeat the above step\. You cannot disable a tunnel on the AWS side of the VPN connection\.
+1. \(Optional\) To test tunnel failover, you can temporarily disable one of the tunnels on your customer gateway device, and repeat the above step\. You cannot disable a tunnel on the AWS side of the VPN connection\.
 
 If your tunnels don't test successfully, see [Troubleshooting Generic Device Customer Gateway Connectivity Using Border Gateway Protocol](Generic_Troubleshooting.md)\.

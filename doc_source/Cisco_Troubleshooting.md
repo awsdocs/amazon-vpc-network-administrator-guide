@@ -1,5 +1,10 @@
 # Troubleshooting Cisco IOS Customer Gateway Connectivity<a name="Cisco_Troubleshooting"></a>
 
+
+|  | 
+| --- |
+| This guide \(the Network Administrator Guide\) has been merged into the AWS Site\-to\-Site VPN User Guide and is no longer maintained\. For more information about configuring your customer gateway device, see the [AWS Site\-to\-Site VPN User Guide](https://docs.aws.amazon.com/vpn/latest/s2svpn/your-cgw.html)\. | 
+
 When you troubleshoot the connectivity of a Cisco customer gateway, consider four things: IKE, IPsec, tunnel, and BGP\. You can troubleshoot these areas in any order, but we recommend that you start with IKE \(at the bottom of the network stack\) and move up\. 
 
 ## IKE<a name="IKE"></a>
@@ -152,7 +157,7 @@ router# no debug crypto ipsec
 
 ## Tunnel<a name="Tunnel"></a>
 
-First, check that you have the necessary firewall rules in place\. For more information, see [Configuring a Firewall Between the Internet and Your Customer Gateway](Introduction.md#FirewallRules)\.
+First, check that you have the necessary firewall rules in place\. For more information, see [Configuring a Firewall Between the Internet and Your Customer Gateway Device](Introduction.md#FirewallRules)\.
 
 If your firewall rules are set up correctly, then continue troubleshooting with the following command:
 
@@ -186,7 +191,7 @@ Tunnel1 is up, line protocol is up
     Received 0 broadcasts, 0 runts, 0 giants, 0 throttles
 ```
 
- Make sure that the `line protocol` is up\. Check that the tunnel source IP address, source interface and destination respectively match the tunnel configuration for the customer gateway outside IP address, interface, and virtual private gateway outside IP address\. Make sure that `Tunnel protection via IPSec` is present\. Make sure to run the command on both tunnel interfaces\. To resolve any problems here, review the configuration\.
+Make sure that the `line protocol` is up\. Check that the tunnel source IP address, source interface and destination respectively match the tunnel configuration for the customer gateway outside IP address, interface, and virtual private gateway outside IP address\. Make sure that `Tunnel protection via IPSec` is present\. Make sure to run the command on both tunnel interfaces\. To resolve any problems here, review the configuration and check the physical connections to your customer gateway\.
 
 Also use the following command, replacing `169.254.255.1` with the inside IP address of your virtual private gateway\.
 
